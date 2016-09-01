@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_add_listing"
+    tools:context="tinashechinyanga.zw.co.ruumz.AddListing"
+    android:orientation="vertical"
+    android:nestedScrollingEnabled="false"
+    android:outlineProvider="none"
+    android:scrollIndicators="none"
+    android:touchscreenBlocksFocus="false">
+
+    <!-- A CardView that contains a TextView -->
+
+    <!-- A CardView that contains a TextView -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:weightSum="1">
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="228dp"
+        card_view:cardCornerRadius="4dp"
+        android:layout_marginBottom="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_photo_imageview"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:src="@mipmap/ic_add_a_photo_white_48dp"
+                android:contentDescription="Images for the mRooms"
+                android:background="#da6d6c6c"
+                android:scaleType="centerInside"
+                android:layout_above="@+id/relativeLayout" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Add Photo"
+                android:id="@+id/add_photo_label"
+                android:layout_alignBottom="@+id/add_photo_imageview"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="25dp"
+                android:textColor="#fff" />
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#758a8a8a"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/relativeLayout"
+                android:paddingLeft="@dimen/card_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="$"
+                    android:id="@+id/dollar_label"
+                    android:textSize="24sp"
+                    android:layout_alignTop="@+id/price_field"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignBaseline="@+id/price_field"
+                    android:layout_gravity="bottom" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/price_field"
+                    android:hint="ENTER PRICE"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/dollar_label"
+                    android:layout_toEndOf="@+id/dollar_label"
+                    android:layout_gravity="bottom"
+                    android:inputType="number" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/location_field"
+                    android:hint="ENTER LOCATION"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Is Price Inclusive Of Bills?"
+            android:id="@+id/bills_label"
+            android:textSize="20sp"
+            android:typeface="sans"
+            android:textColor="#575757"
+            android:padding="@dimen/card_vertical"
+            android:background="#358a8a8a" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="3dp"
+        android:padding="@dimen/card_vertical">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:id="@+id/yes_inclusive_checkbox"
+            android:clickable="true"
+            android:layout_weight="0.45"
+            android:textColor="#fe7878"
+            android:checked="false"
+            android:onClick="onCheckBoxSelected" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:id="@+id/no_inclusive_checkbox"
+            android:textColor="#fe7878"
+            android:onClick="onCheckBoxSelected" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Description"
+        android:id="@+id/addroom_description_label"
+        android:textSize="20sp"
+        android:typeface="sans"
+        android:textColor="#575757"
+        android:padding="@dimen/card_vertical"
+        android:background="#358a8a8a"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
+        android:ems="10"
+        android:id="@+id/description_field"
+        android:layout_gravity="right"
+        android:hint="Enter property description. E.g. 2 bed Flat incl. of water rates and levies. Lounge, kitchen, bath and toilet, secure parking, 24hr security, Located on 3rd floor, good area. Available 1st of May 2016"
+        android:gravity="top"
+        android:textColorHint="#b8a5a5a5"
+        android:textStyle="italic"
+        android:textIsSelectable="false"
+        android:allowUndo="true"
+        android:nestedScrollingEnabled="true"
+        android:scrollIndicators="none"
+        android:breakStrategy="high_quality"
+        android:capitalize="sentences"
+        android:padding="@dimen/card_vertical"
+        android:layout_marginBottom="10dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#358a8a8a"
+        android:id="@+id/linearLayout2"
+        android:padding="@dimen/card_vertical"
+        android:layout_gravity="center_horizontal"
+        android:showDividers="beginning|end"
+        android:layout_above="@+id/listing_bedrooms_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/textView"
+            android:textSize="20sp"
+            android:layout_gravity="bottom"
+            android:hint="150"
+            android:text="Details"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.70"
+            android:layout_marginBottom="10dp"
+            android:padding="@dimen/card_vertical">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Bedroom(s)"
+                    android:id="@+id/listing_bedrooms_label"
+                    android:textSize="18sp"
+                android:layout_alignTop="@+id/add_bedrooms_textfield"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignBaseline="@+id/add_bedrooms_textfield" />
+
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/add_bedrooms_textfield"
+                    android:hint="Enter number of Bedrooms"
+                    android:textAlignment="textEnd"
+                    android:inputType="number"
+                android:layout_column="1"
+                    android:layout_span="20"
+                    android:paddingRight="5dp"
+                android:layout_alignParentRight="false"
+                android:layout_alignParentEnd="true"
+                android:textColorHint="#FF4081"
+                android:textStyle="italic" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_movein_textfield"
+                android:textAlignment="textEnd"
+                android:inputType="date"
+                android:hint="E.g. DD/MM/YYYY"
+                android:paddingRight="5dp"
+                android:layout_gravity="right"
+                android:layout_below="@+id/add_bedrooms_textfield"
+                android:layout_alignRight="@+id/add_baths_field"
+                android:layout_alignEnd="@+id/add_baths_field"
+                android:textColorHint="#FF4081"
+                android:textStyle="italic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Move In By"
+                android:id="@+id/propertyType_label"
+                android:textSize="18sp"
+                android:layout_below="@+id/add_bedrooms_textfield"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignBaseline="@+id/add_movein_textfield" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_baths_field"
+                android:hint="Enter number of baths"
+                android:textAlignment="textEnd"
+                android:inputType="number"
+                android:paddingRight="5dp"
+                android:layout_below="@+id/add_movein_textfield"
+                android:layout_alignRight="@+id/add_num_toilets_field"
+                android:layout_alignEnd="@+id/add_num_toilets_field"
+                android:textColorHint="#FF4081"
+                android:textStyle="italic" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Bath(s)"
+                    android:id="@+id/details_num_baths_label"
+                    android:textSize="18sp"
+                android:layout_alignTop="@+id/add_baths_field"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignBaseline="@+id/add_baths_field" />
+
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/add_num_toilets_field"
+                    android:textAlignment="textEnd"
+                    android:inputType="number"
+                    android:hint="Enter number of toilets"
+                    android:layout_column="1"
+                    android:paddingRight="5dp"
+                android:layout_below="@+id/add_baths_field"
+                android:layout_alignRight="@+id/add_bedrooms_textfield"
+                android:layout_alignEnd="@+id/add_bedrooms_textfield"
+                android:textColorHint="#FF4081"
+                android:textStyle="italic" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Toilet(s)"
+                    android:id="@+id/details_toilets_label"
+                    android:textSize="18sp"
+                    android:layout_column="0"
+                android:layout_below="@+id/add_baths_field"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignBaseline="@+id/add_num_toilets_field" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/zesa_field"
+                android:textAlignment="textEnd"
+                android:inputType="text"
+                android:hint="E.g. Good, Average, Poor "
+                android:layout_column="1"
+                android:paddingRight="5dp"
+                android:layout_below="@+id/add_num_toilets_field"
+                android:layout_alignRight="@+id/add_num_toilets_field"
+                android:layout_alignEnd="@+id/add_num_toilets_field"
+                android:textColorHint="#FF4081"
+                android:textStyle="italic" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Zesa"
+                    android:id="@+id/details_zesa_label"
+                    android:textSize="18sp"
+                    android:layout_column="0"
+                android:layout_below="@+id/add_num_toilets_field"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignBaseline="@+id/zesa_field" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/water_supply_field"
+                android:textAlignment="textEnd"
+                android:inputType="text"
+                android:hint="E.g Borehole / ZINWA"
+                android:layout_column="1"
+                android:paddingRight="5dp"
+                android:layout_alignRight="@+id/zesa_field"
+                android:layout_alignEnd="@+id/zesa_field"
+                android:layout_below="@+id/zesa_field"
+                android:textColorHint="#FF4081"
+                android:textStyle="italic"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Water Supply"
+                android:id="@+id/water_label"
+                android:textSize="18sp"
+                android:layout_column="0"
+                android:layout_below="@+id/zesa_field"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignBaseline="@+id/water_supply_field" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Property type"
+                android:id="@+id/add_propertytype_label"
+                android:textSize="18sp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/water_supply_field"
+                android:layout_alignBaseline="@+id/add_propertytype_textField" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Choose Property"
+                android:id="@+id/add_propertytype_textField"
+                android:layout_below="@+id/water_supply_field"
+                android:layout_alignRight="@+id/water_supply_field"
+                android:layout_alignEnd="@+id/water_supply_field"
+                android:padding="3dp"
+                android:textColor="#FF4081"
+                android:textStyle="italic"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#358a8a8a"
+        android:id="@+id/linearLayout3"
+        android:padding="@dimen/card_vertical"
+        android:showDividers="beginning|end"
+        android:layout_above="@+id/listing_bedrooms_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/textView2"
+            android:textSize="20sp"
+            android:layout_gravity="bottom"
+            android:text="Contact Details"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+        android:padding="@dimen/card_vertical">
+
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/name_field"
+                android:hint="Enter Name"
+                android:layout_marginBottom="3dp"
+            android:inputType="textPersonName" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:id="@+id/email_field"
+                android:hint="Enter E-mail"
+                android:layout_marginBottom="3dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:ems="10"
+                android:id="@+id/contact_number_field"
+                android:hint="Enter Contact Number"
+                android:layout_marginBottom="3dp" />
+        </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ADD LISTING"
+        android:id="@+id/post_button"
+        android:layout_gravity="center_horizontal"
+        android:typeface="sans"
+        android:textColor="#515050"
+        android:textSize="18sp" />
+</LinearLayout>
+</ScrollView>

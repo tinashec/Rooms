@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="tinashechinyanga.zw.co.ruumz.ContactUsActivity"
+    android:orientation="vertical"
+    android:background="#f3f3f3"
+    android:nestedScrollingEnabled="false"
+    android:outlineProvider="none"
+    android:scrollIndicators="none"
+    android:touchscreenBlocksFocus="false"
+    android:paddingBottom="20dp"
+    android:id="@+id/room_detail_scrollview">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="293dp"
+            android:layout_marginBottom="20dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:id="@+id/contact_us_imageview"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:scaleType="centerCrop"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Rooms \nHelping You Find Your Perfect Place"
+                android:id="@+id/textView21"
+                android:gravity="center"
+                android:textColor="#d5ffffff"
+                android:layout_gravity="bottom"
+                android:textSize="20sp"
+                android:textAlignment="gravity"
+                android:background="#60070707"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:paddingTop="50dp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:background="@drawable/border_bottom_top"
+        android:weightSum="1"
+        android:gravity="center|center_vertical|center_horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:baselineAligned="false"
+            android:id="@+id/contact_us_llayout1">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:paddingTop="5dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:id="@+id/imageView3"
+                    android:src="@mipmap/ic_phone"
+                    android:padding="7dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginRight="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/contact_us_call_num"
+                    android:id="@+id/contact_us_call1_textview"
+                    android:textSize="18sp"
+                    android:layout_toRightOf="@+id/imageView3"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center_vertical|left"
+                    android:layout_alignBottom="@+id/imageView3"
+                    android:layout_alignTop="@+id/imageView3"
+                    android:background="@drawable/border"
+                    android:linksClickable="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="1"
+                    android:id="@+id/textView27"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_alignBottom="@+id/imageView3"
+                    android:layout_alignRight="@+id/imageView3"
+                    android:layout_alignEnd="@+id/imageView3"
+                    android:layout_marginRight="19dp"
+                    android:layout_marginEnd="19dp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:baselineAligned="false"
+            android:id="@+id/contact_us_llayout2">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:paddingTop="5dp"
+                android:layout_weight="1" >
+
+                <ImageView
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:id="@+id/imageView6"
+                    android:src="@mipmap/ic_phone"
+                    android:padding="7dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="2"
+                    android:id="@+id/textView26"
+                    android:layout_marginRight="19dp"
+                    android:layout_marginEnd="19dp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_alignBottom="@+id/imageView6"
+                    android:layout_alignRight="@+id/imageView6"
+                    android:layout_alignEnd="@+id/imageView6" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/contact_us_custexp_num"
+                    android:id="@+id/contact_us_call2_textview"
+                    android:textSize="18sp"
+                    android:layout_toRightOf="@+id/imageView6"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center_vertical|left"
+                    android:layout_alignBottom="@+id/imageView6"
+                    android:layout_alignTop="@+id/imageView6"
+                    android:background="@drawable/border" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:baselineAligned="false"
+            android:id="@+id/contact_us_wapp_llayout">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:paddingTop="5dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:id="@+id/imageView4"
+                    android:padding="7dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginRight="20dp"
+                    android:src="@mipmap/ic_wapp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/contact_us_wapp_num"
+                    android:id="@+id/contact_us_wapp_textview"
+                    android:textSize="18sp"
+                    android:layout_toRightOf="@+id/imageView4"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center_vertical|left"
+                    android:background="@drawable/border"
+                    android:layout_alignBottom="@+id/imageView4"
+                    android:layout_alignTop="@+id/imageView4" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:baselineAligned="false"
+            android:id="@+id/contact_us_site_llayout">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:paddingTop="5dp"
+                android:layout_weight="1" >
+
+                <ImageView
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:id="@+id/imageView5"
+                    android:src="@mipmap/ic_link"
+                    android:padding="7dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginRight="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/contact_us_website_link"
+                    android:id="@+id/contact_us_website_link"
+                    android:textSize="18sp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/imageView5"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="left" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

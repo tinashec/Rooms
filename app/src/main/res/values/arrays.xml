@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pic_choices">
+        <item>Take Picture</item>
+        <item>Choose Picture</item>
+    </string-array>
+    <string-array name="propertyChoices">
+        <item>Cottage</item>
+        <item>Flat</item>
+        <item>Full House</item>
+        <item>Sharing</item>
+    </string-array>
+</resources>
