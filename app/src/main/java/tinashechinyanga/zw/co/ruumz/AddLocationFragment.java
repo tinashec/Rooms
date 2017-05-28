@@ -3,6 +3,7 @@ package tinashechinyanga.zw.co.ruumz;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -40,7 +41,7 @@ public class AddLocationFragment extends Fragment {
     private TextView mBicLabel, mOwnEntranceLabel, mOwnToiletLabel, mKitchenLabel, mParkingLabel,
             mWifiLabel, mSecureLabel, mFurnishedLabel, mBoreholeLabel, mPrepaidZesaLabel,
             mWardrobeLabel, mPrepaidWaterLabel, mFamLabel, mFemaleLabel, mMaleLabel,
-            mSoberHabitLabel, mProfessionalLabel, mCoupleLabel;;
+            mSoberHabitLabel, mProfessionalLabel, mCoupleLabel;
 
     private FloatingActionButton mAddRoomStep3;
 
@@ -428,7 +429,7 @@ public class AddLocationFragment extends Fragment {
 
     private void changeLabelColour(TextView mLabel) {
         TextView label = mLabel;
-        if(label.getCurrentTextColor() != new ContextCompat().getColor(getContext(), R.color.colorAccent)) {
+        if(label.getCurrentTextColor() != Color.parseColor("#ff404d") ){
             label.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.colorAccent)));
         }else {
             label.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.colorDull)));

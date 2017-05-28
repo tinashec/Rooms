@@ -14,6 +14,9 @@ public class RoomsApp extends Application {
     public void onCreate(){
         super.onCreate();
         ParseObject.registerSubclass(Room.class);
-        Parse.initialize(this);
+        Parse.initialize(new Parse.Configuration.Builder(this).applicationId("GXgvtP569LEzHZXJmuQv9ACgH7W5IQzrPaKU1pL4")
+            .clientKey("ZtWq01jsDeNxSy1Xd0Htryea5VQAH107k38Bd4ob")
+            .server("https://parseapi.back4app.com/")
+            .build());
     }
 }
