@@ -26,7 +26,10 @@
             <android.support.v4.view.ViewPager
                 android:id="@+id/details_images_viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
 
             </android.support.v4.view.ViewPager>
 
@@ -170,106 +173,58 @@
             android:background="@drawable/border_bottom_top">
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:baselineAligned="false">
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1">
 
                     <TextView
+                        android:id="@+id/listing_bedrooms_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Bedroom(s)"
-                        android:id="@+id/listing_bedrooms_label"
-                        android:textSize="18sp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
-                        android:textColor="#575757"
                         android:layout_below="@+id/details_features_label"
+                        android:layout_marginRight="20dp"
                         android:padding="@dimen/card_vertical"
                         android:paddingLeft="0dp"
-                        android:layout_marginRight="20dp" />
+                        android:text="Bedroom(s)"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="#575757"
+                        android:textSize="18sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1">
 
                     <TextView
+                        android:id="@+id/details_actualRooms_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:id="@+id/details_actualRooms_label"
-                        android:textSize="18sp"
-                        android:textColor="#575757"
-                        android:padding="@dimen/card_vertical"
-                        android:hint="3"
                         android:layout_above="@+id/details_actualDate_label"
                         android:layout_alignLeft="@+id/details_actualDate_label"
                         android:layout_alignStart="@+id/details_actualDate_label"
-                        android:paddingLeft="0dp" />
-                </RelativeLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:baselineAligned="false">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Bath(s)"
-                        android:id="@+id/details_num_baths_label"
-                        android:textSize="18sp"
-                        android:textColor="#575757"
-                        android:layout_below="@+id/propertyType_label"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
+                        android:hint="3"
                         android:padding="@dimen/card_vertical"
                         android:paddingLeft="0dp"
-                        android:layout_gravity="right" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:id="@+id/details_actualBaths_label"
-                        android:textSize="18sp"
                         android:textColor="#575757"
-                        android:padding="@dimen/card_vertical"
-                        android:hint="2"
-                        android:layout_below="@+id/propertyType_label"
-                        android:layout_alignLeft="@+id/details_actualDate_label"
-                        android:layout_alignStart="@+id/details_actualDate_label"
-                        android:paddingLeft="0dp" />
+                        android:textSize="18sp" />
                 </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:baselineAligned="false">
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -277,19 +232,19 @@
                     android:layout_weight="1">
 
                     <TextView
+                        android:id="@+id/details_num_baths_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Toilet(s)"
-                        android:id="@+id/details_toilets_label"
-                        android:textSize="18sp"
-                        android:layout_column="0"
-                        android:textColor="#575757"
-                        android:layout_below="@+id/details_num_baths_label"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
+                        android:layout_below="@+id/propertyType_label"
+                        android:layout_gravity="right"
                         android:padding="@dimen/card_vertical"
-                        android:paddingLeft="0dp" />
+                        android:paddingLeft="0dp"
+                        android:text="Bath(s)"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="#575757"
+                        android:textSize="18sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -298,18 +253,66 @@
                     android:layout_weight="1">
 
                     <TextView
+                        android:id="@+id/details_actualBaths_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:id="@+id/details_actualToilets_label"
-                        android:textSize="18sp"
-                        android:textColor="#575757"
+                        android:layout_alignLeft="@+id/details_actualDate_label"
+                        android:layout_alignStart="@+id/details_actualDate_label"
+                        android:layout_below="@+id/propertyType_label"
+                        android:hint="2"
                         android:padding="@dimen/card_vertical"
-                        android:hint="1"
-                        android:layout_below="@+id/details_actualBaths_label"
+                        android:paddingLeft="0dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="#575757"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/details_toilets_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/details_num_baths_label"
+                        android:layout_column="0"
+                        android:padding="@dimen/card_vertical"
+                        android:paddingLeft="0dp"
+                        android:text="Toilet(s)"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="#575757"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/details_actualToilets_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_alignLeft="@+id/details_actualBaths_label"
                         android:layout_alignStart="@+id/details_actualBaths_label"
-                        android:paddingLeft="0dp" />
+                        android:layout_below="@+id/details_actualBaths_label"
+                        android:hint="1"
+                        android:padding="@dimen/card_vertical"
+                        android:paddingLeft="0dp"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="#575757"
+                        android:textSize="18sp" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -343,54 +346,55 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" >
+                    android:layout_weight="1">
 
                     <TextView
+                        android:id="@+id/textView40"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:id="@+id/textView40"
-                        android:textSize="18sp"
-                        android:textColor="@color/colorAccent"
-                        android:layout_below="@+id/details_actualBaths_label"
                         android:layout_alignLeft="@+id/details_actualBaths_label"
                         android:layout_alignStart="@+id/details_actualBaths_label"
-                        android:paddingTop="@dimen/card_vertical"
+                        android:layout_below="@+id/details_actualBaths_label"
                         android:paddingBottom="@dimen/card_vertical"
                         android:paddingLeft="@dimen/card_vertical"
                         android:paddingRight="5dp"
-                        android:text="$" />
+                        android:paddingTop="@dimen/card_vertical"
+                        android:text="$"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
                         android:id="@+id/details_actualRent_amount"
-                        android:textSize="18sp"
-                        android:textColor="#575757"
-                        android:layout_alignParentTop="true"
-                        android:layout_toRightOf="@+id/textView40"
-                        android:layout_toEndOf="@+id/textView40"
-                        android:textAlignment="viewStart"
-                        android:hint="200"
-                        android:paddingTop="@dimen/card_vertical"
-                        android:paddingBottom="@dimen/card_vertical" />
-
-                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:id="@+id/details_actualInclExcl_label"
-                        android:textSize="18sp"
-                        android:textColor="#575757"
-                        android:textAlignment="viewStart"
-                        android:hint="incl. bills"
-                        android:paddingTop="@dimen/card_vertical"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/textView40"
+                        android:layout_toRightOf="@+id/textView40"
+                        android:hint="200"
                         android:paddingBottom="@dimen/card_vertical"
-                        android:layout_alignParentBottom="true"
+                        android:paddingTop="@dimen/card_vertical"
+                        android:textAlignment="viewStart"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="#575757"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/details_actualInclExcl_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="incl. bills"
+                        android:paddingBottom="@dimen/card_vertical"
+                        android:paddingTop="@dimen/card_vertical"
+                        android:textAlignment="viewStart"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="#575757"
+                        android:textSize="18sp"
+                        android:layout_alignParentTop="true"
                         android:layout_toRightOf="@+id/details_actualRent_amount"
                         android:layout_toEndOf="@+id/details_actualRent_amount"
-                        android:layout_marginLeft="10dp" />
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginStart="15dp" />
                 </RelativeLayout>
             </LinearLayout>
 
