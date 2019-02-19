@@ -24,6 +24,9 @@
     <uses-feature
         android:name="android.hardware.camera2"
         android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
 
     <application
         android:name=".RoomsApp"
@@ -50,9 +53,9 @@
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.SEARCH" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <meta-data
+                <!--<meta-data
                             android:name="android.app.searchable"
-                            android:resource="@xml/searchable" />
+                            android:resource="@xml/searchable" />-->
             </intent-filter>
         </activity>
         <activity
