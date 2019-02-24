@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "975529114539",
+    "firebase_url": "https://rooms-f9755.firebaseio.com",
+    "project_id": "rooms-f9755",
+    "storage_bucket": "rooms-f9755.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975529114539:android:2441c28fd5035d47",
+        "android_client_info": {
+          "package_name": "tinashechinyanga.zw.co.ruumz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "975529114539-ot5vhgbm64hd512600120kl196djk2l0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tinashechinyanga.zw.co.ruumz",
+            "certificate_hash": "b582574ca1d9423734a70abbc01ef6f298747058"
+          }
+        },
+        {
+          "client_id": "975529114539-b4fbe7mdqqasq7nr7sunld2lpsiesfda.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0P47mywuHjomkSkSJnCRkOkxO8XriKC8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "975529114539-b4fbe7mdqqasq7nr7sunld2lpsiesfda.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
