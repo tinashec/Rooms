@@ -226,14 +226,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             ParseUser.logInInBackground(username, password, new LogInCallback() {
                 @Override
                 public void done(ParseUser parseUser, ParseException e) {
-                    if (e == null) {
+                    if (e != null) {
+                        //error
+                        Log.e("Login Error", e.getMessage());
+                        showProgress(false);
+                        mPasswordView.setError("Invalid username or password");
+                        View error = mPasswordView;
+                        error.requestFocus();
+                    } else {
                         //success
                         //go back to previous activity
                         //navToMainActivity();
                         finish();
-                    } else {
-                        //error
-
                     }
                 }
             });
