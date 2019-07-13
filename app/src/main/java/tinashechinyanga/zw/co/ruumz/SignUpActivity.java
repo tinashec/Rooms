@@ -17,6 +17,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,10 +28,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.parse.ParseException;
-import com.parse.ParseUser;
-import com.parse.SignUpCallback;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +36,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, CreateParseUser {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -65,6 +62,8 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        Log.i("Signup:", "Creating the interface");
 
         // Set up the login form.
         mUsernameView = findViewById(R.id.username);
@@ -187,20 +186,21 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             // perform the user login attempt.
             showProgress(true);
             //create user
-            ParseUser newUser = new ParseUser();
-            newUser.setUsername(username);
-            newUser.setEmail(email);
-            newUser.setPassword(password);
-            newUser.signUpInBackground(new SignUpCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if(e == null){
-                        //no error == success
-                        Intent backToMainActivity = new Intent(SignUpActivity.this, MainActivity.class);
-                        startActivity(backToMainActivity);
-                    }
-                }
-            });
+            //ParseUser newUser = new ParseUser();
+            CreateParseUser.user.setUsername(username);
+            CreateParseUser.user.setEmail(email);
+            CreateParseUser.user.setPassword(password);
+            signUpUserInBackground(user);
+//            newUser.signUpInBackground(new SignUpCallback() {
+//                @Override
+//                public void done(ParseException e) {
+//                    if(e == null){
+//                        //no error == success
+//                        Intent backToMainActivity = new Intent(SignUpActivity.this, MainActivity.class);
+//                        startActivity(backToMainActivity);
+//                    }
+//                }
+//            });
         }
     }
 
@@ -282,6 +282,13 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
 
+    }
+
+
+    @Override
+    public void handleSuccessfullyCreateNewParseUser() {
+        Intent backToMainActivity = new Intent(SignUpActivity.this, MainActivity.class);
+        startActivity(backToMainActivity);
     }
 
     private interface ProfileQuery {

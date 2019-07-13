@@ -16,6 +16,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 }
 
 repositories {
@@ -37,6 +41,9 @@ dependencies {
     implementation 'id.zelory:compressor:1.0.2'
     implementation 'junit:junit:4.12'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+
 }
     apply plugin: 'com.google.gms.google-services'
     apply plugin: 'com.android.application'

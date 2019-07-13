@@ -39,15 +39,18 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
+
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, OnClickListener {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, OnClickListener, CreateParseUser {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -99,7 +102,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         //google sign im
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("975529114539-b4fbe7mdqqasq7nr7sunld2lpsiesfda.apps.googleusercontent.com")
+                .requestIdToken(getString(R.string.server_client_id))
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
@@ -107,6 +110,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
+        //User sign up
         mSignUpTextView = findViewById(R.id.sign_up_textView);
         mSignUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,8 +128,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
         /* TO DO: implement updateUI to handle googleSignInAccount object
             if null, account hasn't signed in show sign in button
-                else, already signed in, update UI and show signed in interface
-        updateUI(googleSignInAccount);*/
+                else, already signed in, update UI and show signed in interface */
+//        if(googleSignInAccount != null){
+//            updateUI(googleSignInAccount);
+//        }else{
+//            //initiate Google sign-in: go back to sign-in page
+//            finish();
+//        }
 
     }
 
@@ -138,7 +147,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if(requestCode == RC_SIGN_IN){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             GoogleSignInAccount account = task.getResult();
-            Log.i("Returned account: ", account.getEmail() + " " + account.getDisplayName());
+            Log.i("Returned account: ", account.getEmail() + " " + account.getDisplayName() + " " + account.getIdToken());
             //handle sign in task
             handleSignInTask(task);
         }
@@ -154,7 +163,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             postIDTokenToParseServer(idToken);
             // show previous activity
             Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
-            finish();
+            //We've gotten the token, now need to create a parse user
+            CreateParseUser.user.setUsername(account.getDisplayName());
+            CreateParseUser.user.setEmail(account.getEmail());
+            CreateParseUser.user.setPassword(RandomStringUtils.randomAlphanumeric(4, 8));
+            signUpUserInBackground(user);
+            //finish();
         }catch (ApiException e){
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
@@ -351,6 +365,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private void googleSignIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void handleSuccessfullyCreateNewParseUser() {
+        finish();
     }
 
     private interface ProfileQuery {
