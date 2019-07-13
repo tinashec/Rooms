@@ -25,11 +25,13 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInStatusCodes;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
@@ -97,6 +99,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         //google sign im
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("975529114539-b4fbe7mdqqasq7nr7sunld2lpsiesfda.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
@@ -129,27 +132,39 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.i("Result code: ", "" + resultCode);
 
         //result returned from launching the Intent from GoogleSignInClient
         if(requestCode == RC_SIGN_IN){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            GoogleSignInAccount account = task.getResult();
+            Log.i("Returned account: ", account.getEmail() + " " + account.getDisplayName());
             //handle sign in task
             handleSignInTask(task);
         }
     }
 
-    private void handleSignInTask(Task<GoogleSignInAccount> completedtTask) {
+    private void handleSignInTask(Task<GoogleSignInAccount> completedTask) {
         try{
-            GoogleSignInAccount account = completedtTask.getResult(ApiException.class);
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             Log.i(TAG, "Handle sign in: " + account.getEmail());
-            //signed in successfully, show previous activity
+            //signed in successfully,
+            String idToken = account.getIdToken();
+            //send token to backend server
+            postIDTokenToParseServer(idToken);
+            // show previous activity
+            Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
             finish();
         }catch (ApiException e){
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+            Log.w(TAG, "signInResult:failed code=" + GoogleSignInStatusCodes.getStatusCodeString(e.getStatusCode()));
             updateUI(null);
         }
+    }
+
+    private void postIDTokenToParseServer(String idToken) {
+
     }
 
     private void updateUI(Object o) {
@@ -334,7 +349,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private void googleSignIn() {
-        Intent signInIntent  = mGoogleSignInClient.getSignInIntent();
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 

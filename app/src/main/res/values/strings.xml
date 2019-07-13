@@ -151,4 +151,6 @@
 
     <string name="facebook_app_id">1656895817905933</string>
     <string name="search_hint">Search</string>
+
+    <string name="google_web_app_id">AIzaSyB3YjzF7wo-wp9f56VEsycrEIV4oAlXGto</string>
 </resources>
