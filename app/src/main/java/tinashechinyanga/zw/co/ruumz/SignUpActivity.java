@@ -284,7 +284,8 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
 
     }
 
-
+    //This isn't right. Why take the user to the Main Activity? What if they were creating a room? The flow should take a user back to the
+    // previous activity
     @Override
     public void handleSuccessfullyCreateNewParseUser() {
         Intent backToMainActivity = new Intent(SignUpActivity.this, MainActivity.class);

@@ -2,7 +2,6 @@ package tinashechinyanga.zw.co.ruumz;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -21,10 +20,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 
@@ -146,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     navToLogin();
                 }else{
                     //tell user is already signed in
-                    Toast.makeText(this, "You are already logged in as" + currentUser.getUsername(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "You are already logged in as " + currentUser.getUsername(), Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.action_sign_out:

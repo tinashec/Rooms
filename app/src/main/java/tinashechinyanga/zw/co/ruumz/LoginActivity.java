@@ -27,6 +27,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -39,10 +46,14 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
-import org.apache.commons.lang3.RandomStringUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -128,6 +139,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
         /* TO DO: implement updateUI to handle googleSignInAccount object
             if null, account hasn't signed in show sign in button
+
                 else, already signed in, update UI and show signed in interface */
 //        if(googleSignInAccount != null){
 //            updateUI(googleSignInAccount);
@@ -155,7 +167,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private void handleSignInTask(Task<GoogleSignInAccount> completedTask) {
         try{
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+           GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             Log.i(TAG, "Handle sign in: " + account.getEmail());
             //signed in successfully,
             String idToken = account.getIdToken();
@@ -163,18 +175,109 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             postIDTokenToParseServer(idToken);
             // show previous activity
             Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
-            //We've gotten the token, now need to create a parse user
-            CreateParseUser.user.setUsername(account.getDisplayName());
-            CreateParseUser.user.setEmail(account.getEmail());
-            CreateParseUser.user.setPassword(RandomStringUtils.randomAlphanumeric(4, 8));
-            signUpUserInBackground(user);
-            //finish();
+
+            /*
+            * if there is no user in the back-end
+            *   create a new user
+            * else
+            *   validate token
+            *   get sessionId from Parse
+            * steps:
+            *   - send token to backend
+            *   - validate token in backend
+            *   - check if user is already registered in backend
+            *   - send response
+            * */
+
+            //sending the token to the backend
+            String backendApiUrlToGenerateSessionToken = getResources().getString(R.string.google_signIn_get_sessionToken_url);
+            Log.i("URL: ", backendApiUrlToGenerateSessionToken);
+
+            RequestQueue newRequestQueue = Volley.newRequestQueue(this);
+
+            JSONObject getSessionTokenJsonRequestBody = new JSONObject();
+            //back-end requires the token and Google client ID to be verified
+            try {
+                getSessionTokenJsonRequestBody.put("idToken", idToken);
+                getSessionTokenJsonRequestBody.put("GClientId", getResources().getString(R.string.server_client_id));
+                Log.i("Google Token: ", idToken);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            final String requestBody = getSessionTokenJsonRequestBody.toString();
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, backendApiUrlToGenerateSessionToken, getSessionTokenJsonRequestBody,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            //success callback
+                            //set current user and continue
+                            try {
+                                ParseUser.becomeInBackground(response.getString("result"), new LogInCallback() {
+                                    @Override
+                                    public void done(ParseUser user, ParseException e) {
+                                        if (user != null){
+                                            //successfully logged in, take the user to the last page they were on
+                                            finish();
+                                        }else{
+                                            //error
+                                            Log.e("Login error: ", e.getMessage());
+                                            //show error dialog, prompt user to login again
+
+                                        }
+                                    }
+                                });
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            //error callback
+                            int  statusCode = error.networkResponse.statusCode;
+                            NetworkResponse response = error.networkResponse;
+
+                            Log.d("Error Response req: ","" + statusCode + " " + response.data.toString());
+
+                        }
+                    })
+            {
+                @Override
+                public Map<String, String> getHeaders(){
+                    Map<String, String> headers = new HashMap<>();
+                    //post parameters
+                    headers.put("X-Parse-Application-Id", getResources().getString(R.string.parse_app_id));
+                    headers.put("X-Parse-REST-API-Key", getResources().getString(R.string.parse_rest_api_key));
+                    headers.put("Content-Type", "application/json");
+                    return headers;
+                }
+
+                @Override
+                public byte[] getBody(){
+                    try {
+                        String body;
+                        if (requestBody == null) body = null;
+                        else body = String.valueOf(requestBody.getBytes("utf-8"));
+                        return requestBody == null ? null : requestBody.getBytes("utf-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                        return null;
+                    }
+                }
+            };
+            newRequestQueue.add(jsonObjectRequest);
+
         }catch (ApiException e){
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w(TAG, "signInResult:failed code=" + GoogleSignInStatusCodes.getStatusCodeString(e.getStatusCode()));
             updateUI(null);
         }
+
     }
 
     private void postIDTokenToParseServer(String idToken) {
