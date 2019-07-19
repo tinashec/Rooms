@@ -51,8 +51,8 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
             mRoomPrice = (TextView)itemView.findViewById(R.id.price_label);
             mInclusiveOrNot = (TextView)itemView.findViewById(R.id.incl_excl_label);
             mPropertyType = (TextView)itemView.findViewById(R.id.propertyType_label);
-            mNumOfBeds = (TextView)itemView.findViewById(R.id.num_beds_label);
-            mNumOfBaths = (TextView)itemView.findViewById(R.id.details_num_baths_label);
+            mNumOfBeds = itemView.findViewById(R.id.num_beds_label);
+            mNumOfBaths = itemView.findViewById(R.id.details_num_baths_label);
             mRoomLocation =(TextView)itemView.findViewById(R.id.location_label);
             this.context = context;
             //set onclick listener

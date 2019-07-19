@@ -14,6 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,10 +48,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        GoogleSignIn.silentSignIn().addOnCompleteListener(this, new OnCompleteListener<GoogleSignInAccount>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
+//                        handleSignInResult(task);
+//                    }
+//                });
+
         //tracking number of times app is opened by user
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Create the adapter that will return a fragment for each of the three
@@ -58,11 +66,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mHomeSectionsPagerAdapter = new HomeSectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mHomeSectionsPagerAdapter);
 
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView)findViewById(R.id.nav_view);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
 
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -70,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //sync the toggle state
         toggle.syncState();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,10 +137,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.action_sign_in:
                 if(currentUser == null){
                     //navigate to login
+                    Log.i("SignIn: ", "Attempting signin");
                     navToLogin();
                 }else{
                     //tell user is already signed in
-                    Toast.makeText(this, "You are already logged in as" + currentUser.getUsername().toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "You are already logged in as " + currentUser.getUsername(), Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.action_sign_out:
