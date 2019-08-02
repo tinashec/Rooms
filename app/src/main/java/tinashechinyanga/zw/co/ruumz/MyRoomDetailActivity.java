@@ -2,19 +2,23 @@ package tinashechinyanga.zw.co.ruumz;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
+
+//import android.support.v4.app.FragmentManager;
 
 public class MyRoomDetailActivity extends AppCompatActivity implements RoomImageOneFragment.GetImageUrlListener,
         RoomImageTwoFragment.SetImageTwoUrl, RoomImageThreeFragment.SetImageThreeUrl{
