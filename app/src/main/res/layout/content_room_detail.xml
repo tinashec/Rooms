@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="258dp">
 
-            <android.support.v4.view.ViewPager
+            <androidx.viewpager.widget.ViewPager
                 android:id="@+id/details_images_viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -31,7 +31,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true">
 
-            </android.support.v4.view.ViewPager>
+            </androidx.viewpager.widget.ViewPager>
 
         </RelativeLayout>
 
@@ -187,9 +187,8 @@
                         android:id="@+id/listing_bedrooms_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
-                        android:layout_below="@+id/details_features_label"
+                        android:layout_alignParentLeft="true"
                         android:layout_marginRight="20dp"
                         android:padding="@dimen/card_vertical"
                         android:paddingLeft="0dp"
@@ -208,9 +207,6 @@
                         android:id="@+id/details_actualRooms_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_above="@+id/details_actualDate_label"
-                        android:layout_alignLeft="@+id/details_actualDate_label"
-                        android:layout_alignStart="@+id/details_actualDate_label"
                         android:hint="3"
                         android:padding="@dimen/card_vertical"
                         android:paddingLeft="0dp"
@@ -235,9 +231,8 @@
                         android:id="@+id/details_num_baths_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
-                        android:layout_below="@+id/propertyType_label"
+                        android:layout_alignParentLeft="true"
                         android:layout_gravity="right"
                         android:padding="@dimen/card_vertical"
                         android:paddingLeft="0dp"
@@ -256,9 +251,6 @@
                         android:id="@+id/details_actualBaths_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/details_actualDate_label"
-                        android:layout_alignStart="@+id/details_actualDate_label"
-                        android:layout_below="@+id/propertyType_label"
                         android:hint="2"
                         android:padding="@dimen/card_vertical"
                         android:paddingLeft="0dp"
@@ -285,7 +277,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
-                        android:layout_below="@+id/details_num_baths_label"
                         android:layout_column="0"
                         android:padding="@dimen/card_vertical"
                         android:paddingLeft="0dp"
@@ -304,9 +295,6 @@
                         android:id="@+id/details_actualToilets_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/details_actualBaths_label"
-                        android:layout_alignStart="@+id/details_actualBaths_label"
-                        android:layout_below="@+id/details_actualBaths_label"
                         android:hint="1"
                         android:padding="@dimen/card_vertical"
                         android:paddingLeft="0dp"
@@ -336,7 +324,6 @@
                         android:textSize="18sp"
                         android:layout_column="0"
                         android:textColor="#575757"
-                        android:layout_below="@+id/details_num_baths_label"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:padding="@dimen/card_vertical"
@@ -352,9 +339,6 @@
                         android:id="@+id/textView40"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/details_actualBaths_label"
-                        android:layout_alignStart="@+id/details_actualBaths_label"
-                        android:layout_below="@+id/details_actualBaths_label"
                         android:paddingBottom="@dimen/card_vertical"
                         android:paddingLeft="@dimen/card_vertical"
                         android:paddingRight="5dp"
@@ -418,7 +402,6 @@
                         android:textSize="18sp"
                         android:layout_column="0"
                         android:textColor="#575757"
-                        android:layout_below="@+id/details_num_baths_label"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:padding="@dimen/card_vertical"
@@ -437,9 +420,6 @@
                         android:id="@+id/textView42"
                         android:textSize="18sp"
                         android:textColor="@color/colorAccent"
-                        android:layout_below="@+id/details_actualBaths_label"
-                        android:layout_alignLeft="@+id/details_actualBaths_label"
-                        android:layout_alignStart="@+id/details_actualBaths_label"
                         android:paddingTop="@dimen/card_vertical"
                         android:paddingBottom="@dimen/card_vertical"
                         android:paddingLeft="@dimen/card_vertical"
@@ -484,7 +464,6 @@
                         android:id="@+id/propertyType_label"
                         android:textSize="18sp"
                         android:textColor="#575757"
-                        android:layout_below="@+id/listing_bedrooms_label"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:padding="@dimen/card_vertical"
@@ -520,7 +499,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#358a8a8a"
-            android:id="@+id/linearLayout4"
+            android:id="@+id/linearLayoutAmenities"
             android:padding="@dimen/card_vertical"
             android:showDividers="beginning|end" >
 

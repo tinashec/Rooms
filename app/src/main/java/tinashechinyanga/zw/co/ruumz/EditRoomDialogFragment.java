@@ -1,10 +1,11 @@
 package tinashechinyanga.zw.co.ruumz;
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.DialogFragment;
 
 /**
  * Created by MUZ0007 on 7/26/2016.
