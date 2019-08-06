@@ -7,6 +7,7 @@
     <string name="parse_app_id">GXgvtP569LEzHZXJmuQv9ACgH7W5IQzrPaKU1pL4</string>
     <string name="parse_client_key">ZtWq01jsDeNxSy1Xd0Htryea5VQAH107k38Bd4ob</string>
     <string name="parse_rest_api_key">bTn0gwmrm7ZCmdvscYz2WqvMWSFLY09MhJ5yGJdS</string>
+    <string name="parse_server_url">https://parseapi.back4app.com/</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -150,12 +151,13 @@
     <string name="contact_us_website_link">http://www.rooms.co.zw</string>
     <string name="title_activity_my_rooms">My Rooms</string>
 
+    <string name="search_hint">Search</string>
+
+    <!--facebook-->
     <string name="facebook_app_id">1656895817905933</string>
     <string name="fb_login_protocol_scheme">fb1656895817905933</string>
 
-
-    <string name="search_hint">Search</string>
-
+    <!--google-->
     <string name="google_web_app_id">AIzaSyB3YjzF7wo-wp9f56VEsycrEIV4oAlXGto</string>
     <string name="server_client_id">975529114539-b4fbe7mdqqasq7nr7sunld2lpsiesfda.apps.googleusercontent.com</string>
     <string name="google_signIn_get_sessionToken_url">https://parseapi.back4app.com/functions/getSessionToken</string>

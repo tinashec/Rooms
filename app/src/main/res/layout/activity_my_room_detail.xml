@@ -6,16 +6,28 @@
     android:layout_height="match_parent" android:fitsSystemWindows="true"
     tools:context="tinashechinyanga.zw.co.ruumz.MyRoomDetailActivity">
 
-    <com.google.android.material.appbar.AppBarLayout android:id="@+id/app_bar"
-        android:fitsSystemWindows="false" android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:theme="@style/AppTheme.AppBarOverlay">
+    <!--<com.google.android.material.appbar.AppBarLayout android:id="@+id/app_bar"-->
+        <!--android:fitsSystemWindows="false" android:layout_height="wrap_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:theme="@style/AppTheme.AppBarOverlay">-->
 
-            <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
-                android:layout_height="?attr/actionBarSize" android:layout_width="match_parent"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay"
-                android:fitsSystemWindows="false" />
+            <!--<androidx.appcompat.widget.Toolbar -->
+                <!--android:id="@+id/toolbar"-->
+                <!--android:layout_height="?attr/actionBarSize" -->
+                <!--android:layout_width="match_parent"-->
+                <!--app:layout_collapseMode="pin"-->
+                <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
+                <!--android:fitsSystemWindows="false" />-->
+
+    <!--</com.google.android.material.appbar.AppBarLayout>-->
+
+    <com.google.android.material.appbar.AppBarLayout android:id="@+id/app_bar"
+        style="@style/app_bar_design">
+
+        <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
+            app:layout_collapseMode="pin"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            style="@style/toolbar_design" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
