@@ -133,16 +133,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         facebookLoginBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Collection<String> permissions = Arrays.asList("public profile", "email");
+                Collection<String> permissions = Arrays.asList("public_profile", "email");
                 ParseFacebookUtils.logInWithReadPermissionsInBackground(LoginActivity.this, permissions, new LogInCallback() {
                     @Override
                     public void done(ParseUser user, ParseException e) {
                         if(e != null){
-                            Log.e("Facebook login: ", "Facebook login error");
+                            Log.e("Facebook login: ", e.getMessage());
                         }
                         if (user == null){
                             Log.i("Facebook login: ", "Login cancelled.");
                         }else if(user.isNew()){
+                            Log.i("New Facebook login: ", "New user." + " " + user.getUsername());
                             getUserDetailsFromFacebook();
                         }else {
                             getUserDetailsFromParse();
@@ -172,11 +173,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onCompleted(JSONObject object, GraphResponse response) {
                 ParseUser user = ParseUser.getCurrentUser();
                 try{
+                    Log.i("Current User: ", "Current username " + ParseUser.getCurrentUser().getUsername());
+                    Log.i("Returned name: ", "Facebook name: " + object.getString("name"));
                     user.setUsername(object.getString("name"));
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
                 try {
+                    Log.i("Returned email: ", "Facebook email: " + object.getString("email"));
                     user.setEmail(object.getString("email"));
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -185,6 +189,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     @Override
                     public void done(ParseException e) {
                         //Add welcome alert
+                        if(e == null){
+                            Log.i("Success", "Successful Parse user update");
+                            finish();
+                        }else {
+                            Log.e("Parse update failure", "Parse error: " + e.getMessage());
+                            e.printStackTrace();
+                        }
                     }
                 });
             }
@@ -196,7 +207,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private void getUserDetailsFromParse() {
-
+        Toast.makeText(this, "Welcome, " + ParseUser.getCurrentUser().getUsername(), Toast.LENGTH_LONG).show();
+        finish();
     }
 
     @Override
@@ -408,8 +420,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         boolean cancel = false;
         View focusView = null;
 
+        if(TextUtils.isEmpty(username)){
+            mUsername.setError(getResources().getString(R.string.username_blank_error));
+            focusView = mUsername;
+            cancel = true;
+        }
+
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
