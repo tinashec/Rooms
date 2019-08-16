@@ -35,6 +35,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -46,12 +49,16 @@ import com.google.android.gms.tasks.Task;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
+import com.parse.facebook.ParseFacebookUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,7 +75,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
-    private static final int RC_SIGN_IN = 0;
+    private static final int RC_GOOGLE_SIGN_IN = 1;
+    private static final int RC_FACEBOOK_SIGN_IN = 2;
     private static final String TAG = "Login Activity";
 
     private GoogleSignInClient mGoogleSignInClient;
@@ -79,6 +87,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
     private TextView mSignUpTextView;
+    private Button facebookLoginBtn;
 
 
     @Override
@@ -119,6 +128,31 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
+        //facebook login
+        facebookLoginBtn = findViewById(R.id.facebook_login_btn);
+        facebookLoginBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Collection<String> permissions = Arrays.asList("public_profile", "email");
+                ParseFacebookUtils.logInWithReadPermissionsInBackground(LoginActivity.this, permissions, new LogInCallback() {
+                    @Override
+                    public void done(ParseUser user, ParseException e) {
+                        if(e != null){
+                            Log.e("Facebook login: ", e.getMessage());
+                        }
+                        if (user == null){
+                            Log.i("Facebook login: ", "Login cancelled.");
+                        }else if(user.isNew()){
+                            Log.i("New Facebook login: ", "New user." + " " + user.getUsername());
+                            getUserDetailsFromFacebook();
+                        }else {
+                            getUserDetailsFromParse();
+                        }
+                    }
+                });
+            }
+        });
+
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
@@ -131,6 +165,50 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 startActivity(signUpIntent);
             }
         });
+    }
+
+    private void getUserDetailsFromFacebook() {
+        GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+                ParseUser user = ParseUser.getCurrentUser();
+                try{
+                    Log.i("Current User: ", "Current username " + ParseUser.getCurrentUser().getUsername());
+                    Log.i("Returned name: ", "Facebook name: " + object.getString("name"));
+                    user.setUsername(object.getString("name"));
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+                try {
+                    Log.i("Returned email: ", "Facebook email: " + object.getString("email"));
+                    user.setEmail(object.getString("email"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                user.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        //Add welcome alert
+                        if(e == null){
+                            Log.i("Success", "Successful Parse user update");
+                            finish();
+                        }else {
+                            Log.e("Parse update failure", "Parse error: " + e.getMessage());
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "name, email");
+        request.setParameters(parameters);
+        request.executeAsync();
+    }
+
+    private void getUserDetailsFromParse() {
+        Toast.makeText(this, "Welcome, " + ParseUser.getCurrentUser().getUsername(), Toast.LENGTH_LONG).show();
+        finish();
     }
 
     @Override
@@ -154,16 +232,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
         Log.i("Result code: ", "" + resultCode);
 
         //result returned from launching the Intent from GoogleSignInClient
-        if(requestCode == RC_SIGN_IN){
+        if(requestCode == RC_GOOGLE_SIGN_IN){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             GoogleSignInAccount account = task.getResult();
             Log.i("Returned account: ", account.getEmail() + " " + account.getDisplayName() + " " + account.getIdToken());
             //handle sign in task
             handleSignInTask(task);
         }
+
+
     }
 
     private void handleSignInTask(Task<GoogleSignInAccount> completedTask) {
@@ -339,8 +420,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         boolean cancel = false;
         View focusView = null;
 
+        if(TextUtils.isEmpty(username)){
+            mUsername.setError(getResources().getString(R.string.username_blank_error));
+            focusView = mUsername;
+            cancel = true;
+        }
+
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -468,7 +555,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private void googleSignIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        startActivityForResult(signInIntent, RC_GOOGLE_SIGN_IN);
     }
 
     @Override

@@ -21,6 +21,7 @@
 
     <ScrollView
         android:id="@+id/login_form"
+        style="@android:style/Widget.DeviceDefault.Light.ScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -73,10 +74,26 @@
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
 
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/sign_in_button"
-                android:layout_width="187dp"
-                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/sign_in_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <Button
+                    android:id="@+id/facebook_login_btn"
+                    style="@style/com_facebook_button_share"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Sign in with Facebook" />
+
+
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/sign_up_textView"

@@ -44,6 +44,15 @@
         <meta-data
             android:name="android.support.UI_OPTIONS"
             android:value="splitActionBarWhenNarrow" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/fb_login_protocol_scheme"/>
+
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider1656895817905933"
+            android:exported="true" />
+
 
         <activity
             android:name=".MainActivity"
