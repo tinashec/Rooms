@@ -84,6 +84,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     // UI references.
     private AutoCompleteTextView mUsername;
     private EditText mPasswordView;
+    private TextView forgotPasswordText;
     private View mProgressView;
     private View mLoginFormView;
     private TextView mSignUpTextView;
@@ -107,6 +108,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     return true;
                 }
                 return false;
+            }
+        });
+
+        forgotPasswordText = findViewById(R.id.forgot_password);
+        forgotPasswordText.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent forgotPasswordIntent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(forgotPasswordIntent);
             }
         });
 
