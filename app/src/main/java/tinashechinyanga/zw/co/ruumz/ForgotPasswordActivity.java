@@ -37,32 +37,33 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private void resetPassword() {
         resetPasswordEmail.setError(null);
 
+        String email = resetPasswordEmail.getText().toString();
+
         View focusView = null;
         boolean cancel = false;
         //check if email is valid
-        if(TextUtils.isEmpty(resetPasswordEmail.getText().toString())){
-            resetPasswordEmail.setError("Email cannot be empty");
-            focusView = resetPasswordEmail;
-            cancel = true;
-        }
-        if(!resetPasswordEmail.getText().toString().contains("@")){
+        if(TextUtils.isEmpty(email.trim()) || !email.contains("@")){
             resetPasswordEmail.setError("Invalid email address");
             focusView = resetPasswordEmail;
             cancel = true;
         }
 
-        ParseUser.requestPasswordResetInBackground(resetPasswordEmail.getText().toString().trim(), new RequestPasswordResetCallback() {
-            @Override
-            public void done(ParseException e) {
-                if(e == null){
-                    //password reset sent to email successfully
-                    Toast.makeText(ForgotPasswordActivity.this, "Password reset sent to your email.", Toast.LENGTH_LONG).show();
-                    finish();
-                }else{
-                    //error occurred
-                    Toast.makeText(ForgotPasswordActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+        if(cancel){
+            focusView.requestFocus();
+        }else {
+            ParseUser.requestPasswordResetInBackground(resetPasswordEmail.getText().toString().trim(), new RequestPasswordResetCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e == null) {
+                        //password reset sent to email successfully
+                        Toast.makeText(ForgotPasswordActivity.this, "Password reset sent to your email.", Toast.LENGTH_LONG).show();
+                        finish();
+                    } else {
+                        //error occurred
+                        Toast.makeText(ForgotPasswordActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 }
