@@ -46,5 +46,18 @@
         <item name="android:paddingTop">5dp</item>
     </style>
 
+    <style name="app_bar_design">
+        <item name="android:fitsSystemWindows">false</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:theme">@style/AppTheme.AppBarOverlay</item>
+    </style>
+
+    <style name="toolbar_design">
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:fitsSystemWindows">false</item>
+    </style>
+
 
 </resources>

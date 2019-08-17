@@ -266,7 +266,7 @@
                             android:layout_height="40dp"
                             android:id="@+id/house_imageview"
                             android:src="@mipmap/ic_fullhouse"
-                            android:layout_alignTop="@+id/flat_imageview"
+                            android:layout_alignParentTop="true"
                             android:layout_gravity="center"
                             android:padding="5dp" />
                     </RelativeLayout>
@@ -369,7 +369,8 @@
 
         </LinearLayout>
 
-        <android.support.design.widget.FloatingActionButton android:id="@+id/add_room_step1_fab"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_room_step1_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
