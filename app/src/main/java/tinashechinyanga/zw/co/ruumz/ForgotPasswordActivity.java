@@ -51,7 +51,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             cancel = true;
         }
 
-        ParseUser.requestPasswordResetInBackground(resetPasswordEmail.getText().toString(), new RequestPasswordResetCallback() {
+        ParseUser.requestPasswordResetInBackground(resetPasswordEmail.getText().toString().trim(), new RequestPasswordResetCallback() {
             @Override
             public void done(ParseException e) {
                 if(e == null){
