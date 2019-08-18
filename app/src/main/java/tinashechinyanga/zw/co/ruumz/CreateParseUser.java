@@ -13,9 +13,15 @@ interface CreateParseUser {
                     //no error == success
                     handleSuccessfullyCreateNewParseUser();
                 }
+                else{
+                    handleErrorOnSignUp(e);
+                }
             }
         });
     }
+
     void handleSuccessfullyCreateNewParseUser();
+    void handleErrorOnSignUp(ParseException e);
+
     ParseUser user = new ParseUser();
 }

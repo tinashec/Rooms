@@ -24,11 +24,13 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.parse.ParseException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -161,8 +163,15 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
         boolean cancel = false;
         View focusView = null;
 
+        //check for non-empty username
+        if(TextUtils.isEmpty(username)){
+            mUsernameView.setError("Username cannot be empty");
+            focusView = mUsernameView;
+            cancel = true;
+        }
+
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -193,16 +202,6 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             CreateParseUser.user.setEmail(email);
             CreateParseUser.user.setPassword(password);
             signUpUserInBackground(user);
-//            newUser.signUpInBackground(new SignUpCallback() {
-//                @Override
-//                public void done(ParseException e) {
-//                    if(e == null){
-//                        //no error == success
-//                        Intent backToMainActivity = new Intent(SignUpActivity.this, MainActivity.class);
-//                        startActivity(backToMainActivity);
-//                    }
-//                }
-//            });
         }
     }
 
@@ -292,6 +291,13 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
     public void handleSuccessfullyCreateNewParseUser() {
         Intent backToMainActivity = new Intent(SignUpActivity.this, MainActivity.class);
         startActivity(backToMainActivity);
+    }
+
+    @Override
+    public void handleErrorOnSignUp(ParseException e) {
+        Toast.makeText(this, "Error, " + e.getMessage(), Toast.LENGTH_LONG).show();
+        //cancel the loading icon
+        showProgress(false);
     }
 
     private interface ProfileQuery {

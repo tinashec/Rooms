@@ -573,6 +573,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         finish();
     }
 
+    @Override
+    public void handleErrorOnSignUp(ParseException e) {
+        Toast.makeText(this, "Error, " + e.getMessage(), Toast.LENGTH_LONG).show();
+        showProgress(false);
+    }
+
     private interface ProfileQuery {
         String[] PROJECTION = {
                 ContactsContract.CommonDataKinds.Email.ADDRESS,

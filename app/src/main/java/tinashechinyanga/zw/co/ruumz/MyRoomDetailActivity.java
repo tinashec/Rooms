@@ -548,9 +548,15 @@ public class MyRoomDetailActivity extends AppCompatActivity implements RoomImage
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //get the room ID
+                String roomId = roomObject.getObjectId();
+                //pass roomId to the dialog fragment
+                Bundle bundle = new Bundle();
+                bundle.putString("roomId", roomId);
                 ////edit room
                 FragmentManager fm = getSupportFragmentManager();
                 EditRoomDialogFragment editRoomDialogFragment = EditRoomDialogFragment.newInstance();
+                editRoomDialogFragment.setArguments(bundle);
                 editRoomDialogFragment.show(fm, "edit");
             }
         });

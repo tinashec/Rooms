@@ -51,13 +51,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        GoogleSignIn.silentSignIn().addOnCompleteListener(this, new OnCompleteListener<GoogleSignInAccount>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
-//                        handleSignInResult(task);
-//                    }
-//                });
-
         //tracking number of times app is opened by user
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
