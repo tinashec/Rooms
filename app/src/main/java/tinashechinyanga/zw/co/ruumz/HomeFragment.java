@@ -102,7 +102,7 @@ public class HomeFragment extends Fragment {
             }
         });
         //configure the swipe refresh colours
-        swipeRefreshLayout.setColorSchemeColors(R.color.colorAccent);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
 
         return rootView;
     }

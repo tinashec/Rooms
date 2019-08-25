@@ -1,7 +1,7 @@
 package tinashechinyanga.zw.co.ruumz;
 
 /**
- * Created by MUZ0007 on 5/29/2016.
+ * Created by Tinashe on 5/29/2016.
  */
 // By Janaka Jayasuriya, @pinkydoe
 // Original By Jamie Chapman, @chappers57
@@ -124,7 +124,7 @@ public class ParseProxyObject implements Serializable {
     }
 
     //Note: only the url to the file is returned, not an actual ParseFile
-    public String getParseFile(String key) {
+    public String getRoomImageParseFile(String key) {
         if(fileUrls.containsKey(key)) {
             return fileUrls.get(key);
         } else {
