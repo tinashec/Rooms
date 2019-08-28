@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.parse.ParseObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,89 +49,95 @@ public class MyRoomDetailActivity extends AppCompatActivity implements RoomImage
     private TextView mDescription;
 
     private ParseProxyObject roomObject;
+    private ParseObject currentSelectedRoom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_room_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);      //displays the back icon
-
+        //currentSelectedRoom = roomObject;
         //get the object passed by the parent activity
         Intent intent = getIntent();
-        roomObject = (ParseProxyObject)intent.getSerializableExtra("roomObject");
+        roomObject = (ParseProxyObject) intent.getSerializableExtra("roomObject");
+        Log.i("Intent data, ", "Parcelable extra, " + intent.getParcelableExtra("currentSelectedRoomObject"));
+        Log.i("Intent data, ", "Serializable extra, " + intent.getSerializableExtra("roomObject"));
+
+        currentSelectedRoom = intent.getParcelableExtra("currentSelectedRoomObject");
+        Log.i("Parcel", "Intent parcel, " + (currentSelectedRoom != null ? currentSelectedRoom.getClassName() : null));
 
         //attach the views
         //mRoomImages = (ImageView)findViewById(R.id.details_roomImage_imageview);
-        mImagesViewPager = (ViewPager)findViewById(R.id.details_images_viewpager);
-        mPropertyType = (TextView) findViewById(R.id.details_propertyType_label);
-        mPropertyTypeImage = (ImageView)findViewById(R.id.details_propertyType_imageview);
-        mLocationImage = (ImageView)findViewById(R.id.details_location_imageview);
-        mSharedOrNot = (TextView)findViewById(R.id.details_roomSharedOrNot_label);
-        mSuburb = (TextView) findViewById(R.id.details_suburb_label);
-        mCity = (TextView) findViewById(R.id.details_roomCity_label);
+        mImagesViewPager = findViewById(R.id.details_images_viewpager);
+        mPropertyType = findViewById(R.id.details_propertyType_label);
+        mPropertyTypeImage = findViewById(R.id.details_propertyType_imageview);
+        mLocationImage = findViewById(R.id.details_location_imageview);
+        mSharedOrNot = findViewById(R.id.details_roomSharedOrNot_label);
+        mSuburb = findViewById(R.id.details_suburb_label);
+        mCity = findViewById(R.id.details_roomCity_label);
 
-        mBedrooms = (TextView) findViewById(R.id.details_actualRooms_label);
-        mBathrooms = (TextView) findViewById(R.id.details_actualBaths_label);
-        mToilets = (TextView) findViewById(R.id.details_actualToilets_label);
-        mRentAmount = (TextView) findViewById(R.id.details_actualRent_amount);
-        mInclusiveOfRentOrNot = (TextView) findViewById(R.id.details_actualInclExcl_label);
-        mDepositAmount = (TextView) findViewById(R.id.details_roomDeposit_label);
-        mMoveInDate = (TextView) findViewById(R.id.details_actualDate_label);
+        mBedrooms = findViewById(R.id.details_actualRooms_label);
+        mBathrooms = findViewById(R.id.details_actualBaths_label);
+        mToilets = findViewById(R.id.details_actualToilets_label);
+        mRentAmount = findViewById(R.id.details_actualRent_amount);
+        mInclusiveOfRentOrNot = findViewById(R.id.details_actualInclExcl_label);
+        mDepositAmount = findViewById(R.id.details_roomDeposit_label);
+        mMoveInDate = findViewById(R.id.details_actualDate_label);
 
         //amenities section
-        layout2 = (LinearLayout)findViewById(R.id.details_amenities_llayout2);
-        layout3 = (LinearLayout)findViewById(R.id.details_amenities_llayout3);
+        layout2 = findViewById(R.id.details_amenities_llayout2);
+        layout3 = findViewById(R.id.details_amenities_llayout3);
 
-        mImage1 = (ImageView)findViewById(R.id.details_image_1);
-        mImage2 = (ImageView)findViewById(R.id.details_image_2);
-        mImage3 = (ImageView)findViewById(R.id.details_image_3);
-        mImage4 = (ImageView)findViewById(R.id.details_image_4);
-        mImage5 = (ImageView)findViewById(R.id.details_image_5);
-        mImage6 = (ImageView)findViewById(R.id.details_image_6);
-        mImage7 = (ImageView)findViewById(R.id.details_image_7);
-        mImage8 = (ImageView)findViewById(R.id.details_image_8);
-        mImage9 = (ImageView)findViewById(R.id.details_image_9);
-        mImage10 = (ImageView)findViewById(R.id.details_image_10);
-        mImage11 = (ImageView)findViewById(R.id.details_image_11);
-        mImage12 = (ImageView)findViewById(R.id.details_image_12);
+        mImage1 = findViewById(R.id.details_image_1);
+        mImage2 = findViewById(R.id.details_image_2);
+        mImage3 = findViewById(R.id.details_image_3);
+        mImage4 = findViewById(R.id.details_image_4);
+        mImage5 = findViewById(R.id.details_image_5);
+        mImage6 = findViewById(R.id.details_image_6);
+        mImage7 = findViewById(R.id.details_image_7);
+        mImage8 = findViewById(R.id.details_image_8);
+        mImage9 = findViewById(R.id.details_image_9);
+        mImage10 = findViewById(R.id.details_image_10);
+        mImage11 = findViewById(R.id.details_image_11);
+        mImage12 = findViewById(R.id.details_image_12);
 
-        mText1 = (TextView)findViewById(R.id.details_textview_1);
-        mText2 = (TextView)findViewById(R.id.details_textview_2);
-        mText3 = (TextView)findViewById(R.id.details_textview_3);
-        mText4 = (TextView)findViewById(R.id.details_textview_4);
-        mText5 = (TextView)findViewById(R.id.details_textview_5);
-        mText6 = (TextView)findViewById(R.id.details_textview_6);
-        mText7 = (TextView)findViewById(R.id.details_textview_7);
-        mText8 = (TextView)findViewById(R.id.details_textview_8);
-        mText9 = (TextView)findViewById(R.id.details_textview_9);
-        mText10 = (TextView)findViewById(R.id.details_textview_10);
-        mText11 = (TextView)findViewById(R.id.details_textview_11);
-        mText12 = (TextView)findViewById(R.id.details_textview_12);
+        mText1 = findViewById(R.id.details_textview_1);
+        mText2 = findViewById(R.id.details_textview_2);
+        mText3 = findViewById(R.id.details_textview_3);
+        mText4 = findViewById(R.id.details_textview_4);
+        mText5 = findViewById(R.id.details_textview_5);
+        mText6 = findViewById(R.id.details_textview_6);
+        mText7 = findViewById(R.id.details_textview_7);
+        mText8 = findViewById(R.id.details_textview_8);
+        mText9 = findViewById(R.id.details_textview_9);
+        mText10 = findViewById(R.id.details_textview_10);
+        mText11 = findViewById(R.id.details_textview_11);
+        mText12 = findViewById(R.id.details_textview_12);
 
         //preferences section
-        prefLayout2 = (LinearLayout)findViewById(R.id.details_pref_llayout2);
+        prefLayout2 = findViewById(R.id.details_pref_llayout2);
 
-        mImage1Pref = (ImageView)findViewById(R.id.details_pref_image1);
-        mImage2Pref = (ImageView)findViewById(R.id.details_pref_image2);
-        mImage3Pref = (ImageView)findViewById(R.id.details_pref_image3);
-        mImage4Pref = (ImageView)findViewById(R.id.details_pref_image4);
-        mImage5Pref = (ImageView)findViewById(R.id.details_pref_image5);
-        mImage6Pref = (ImageView)findViewById(R.id.details_pref_image6);
+        mImage1Pref = findViewById(R.id.details_pref_image1);
+        mImage2Pref = findViewById(R.id.details_pref_image2);
+        mImage3Pref = findViewById(R.id.details_pref_image3);
+        mImage4Pref = findViewById(R.id.details_pref_image4);
+        mImage5Pref = findViewById(R.id.details_pref_image5);
+        mImage6Pref = findViewById(R.id.details_pref_image6);
 
-        mText1Pref = (TextView)findViewById(R.id.details_pref_text1);
-        mText2Pref = (TextView)findViewById(R.id.details_pref_text2);
-        mText3Pref = (TextView)findViewById(R.id.details_pref_text3);
-        mText4Pref = (TextView)findViewById(R.id.details_pref_text4);
-        mText5Pref = (TextView)findViewById(R.id.details_pref_text5);
-        mText6Pref = (TextView)findViewById(R.id.details_pref_text6);
+        mText1Pref = findViewById(R.id.details_pref_text1);
+        mText2Pref = findViewById(R.id.details_pref_text2);
+        mText3Pref = findViewById(R.id.details_pref_text3);
+        mText4Pref = findViewById(R.id.details_pref_text4);
+        mText5Pref = findViewById(R.id.details_pref_text5);
+        mText6Pref = findViewById(R.id.details_pref_text6);
 
-        mDescription = (TextView)findViewById(R.id.details_description_label);
+        mDescription = findViewById(R.id.details_description_label);
 
         /*set the views using the proxy object*/
-        //mRoomImages.setImageBitmap(roomObject.getParseFile("roomImage1"));
+        //mRoomImages.setImageBitmap(roomObject.getRoomImageParseFile("roomImage1"));
         //setting up the images fragments
         mRoomImageAdapter = new RoomImagesPagerAdapter(getSupportFragmentManager());
         mImagesViewPager.setAdapter(mRoomImageAdapter);
@@ -215,7 +222,7 @@ public class MyRoomDetailActivity extends AppCompatActivity implements RoomImage
                         //add to the features list
                         features.add(new Features(R.mipmap.ic_bic, getString(R.string.add_room_bic_amenity)));
 
-                        Log.d("View added ", "Size: " + Integer.toString(features.size()));
+                        Log.d("View added ", "Size: " + features.size());
 
                         break;
                     case 1:
@@ -306,7 +313,7 @@ public class MyRoomDetailActivity extends AppCompatActivity implements RoomImage
                         //add to the features list
                         preferencesAmenities.add(new PreferencesAmenity(R.mipmap.ic_fam, getString(R.string.add_room_family_amenity)));
 
-                        Log.d("View added ", "Size: " + Integer.toString(preferencesAmenities.size()));
+                        Log.d("View added ", "Size: " + preferencesAmenities.size());
 
                         break;
                     case 1:
@@ -544,13 +551,17 @@ public class MyRoomDetailActivity extends AppCompatActivity implements RoomImage
 
         mDescription.setText(roomObject.getString("roomRoomDescription"));
 
-       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.edit_room_fab);
+       FloatingActionButton fab = findViewById(R.id.edit_room_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ////edit room
+                //pass room object to the dialog fragment
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("selectedRoom", intent.getParcelableExtra("currentSelectedRoomObject"));// putString("roomId", roomId);
+                //edit room
                 FragmentManager fm = getSupportFragmentManager();
                 EditRoomDialogFragment editRoomDialogFragment = EditRoomDialogFragment.newInstance();
+                editRoomDialogFragment.setArguments(bundle);
                 editRoomDialogFragment.show(fm, "edit");
             }
         });
@@ -572,19 +583,19 @@ public class MyRoomDetailActivity extends AppCompatActivity implements RoomImage
     @Override
     public void passImageUrl() {
         RoomImageOneFragment fragment = (RoomImageOneFragment) mRoomImageAdapter.getRegisteredFragment(0);
-        fragment.setImageUrl(roomObject.getParseFile("roomImage1"));
+        fragment.setImageUrl(roomObject.getRoomImageParseFile("roomImage1"));
     }
 
     @Override
     public void setImageUrl() {
         //setting the image in fragment 2
         RoomImageTwoFragment fragment = (RoomImageTwoFragment)mRoomImageAdapter.getRegisteredFragment(1);
-        fragment.setImageUrl(roomObject.getParseFile("roomImage2"));
+        fragment.setImageUrl(roomObject.getRoomImageParseFile("roomImage2"));
     }
 
     @Override
     public void setImageThreeUrl() {
         RoomImageThreeFragment fragment = (RoomImageThreeFragment)mRoomImageAdapter.getRegisteredFragment(2);
-        fragment.setImageUrl(roomObject.getParseFile("roomImage3"));
+        fragment.setImageUrl(roomObject.getRoomImageParseFile("roomImage3"));
     }
 }

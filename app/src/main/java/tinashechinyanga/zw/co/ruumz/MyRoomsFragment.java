@@ -28,7 +28,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by MUZ0007 on 1/14/2016.
+ * Created by Tinashe on 1/14/2016.
  */
 
 /**
@@ -75,8 +75,8 @@ public class MyRoomsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        swipeRefreshLayout = (SwipeRefreshLayout)rootView.findViewById(R.id.swipeRefreshLayout);
-        recyclerView = (RecyclerView)rootView.findViewById(R.id.recycler_view);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout);
+        recyclerView = rootView.findViewById(R.id.recycler_view);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -120,7 +120,7 @@ public class MyRoomsFragment extends Fragment {
         protected List<ParseObject> doInBackground(Void... params) {
             ParseQuery<ParseObject> getMyRoomsQuery = ParseQuery.getQuery("Room");
             getMyRoomsQuery.orderByDescending("updatedAt");
-            getMyRoomsQuery.whereEqualTo("roomOwner", ParseUser.getCurrentUser().getObjectId().toString());
+            getMyRoomsQuery.whereEqualTo("roomOwner", ParseUser.getCurrentUser().getObjectId());
             Log.d("Owner: ", ParseUser.getCurrentUser().getObjectId());
 
             try {
@@ -145,7 +145,7 @@ public class MyRoomsFragment extends Fragment {
             super.onPreExecute();
             //initialise and show progress bar
             progressDialog = new ProgressDialog(getContext());
-            progressDialog.setMessage("Fetching rooms... " + ParseUser.getCurrentUser().getUsername().toString());
+            progressDialog.setMessage("Fetching rooms... " + ParseUser.getCurrentUser().getUsername());
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
@@ -159,7 +159,7 @@ public class MyRoomsFragment extends Fragment {
             if(progressDialog != null && progressDialog.isShowing()){
                 progressDialog.dismiss();
             }
-            Log.d("Current User: ", ParseUser.getCurrentUser().getUsername().toString());
+            Log.d("Current User: ", ParseUser.getCurrentUser().getUsername());
             //intialise adapter and set it
             roomAdapter = new RoomRecyclerViewAdapter(mRooms, "My Rooms");
 
@@ -175,7 +175,7 @@ public class MyRoomsFragment extends Fragment {
             //fetch the latest rooms
             ParseQuery<ParseObject> getLatestRoomQuery = ParseQuery.getQuery("Room");
             getLatestRoomQuery.whereGreaterThan("updatedAt", lastUpdated);
-            getLatestRoomQuery.whereEqualTo("roomOwner", ParseUser.getCurrentUser().getObjectId().toString());
+            getLatestRoomQuery.whereEqualTo("roomOwner", ParseUser.getCurrentUser().getObjectId());
             getLatestRoomQuery.orderByDescending("createdAt");
             try {
                 mLatestRooms = getLatestRoomQuery.find();

@@ -135,7 +135,7 @@ public class RoomDetailActivity extends AppCompatActivity implements RoomImageOn
         mDescription = findViewById(R.id.details_description_label);
 
         /*set the views using the proxy object*/
-        //mRoomImages.setImageBitmap(roomObject.getParseFile("roomImage1"));
+        //mRoomImages.setImageBitmap(roomObject.getRoomImageParseFile("roomImage1"));
         //setting up the images fragments
         mRoomImageAdapter = new RoomImagesPagerAdapter(getSupportFragmentManager());
         mImagesViewPager.setAdapter(mRoomImageAdapter);
@@ -591,37 +591,37 @@ public class RoomDetailActivity extends AppCompatActivity implements RoomImageOn
     @Override
     public void passImageUrl() {
         RoomImageOneFragment fragment = (RoomImageOneFragment) mRoomImageAdapter.getRegisteredFragment(0);
-        fragment.setImageUrl(roomObject.getParseFile("roomImage1"));
+        fragment.setImageUrl(roomObject.getRoomImageParseFile("roomImage1"));
     }
 
     @Override
     public void setImageUrl() {
         //setting the image in fragment 2
         RoomImageTwoFragment fragment = (RoomImageTwoFragment)mRoomImageAdapter.getRegisteredFragment(1);
-        fragment.setImageUrl(roomObject.getParseFile("roomImage2"));
+        fragment.setImageUrl(roomObject.getRoomImageParseFile("roomImage2"));
     }
 
     @Override
     public void setImageThreeUrl() {
         RoomImageThreeFragment fragment = (RoomImageThreeFragment)mRoomImageAdapter.getRegisteredFragment(2);
-        fragment.setImageUrl(roomObject.getParseFile("roomImage3"));
+        fragment.setImageUrl(roomObject.getRoomImageParseFile("roomImage3"));
     }
 
     @Override
     public void setImageFourUrl() {
         RoomImageFourFragment fragment = (RoomImageFourFragment)mRoomImageAdapter.getRegisteredFragment(3);
-        fragment.setSetImageFourUrl(roomObject.getParseFile("roomImage4"));
+        fragment.setSetImageFourUrl(roomObject.getRoomImageParseFile("roomImage4"));
     }
 
     @Override
     public void setImageFiveUrl() {
         RoomImageFiveFragment fragment = (RoomImageFiveFragment)mRoomImageAdapter.getRegisteredFragment(4);
-        fragment.setSetImageFiveUrl(roomObject.getParseFile("roomImage5"));
+        fragment.setSetImageFiveUrl(roomObject.getRoomImageParseFile("roomImage5"));
     }
 
     @Override
     public void setImageSixUrl() {
         RoomImageSixFragment fragment = (RoomImageSixFragment)mRoomImageAdapter.getRegisteredFragment(5);
-        fragment.setSetImageSixUrl(roomObject.getParseFile("roomImage6"));
+        fragment.setSetImageSixUrl(roomObject.getRoomImageParseFile("roomImage6"));
     }
 }

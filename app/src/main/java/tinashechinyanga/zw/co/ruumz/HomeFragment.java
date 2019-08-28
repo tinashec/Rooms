@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by MUZ0007 on 1/14/2016.
+ * Created by Tinashe on 1/14/2016.
  */
 
 /**
@@ -80,8 +80,8 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        swipeRefreshLayout = (SwipeRefreshLayout)rootView.findViewById(R.id.swipeRefreshLayout);
-        recyclerView = (RecyclerView)rootView.findViewById(R.id.recycler_view);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout);
+        recyclerView = rootView.findViewById(R.id.recycler_view);
 
 
         // use this setting to improve performance if you know that changes
@@ -102,7 +102,7 @@ public class HomeFragment extends Fragment {
             }
         });
         //configure the swipe refresh colours
-        swipeRefreshLayout.setColorSchemeColors(R.color.colorAccent);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
 
         return rootView;
     }

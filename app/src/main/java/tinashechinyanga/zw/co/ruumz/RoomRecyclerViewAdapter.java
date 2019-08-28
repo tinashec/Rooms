@@ -3,6 +3,7 @@ package tinashechinyanga.zw.co.ruumz;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by MUZ0007 on 2/22/2016.
+ * Created by Tinashe on 2/22/2016.
  */
 public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerViewAdapter.RoomViewHolder> {
 
@@ -48,13 +49,13 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
 
         public RoomViewHolder(Context context, View itemView) {
             super(itemView);
-            mRoomImage = (ImageView)itemView.findViewById(R.id.room_image);
-            mRoomPrice = (TextView)itemView.findViewById(R.id.price_label);
-            mInclusiveOrNot = (TextView)itemView.findViewById(R.id.incl_excl_label);
-            mPropertyType = (TextView)itemView.findViewById(R.id.propertyType_label);
+            mRoomImage = itemView.findViewById(R.id.room_image);
+            mRoomPrice = itemView.findViewById(R.id.price_label);
+            mInclusiveOrNot = itemView.findViewById(R.id.incl_excl_label);
+            mPropertyType = itemView.findViewById(R.id.propertyType_label);
             mNumOfBeds = itemView.findViewById(R.id.num_beds_label);
             mNumOfBaths = itemView.findViewById(R.id.details_num_baths_label);
-            mRoomLocation =(TextView)itemView.findViewById(R.id.location_label);
+            mRoomLocation = itemView.findViewById(R.id.location_label);
             this.context = context;
             //set onclick listener
             itemView.setOnClickListener(this);
@@ -65,6 +66,7 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
             int pos = getLayoutPosition();
             Intent intent;
             ParseObject room = mRooms.get(pos);
+
             //create the ParseObject proxy
             ParseProxyObject roomProxy = new ParseProxyObject(room);
             Toast.makeText(context, room.getString("roomSuburb"), Toast.LENGTH_LONG).show();
@@ -73,7 +75,9 @@ public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerVi
                 if (mSection.equals("My Rooms")) {
                     //start my rooms detail activity
                     intent = new Intent(context, MyRoomDetailActivity.class);
-                    //add the proxy to the intent
+                    //add the room to the intent
+                    intent.putExtra("currentSelectedRoomObject", room);
+                    Log.i("Selected room", "Put Extra, " + room);
                     intent.putExtra("roomObject", roomProxy);
                     context.startActivity(intent);
                 }

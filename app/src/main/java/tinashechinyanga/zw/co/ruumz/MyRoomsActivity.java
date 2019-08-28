@@ -15,12 +15,12 @@ public class MyRoomsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_rooms);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);      //displays the back icon
 
-        mMyRoomsViewPager = (ViewPager)findViewById(R.id.my_rooms_container);
+        mMyRoomsViewPager = findViewById(R.id.my_rooms_container);
         myRoomsSectionsPagerAdapter = new MyRoomsSectionsPagerAdapter(getSupportFragmentManager());
 
         //assign the viewpager
