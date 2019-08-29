@@ -2,6 +2,7 @@ package tinashechinyanga.zw.co.ruumz;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NavUtils;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 
@@ -28,16 +30,20 @@ public class ContactUsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_us);
-        mContactUsImage = (ImageView)findViewById(R.id.contact_us_imageview);
-        mLayout1 = (LinearLayout)findViewById(R.id.contact_us_llayout1);
-        mLayout2 = (LinearLayout)findViewById(R.id.contact_us_llayout2);
-        mLayoutWhatsApp = (LinearLayout)findViewById(R.id.contact_us_wapp_llayout);
-        mLayoutWebsite= (LinearLayout)findViewById(R.id.contact_us_site_llayout);
-        mCall1 = (TextView)findViewById(R.id.contact_us_call1_textview);
-        mCall2 = (TextView)findViewById(R.id.contact_us_call2_textview);
+        mContactUsImage = findViewById(R.id.contact_us_imageview);
+        mLayout1 = findViewById(R.id.contact_us_llayout1);
+        mLayout2 = findViewById(R.id.contact_us_llayout2);
+        mLayoutWhatsApp = findViewById(R.id.contact_us_wapp_llayout);
+        mLayoutWebsite= findViewById(R.id.contact_us_site_llayout);
+        mCall1 = findViewById(R.id.contact_us_call1_textview);
+        mCall2 = findViewById(R.id.contact_us_call2_textview);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        }
 
         Glide.with(this).load(R.drawable.room_photo).centerCrop().crossFade().into(mContactUsImage);
 
