@@ -2,6 +2,7 @@ package tinashechinyanga.zw.co.ruumz;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
@@ -58,8 +60,13 @@ public class RoomDetailActivity extends AppCompatActivity implements RoomImageOn
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_detail);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);      //displays the back icon
 
@@ -566,7 +573,6 @@ public class RoomDetailActivity extends AppCompatActivity implements RoomImageOn
                 }
                 else {
                     //prompt user to login
-
                     Snackbar.make(view, "Please login/signup to make contact", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     //show login dialog
                     showLoginDialog();
