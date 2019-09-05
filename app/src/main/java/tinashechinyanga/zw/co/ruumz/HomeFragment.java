@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment {
 
     //recyclerView
     private RecyclerView recyclerView;
-    private RoomRecyclerViewAdapter roomAdapter;
+    private RoomCardRecyclerViewAdapter roomAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<ParseObject> mRooms = new ArrayList<>();
     private List<ParseObject> mLatestRooms = new ArrayList<>();
@@ -169,7 +169,7 @@ public class HomeFragment extends Fragment {
                 progressDialog.dismiss();
             }
             //intialise adapter and set it
-            roomAdapter = new RoomRecyclerViewAdapter(mRooms);
+            roomAdapter = new RoomCardRecyclerViewAdapter(mRooms);
             recyclerView.setAdapter(roomAdapter);
 
             //add endless scrolling

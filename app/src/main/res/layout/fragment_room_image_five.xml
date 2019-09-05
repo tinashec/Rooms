@@ -11,4 +11,5 @@
         android:layout_height="match_parent"
         android:id="@+id/detail_roomimage_five"
         android:src="@mipmap/ic_fullhouse" />
+
 </LinearLayout>

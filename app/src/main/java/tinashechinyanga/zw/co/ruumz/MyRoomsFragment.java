@@ -44,7 +44,7 @@ public class MyRoomsFragment extends Fragment {
 
     //recyclerView
     protected RecyclerView recyclerView;
-    protected RoomRecyclerViewAdapter roomAdapter;
+    protected RoomCardRecyclerViewAdapter roomAdapter;
     protected List<ParseObject> mRooms = new ArrayList<>();
     protected List<ParseObject> mLatestRooms = new ArrayList<>();
     protected Context context;
@@ -161,7 +161,7 @@ public class MyRoomsFragment extends Fragment {
             }
             Log.d("Current User: ", ParseUser.getCurrentUser().getUsername());
             //intialise adapter and set it
-            roomAdapter = new RoomRecyclerViewAdapter(mRooms, "My Rooms");
+            roomAdapter = new RoomCardRecyclerViewAdapter(mRooms, "My Rooms");
 
             recyclerView.setAdapter(roomAdapter);
         }
