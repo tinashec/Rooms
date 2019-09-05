@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 /**
- * Created by MUZ0007 on 4/29/2016.
+ * Created by Tinashe on 4/29/2016.
  */
 /*
    Extension of FragmentStatePagerAdapter which intelligently caches

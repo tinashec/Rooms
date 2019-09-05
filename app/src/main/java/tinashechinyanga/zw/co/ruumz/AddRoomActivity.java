@@ -1,6 +1,7 @@
 package tinashechinyanga.zw.co.ruumz;
 
 import android.app.DatePickerDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -8,6 +9,7 @@ import android.widget.DatePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import java.text.DateFormat;
@@ -39,8 +41,13 @@ public class AddRoomActivity extends AppCompatActivity implements DatePickerDial
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_room);
 
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        }
+
         //include back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);      //icon in appbar
         getSupportActionBar().setDisplayShowHomeEnabled(true);      //back button in android
@@ -48,7 +55,7 @@ public class AddRoomActivity extends AppCompatActivity implements DatePickerDial
 
         mAddRoomPagerAdapter = new AddRoomPagerAdapter(getSupportFragmentManager());
 
-        mViewPager = (ViewPager)findViewById(R.id.container);
+        mViewPager = findViewById(R.id.container);
         //keep 3 fragments on either side of the current fragment alive in memory
         mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(mAddRoomPagerAdapter);

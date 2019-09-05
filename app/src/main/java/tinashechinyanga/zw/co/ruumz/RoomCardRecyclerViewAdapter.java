@@ -23,15 +23,15 @@ import java.util.List;
 /**
  * Created by Tinashe on 2/22/2016.
  */
-public class RoomRecyclerViewAdapter extends RecyclerView.Adapter<RoomRecyclerViewAdapter.RoomViewHolder> {
+public class RoomCardRecyclerViewAdapter extends RecyclerView.Adapter<RoomCardRecyclerViewAdapter.RoomViewHolder> {
 
     private List<ParseObject> mRooms = new ArrayList<>();
     private String mSection;
-    RoomRecyclerViewAdapter(List<ParseObject> rooms){
+    RoomCardRecyclerViewAdapter(List<ParseObject> rooms){
         this.mRooms = rooms;
     }
 
-    public RoomRecyclerViewAdapter(List<ParseObject> mRooms, String section) {
+    public RoomCardRecyclerViewAdapter(List<ParseObject> mRooms, String section) {
         this.mRooms = mRooms;
         this.mSection = section;
     }

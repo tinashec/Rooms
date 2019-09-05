@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -45,7 +46,7 @@ public class HomeFragment extends Fragment {
 
     //recyclerView
     private RecyclerView recyclerView;
-    private RoomRecyclerViewAdapter roomAdapter;
+    private RoomCardRecyclerViewAdapter roomAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<ParseObject> mRooms = new ArrayList<>();
     private List<ParseObject> mLatestRooms = new ArrayList<>();
@@ -82,7 +83,6 @@ public class HomeFragment extends Fragment {
 
         swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout);
         recyclerView = rootView.findViewById(R.id.recycler_view);
-
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -131,6 +131,10 @@ public class HomeFragment extends Fragment {
                 mRooms = getRoomQuery.find();
             } catch (ParseException e) {
                 e.printStackTrace();
+                //dismiss progress bar
+//                progressDialog.dismiss();
+//                Toast.makeText(getActivity(), "Unable to fetch romoms. Please check your internet", Toast.LENGTH_LONG).show();
+//                Log.e("Fetch Rooms Error: ", "Unable to get rooms, " + e.getMessage());
             }
             //get value of last updated room
             if(mRooms.size() > 0) {
@@ -165,7 +169,7 @@ public class HomeFragment extends Fragment {
                 progressDialog.dismiss();
             }
             //intialise adapter and set it
-            roomAdapter = new RoomRecyclerViewAdapter(mRooms);
+            roomAdapter = new RoomCardRecyclerViewAdapter(mRooms);
             recyclerView.setAdapter(roomAdapter);
 
             //add endless scrolling
@@ -192,6 +196,7 @@ public class HomeFragment extends Fragment {
                 mLatestRooms = getLatestRoomQuery.find();
             } catch (ParseException e) {
                 e.printStackTrace();
+                Toast.makeText(getActivity(), "No new rooms", Toast.LENGTH_LONG).show();
             }
             //check if there are new rooms and assign the topmost elements date to lastUpdated
             if(mLatestRooms.size() == 0){

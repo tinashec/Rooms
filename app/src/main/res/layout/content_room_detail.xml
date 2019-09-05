@@ -29,9 +29,12 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true">
+                android:layout_alignParentStart="true"
+                android:background="@color/lb_tv_white">
 
             </androidx.viewpager.widget.ViewPager>
+
+            <include layout="@layout/image_circle_indicator_footer" />
 
         </RelativeLayout>
 

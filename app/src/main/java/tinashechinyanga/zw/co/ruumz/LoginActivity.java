@@ -258,15 +258,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private void handleSignInTask(Task<GoogleSignInAccount> completedTask) {
+        showProgress(true);
         try{
            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            Log.i(TAG, "Handle sign in: " + account.getEmail());
+            Log.i(TAG, "Handle sign in: " + account.getEmail() + " " + account.getIdToken());
             //signed in successfully,
             String idToken = account.getIdToken();
+
             //send token to backend server
-            postIDTokenToParseServer(idToken);
-            // show previous activity
-            Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
+            /*
+            * postIDTokenToParseServer(idToken);
+            * */
 
             /*
             * if there is no user in the back-end
@@ -283,7 +285,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             //sending the token to the backend
             String backendApiUrlToGenerateSessionToken = getResources().getString(R.string.google_signIn_get_sessionToken_url);
-            Log.i("URL: ", backendApiUrlToGenerateSessionToken);
+            Log.i("URL: ", "Back-end URL: " + backendApiUrlToGenerateSessionToken);
 
             RequestQueue newRequestQueue = Volley.newRequestQueue(this);
 
@@ -292,7 +294,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             try {
                 getSessionTokenJsonRequestBody.put("idToken", idToken);
                 getSessionTokenJsonRequestBody.put("GClientId", getResources().getString(R.string.server_client_id));
-                Log.i("Google Token: ", idToken);
+                Log.i("Google Token: ", "Google token: " + idToken);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -311,16 +313,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                     public void done(ParseUser user, ParseException e) {
                                         if (user != null){
                                             //successfully logged in, take the user to the last page they were on
+                                            Log.i("Login Success", "Successfully logged in as: " + user.getUsername());
                                             finish();
                                         }else{
                                             //error
-                                            Log.e("Login error: ", e.getMessage());
+                                            Log.e("Login error: ", "Google login error: " + e.getMessage());
                                             //show error dialog, prompt user to login again
 
                                         }
                                     }
                                 });
                             } catch (JSONException e) {
+                                Log.e("Error", "Google login Error: " + e.getMessage());
                                 e.printStackTrace();
                             }
 
@@ -332,9 +336,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             //error callback
                             int  statusCode = error.networkResponse.statusCode;
                             NetworkResponse response = error.networkResponse;
+                            JSONObject jsonResponse = null;
+                            String actualResponse = new String(response.data);
+                            try {
+                                jsonResponse = new JSONObject(actualResponse);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
-                            Log.d("Error Response req: ","" + statusCode + " " + response.data.toString());
+                            showProgress(false);
 
+                            try {
+                                Log.d("Error Response req: ","Error response " + statusCode + " " + jsonResponse.getJSONObject("error").get("message")
+                                        + " " + error.getMessage() + " " + response.data);
+                                Toast.makeText(getApplicationContext(), "Error, " + jsonResponse.getJSONObject("error").get("message"), Toast.LENGTH_LONG).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     })
             {

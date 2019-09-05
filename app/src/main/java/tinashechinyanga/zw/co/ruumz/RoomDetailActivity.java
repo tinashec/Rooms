@@ -2,6 +2,7 @@ package tinashechinyanga.zw.co.ruumz;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
@@ -53,13 +55,19 @@ public class RoomDetailActivity extends AppCompatActivity implements RoomImageOn
     private TextView mDescription;
 
     private ParseProxyObject roomObject;
+    private ImageView circle_indicator_one, circle_indicator_two, circle_indicator_three, circle_indicator_four, circle_indicator_five, circle_indicator_six;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_detail);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);      //displays the back icon
 
@@ -70,6 +78,14 @@ public class RoomDetailActivity extends AppCompatActivity implements RoomImageOn
         //attach the views
         //mRoomImages = (ImageView)findViewById(R.id.details_roomImage_imageview);
         mImagesViewPager = findViewById(R.id.details_images_viewpager);
+
+        circle_indicator_one = findViewById(R.id.circle_one);
+        circle_indicator_two = findViewById(R.id.circle_two);
+        circle_indicator_three = findViewById(R.id.circle_three);
+        circle_indicator_four = findViewById(R.id.circle_four);
+        circle_indicator_five = findViewById(R.id.circle_five);
+        circle_indicator_six = findViewById(R.id.circle_six);
+
         mPropertyType = findViewById(R.id.details_propertyType_label);
         mPropertyTypeImage = findViewById(R.id.details_propertyType_imageview);
         mLocationImage = findViewById(R.id.details_location_imageview);
@@ -139,6 +155,29 @@ public class RoomDetailActivity extends AppCompatActivity implements RoomImageOn
         //setting up the images fragments
         mRoomImageAdapter = new RoomImagesPagerAdapter(getSupportFragmentManager());
         mImagesViewPager.setAdapter(mRoomImageAdapter);
+
+        mImagesViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                circle_indicator_one.setImageResource(R.drawable.holo_circle);
+                circle_indicator_two.setImageResource(R.drawable.holo_circle);
+                circle_indicator_three.setImageResource(R.drawable.holo_circle);
+                circle_indicator_four.setImageResource(R.drawable.holo_circle);
+                circle_indicator_five.setImageResource(R.drawable.holo_circle);
+                circle_indicator_six.setImageResource(R.drawable.holo_circle);
+                fill_indicator_circle(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         if(roomObject.getString("roomPropertyType") != null){
             switch(roomObject.getString("roomPropertyType")){
@@ -566,13 +605,37 @@ public class RoomDetailActivity extends AppCompatActivity implements RoomImageOn
                 }
                 else {
                     //prompt user to login
-
                     Snackbar.make(view, "Please login/signup to make contact", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     //show login dialog
                     showLoginDialog();
                 }
             }
         });
+    }
+
+    private void fill_indicator_circle(int position) {
+        switch (position){
+            case 0:
+                circle_indicator_one.setImageResource(R.drawable.fill_circle);
+                break;
+            case 1:
+                circle_indicator_two.setImageResource(R.drawable.fill_circle);
+                break;
+            case 2:
+                circle_indicator_three.setImageResource(R.drawable.fill_circle);
+                break;
+            case 3:
+                circle_indicator_four.setImageResource(R.drawable.fill_circle);
+                break;
+            case 4:
+                circle_indicator_five.setImageResource(R.drawable.fill_circle);
+                break;
+            case 5:
+                circle_indicator_six.setImageResource(R.drawable.fill_circle);
+                break;
+            default:
+                break;
+        }
     }
 
     private void showLoginDialog() {

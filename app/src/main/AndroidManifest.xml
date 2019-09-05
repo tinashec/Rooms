@@ -32,6 +32,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".FilterActivity"></activity>
 
         <meta-data
             android:name="com.parse.APPLICATION_ID"
@@ -72,7 +73,7 @@
             android:label="@string/title_activity_login" />
         <activity
             android:name=".ForgotPasswordActivity"
-            android:label="@string/title_activity_forgot_password"/>
+            android:label="@string/title_activity_forgot_password" />
         <activity
             android:name=".SignUpActivity"
             android:label="@string/title_activity_sign_up" />

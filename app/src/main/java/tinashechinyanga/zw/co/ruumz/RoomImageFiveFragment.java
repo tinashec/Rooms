@@ -39,7 +39,7 @@ public class RoomImageFiveFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_room_image_five, container, false);
-        mRoomImageFive = (ImageView)rootview.findViewById(R.id.detail_roomimage_five);
+        mRoomImageFive = rootview.findViewById(R.id.detail_roomimage_five);
         //call the interface which, in onAttach, passes control the activity that implements the public method to
         //set the imageUrl
         setImageFiveUrl.setImageFiveUrl();

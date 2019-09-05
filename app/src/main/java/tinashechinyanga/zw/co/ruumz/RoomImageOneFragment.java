@@ -40,7 +40,7 @@ public class RoomImageOneFragment extends Fragment {
 
     //interface to be implemented in the parent activity
     public interface GetImageUrlListener{
-        public void passImageUrl();
+        void passImageUrl();
     }
 
     @Override
@@ -53,7 +53,7 @@ public class RoomImageOneFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_room_image_one, container, false);
         imageUrlListener.passImageUrl();
-        mRoomImageOne = (ImageView) rootView.findViewById(R.id.detail_roomimage_one);
+        mRoomImageOne = rootView.findViewById(R.id.detail_roomimage_one);
         //setting the imageview
         if(imageUrl != null){
             Glide.with(getActivity().getApplicationContext()).load(imageUrl)
