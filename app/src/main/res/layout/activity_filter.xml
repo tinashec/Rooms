@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".FilterActivity">
 
-
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rooms_filter_fragment"
+        tools:layout="@layout/filter_rooms_fragment"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

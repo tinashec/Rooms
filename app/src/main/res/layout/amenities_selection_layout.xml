@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="20dp"
+    android:weightSum="1"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/border_bottom_top"
+    android:id="@+id/details_amenities_layout"
+    tools:showIn="@layout/fragment_add_location">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:id="@+id/add_room_bic_imageview"
+                android:src="@mipmap/ic_bic"
+                android:padding="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/add_room_bic_amenity"
+                android:id="@+id/add_room_bic_label"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/add_room_bic_imageview" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:id="@+id/add_room_entrance_imageview"
+                android:src="@mipmap/ic_entrance"
+                android:padding="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/add_room_entrance_amenity"
+                android:id="@+id/add_room_entrance_label"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:id="@+id/add_room_toilet_imageview"
+                android:src="@mipmap/ic_toilet"
+                android:padding="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/add_room_toilet_amenity"
+                android:id="@+id/add_room_toilet_label"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:id="@+id/add_room_kitchen_imageview"
+                android:src="@mipmap/ic_kitchen"
+                android:padding="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/add_room_kitchen_amenity"
+                android:id="@+id/add_room_kitchen_label"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:baselineAligned="false"
+        android:layout_marginTop="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:id="@+id/add_room_parking_imageview"
+                android:src="@mipmap/ic_parking"
+                android:padding="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/add_room_parking_amenity"
+                android:id="@+id/add_room_parking_label"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/add_room_parking_imageview" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:id="@+id/add_room_wifi_imageview"
+                android:src="@mipmap/ic_wi_fi"
+                android:padding="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/add_room_wifi_amenity"
+                android:id="@+id/add_room_wifi_label"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:id="@+id/add_room_secure_imageview"
+                android:src="@mipmap/ic_secure"
+                android:padding="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/add_room_secure_amenity"
+                android:id="@+id/add_room_secure_label"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_below="@+id/add_room_secure_imageview"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:id="@+id/add_room_furnished_imageview"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:src="@mipmap/ic_furnished"
+                android:padding="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/add_room_furnished_amenity"
+                android:id="@+id/add_room_furnished_label"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_below="@+id/add_room_furnished_imageview"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:baselineAligned="false"
+        android:layout_marginTop="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:id="@+id/add_room_borehole_imageview"
+                android:src="@mipmap/ic_borehole"
+                android:padding="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/add_room_borehole_amenity"
+                android:id="@+id/add_room_borehole_label"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:id="@+id/add_room_prezesa_imageview"
+                android:src="@mipmap/ic_zesa"
+                android:padding="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/add_room_zesa_amenity"
+                android:id="@+id/add_room_prezesa_label"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:id="@+id/add_room_wardrobe_imageview"
+                android:src="@mipmap/ic_wardrobe"
+                android:padding="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/add_room_wardrobe_amenity"
+                android:id="@+id/add_room_wardrobe_label"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:id="@+id/add_room_prewater_imageview"
+                android:src="@mipmap/ic_prewater"
+                android:padding="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/add_room_water_amenity"
+                android:id="@+id/add_room_prewater_label"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/add_room_prewater_imageview" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

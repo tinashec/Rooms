@@ -185,7 +185,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 //launch rooms fragments
                 Toast.makeText(this, "Fetching rooms", Toast.LENGTH_LONG).show();
                 fragmentClass = HomeFragment.class;
-
                 break;
             case R.id.nav_my_rooms:
                 fragmentClass = MyRoomsFragment.class;
