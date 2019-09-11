@@ -65,12 +65,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="No. of Bedrooms, Baths"/>
+
         <Spinner
+            android:id="@+id/num_bedrooms_dropdown"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:entries="@array/num_bedrooms_filter_selection_array"/>
 
-        </Spinner>
-
+        <!--amenities-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

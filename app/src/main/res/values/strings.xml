@@ -79,4 +79,13 @@
     <string name="google_signIn_get_sessionToken_url">https://parseapi.back4app.com/functions/getSessionToken</string>
     <string name="username_blank_error">Username cannot be blank</string>
     <string name="no_rooms_found_text">No rooms listed, please add a room</string>
+
+    <!--filter-->
+    <string-array name="num_bedrooms_filter_selection_array">
+        <item>1 bedroom</item>
+        <item>2 bedrooms</item>
+        <item>3 bedrooms</item>
+        <item>4+ bedrooms</item>
+    </string-array>
+
 </resources>
