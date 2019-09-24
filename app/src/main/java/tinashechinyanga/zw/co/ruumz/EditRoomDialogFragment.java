@@ -21,8 +21,6 @@ import com.parse.ParseObject;
  */
 
 public class EditRoomDialogFragment extends DialogFragment {
-    private Object ParseObject;
-    private ParseObject parseObject;
 
     public EditRoomDialogFragment(){
 
@@ -50,11 +48,14 @@ public class EditRoomDialogFragment extends DialogFragment {
                             case 0:
                                 //remove the room
                                 removeUsersRoom(selectedRoom);
-                                Toast.makeText(getActivity(), "Room removed, " + (selectedRoom != null ? selectedRoom.getParseObject("Room").getString("roomSurburb") : null), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity(), "Room removed, " + (selectedRoom != null ? selectedRoom.getObjectId() : null), Toast.LENGTH_LONG).show();
                                 break;
                             case 1:
+                                /*
+                                * TODO
+                                * */
                                 //mark room as reserved
-                                Toast.makeText(getActivity(), "Room reserved", Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getActivity(), "Room reserved", Toast.LENGTH_LONG).show();
                                 break;
                             default:
                                 //leave room as is
@@ -74,12 +75,16 @@ public class EditRoomDialogFragment extends DialogFragment {
             public void done(ParseException e) {
                 if(e == null){
                     //success, dismiss loading icon, remove from view
-                    //getActivity().finish();
+                   /*
+                   * TODO
+                   * */
                 }else {
                     //error
                     Toast.makeText(getActivity(), "Error, " + e.getMessage(), Toast.LENGTH_LONG).show();
                     //try again
-
+                    /*
+                    * TODO
+                    * */
                 }
             }
         });

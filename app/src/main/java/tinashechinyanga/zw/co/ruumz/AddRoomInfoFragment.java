@@ -28,18 +28,17 @@ public class AddRoomInfoFragment extends Fragment {
 
     public interface GetRoomInfo {
         //methods to pass back the attributes captured
-        public void getRoomNumBedrooms(int numBeds);
-        public void getRoomNumBaths(int numBaths);
-        public void getRoomNumToilets(int numToilets);
-        public void getRoomPropertyType(String propertyType);
-        public void getRoomSharingYesOrNo(String sharingYesOrNo);
+        void getRoomNumBedrooms(int numBeds);
+        void getRoomNumBaths(int numBaths);
+        void getRoomNumToilets(int numToilets);
+        void getRoomPropertyType(String propertyType);
+        void getRoomSharingYesOrNo(String sharingYesOrNo);
     }
 
     //views
     protected ImageView mAddBeds, mSubtractBeds, mAddBaths, mSubtractBaths, mAddToilets, mSubtractToilets;
     protected TextView mNumBeds, mNumBaths, mNumToilets;
-    protected RadioButton mFlatButton;
-    protected RadioButton mCottageButton, mFullhouseButton, mSharingYesButton, mSharingNoButton;
+    protected RadioButton mFlatButton, mCottageButton, mFullhouseButton, mSharingYesButton, mSharingNoButton;
 
     protected int bedsCtr, bathsCtr, toiletsCtr;
 
@@ -60,21 +59,21 @@ public class AddRoomInfoFragment extends Fragment {
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_add_room_info, container, false);
 
-        mNumBeds = (TextView)rootView.findViewById(R.id.add_room_num_of_rooms_label);
-        mAddBeds = (ImageView)rootView.findViewById(R.id.num_beds_plus);
-        mSubtractBeds = (ImageView)rootView.findViewById(R.id.num_beds_minus);
-        mNumBaths = (TextView)rootView.findViewById(R.id.add_room_num_baths_label);
-        mAddBaths = (ImageView)rootView.findViewById(R.id.plus_num_baths);
-        mSubtractBaths = (ImageView)rootView.findViewById(R.id.minus_num_baths);
-        mNumToilets = (TextView)rootView.findViewById(R.id.add_room_num_toilets_label);
-        mAddToilets = (ImageView)rootView.findViewById(R.id.plus_num_toilets);
-        mSubtractToilets = (ImageView)rootView.findViewById(R.id.minus_num_toilets);
+        mNumBeds = rootView.findViewById(R.id.add_room_num_of_rooms_label);
+        mAddBeds = rootView.findViewById(R.id.num_beds_plus);
+        mSubtractBeds = rootView.findViewById(R.id.num_beds_minus);
+        mNumBaths = rootView.findViewById(R.id.add_room_num_baths_label);
+        mAddBaths = rootView.findViewById(R.id.plus_num_baths);
+        mSubtractBaths = rootView.findViewById(R.id.minus_num_baths);
+        mNumToilets = rootView.findViewById(R.id.add_room_num_toilets_label);
+        mAddToilets = rootView.findViewById(R.id.plus_num_toilets);
+        mSubtractToilets = rootView.findViewById(R.id.minus_num_toilets);
         //radio buttons
-        mFlatButton = (RadioButton)rootView.findViewById(R.id.radio_flat_property);
-        mCottageButton = (RadioButton)rootView.findViewById(R.id.radio_cottage_property);
-        mFullhouseButton = (RadioButton)rootView.findViewById(R.id.radio_fullhouse_property);
-        mSharingYesButton = (RadioButton)rootView.findViewById(R.id.radio_sharing_yes);
-        mSharingNoButton = (RadioButton)rootView.findViewById(R.id.radio_sharing_no);
+        mFlatButton = rootView.findViewById(R.id.radio_flat_property);
+        mCottageButton = rootView.findViewById(R.id.radio_cottage_property);
+        mFullhouseButton = rootView.findViewById(R.id.radio_fullhouse_property);
+        mSharingYesButton = rootView.findViewById(R.id.radio_sharing_yes);
+        mSharingNoButton = rootView.findViewById(R.id.radio_sharing_no);
 
         //adding the back button
 
@@ -186,7 +185,7 @@ public class AddRoomInfoFragment extends Fragment {
         * indicates user has entered sufficient information and wishes to proceed to the next phase
         * onClick/Done: capture all set information and set to room properties/attributes
         * */
-        FloatingActionButton next = (FloatingActionButton)rootView.findViewById(R.id.add_room_step1_fab);
+        FloatingActionButton next = rootView.findViewById(R.id.add_room_step1_fab);
         //if beds == 0, onclick disabled
         //else go to next fragment
         next.setOnClickListener(new View.OnClickListener() {

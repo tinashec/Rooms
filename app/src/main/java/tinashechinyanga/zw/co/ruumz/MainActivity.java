@@ -153,6 +153,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     showLoginDialog();
                 }
                 break;
+            case R.id.action_filter_rooms:
+                Intent filterRoomsIntent = new Intent(this, FilterActivity.class);
+                startActivity(filterRoomsIntent);
+                break;
             case R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
@@ -185,7 +189,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 //launch rooms fragments
                 Toast.makeText(this, "Fetching rooms", Toast.LENGTH_LONG).show();
                 fragmentClass = HomeFragment.class;
-
                 break;
             case R.id.nav_my_rooms:
                 fragmentClass = MyRoomsFragment.class;
