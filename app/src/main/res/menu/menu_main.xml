@@ -10,10 +10,16 @@
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/action_sign_out" android:title="@string/action_sign_out"
         android:orderInCategory="100" app:showAsAction="never" />
-    <item android:id="@+id/search"
-        android:title="@string/search_hint"
-        android:icon="@mipmap/ic_search_white_48dp"
-        app:showAsAction="always"
-        app:actionViewClass="android.widget.SearchView" />
+    <!--<item android:id="@+id/search"-->
+        <!--android:title="@string/search_hint"-->
+        <!--android:icon="@mipmap/ic_search_white_48dp"-->
+        <!--app:showAsAction="never"-->
+        <!--app:actionViewClass="android.widget.SearchView" />-->
+
+    <item
+        android:id="@+id/action_filter_rooms"
+        android:icon="@mipmap/ic_action_icons8_slider_48"
+        android:title="Filter Rooms"
+        app:showAsAction="always" />
 
 </menu>

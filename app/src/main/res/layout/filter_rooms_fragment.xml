@@ -40,14 +40,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <RadioButton
+                android:id="@+id/sort_by_least_expensive"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Least expensive"/>
             <RadioButton
+                android:id="@+id/sort_by_most_expensive"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Most expensive"/>
             <RadioButton
+                android:id="@+id/sort_by_most_recent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Recently posted"/>

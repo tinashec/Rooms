@@ -108,48 +108,48 @@ public class AddLocationFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_add_location, container, false);
 
         //attach the views to the fragment
-        mCityTown = (EditText)rootView.findViewById(R.id.add_room_town_edit_text);
-        mSuburb = (EditText)rootView.findViewById(R.id.add_room_suburb_edit_text);
+        mCityTown = rootView.findViewById(R.id.add_room_town_edit_text);
+        mSuburb = rootView.findViewById(R.id.add_room_suburb_edit_text);
 
         //imageviews
-        mBic = (ImageView)rootView.findViewById(R.id.add_room_bic_imageview);
-        mOwnEntrance = (ImageView)rootView.findViewById(R.id.add_room_entrance_imageview);
-        mOwnToilet = (ImageView)rootView.findViewById(R.id.add_room_toilet_imageview);
-        mKitchen = (ImageView)rootView.findViewById(R.id.add_room_kitchen_imageview);
-        mParking = (ImageView)rootView.findViewById(R.id.add_room_parking_imageview);
-        mWifi = (ImageView)rootView.findViewById(R.id.add_room_wifi_imageview);
-        mSecure = (ImageView)rootView.findViewById(R.id.add_room_secure_imageview);
-        mFurnished = (ImageView)rootView.findViewById(R.id.add_room_furnished_imageview);
-        mBorehole = (ImageView)rootView.findViewById(R.id.add_room_borehole_imageview);
-        mPrepaidZesa = (ImageView)rootView.findViewById(R.id.add_room_prezesa_imageview);
-        mWardrobe = (ImageView)rootView.findViewById(R.id.add_room_wardrobe_imageview);
-        mPrepaidWater = (ImageView)rootView.findViewById(R.id.add_room_prewater_imageview);
-        mFam = (ImageView)rootView.findViewById(R.id.add_room_fam_imageview);
-        mFemale = (ImageView)rootView.findViewById(R.id.add_room_female_imageview);
-        mMale = (ImageView)rootView.findViewById(R.id.add_room_male_imageview);
-        mSoberHabit = (ImageView)rootView.findViewById(R.id.add_room_sober_imageview);
-        mProfessional = (ImageView)rootView.findViewById(R.id.add_room_pro_imageview);
-        mCouple = (ImageView)rootView.findViewById(R.id.add_room_couple_imageview);
+        mBic = rootView.findViewById(R.id.add_room_bic_imageview);
+        mOwnEntrance = rootView.findViewById(R.id.add_room_entrance_imageview);
+        mOwnToilet = rootView.findViewById(R.id.add_room_toilet_imageview);
+        mKitchen = rootView.findViewById(R.id.add_room_kitchen_imageview);
+        mParking = rootView.findViewById(R.id.add_room_parking_imageview);
+        mWifi = rootView.findViewById(R.id.add_room_wifi_imageview);
+        mSecure = rootView.findViewById(R.id.add_room_secure_imageview);
+        mFurnished = rootView.findViewById(R.id.add_room_furnished_imageview);
+        mBorehole = rootView.findViewById(R.id.add_room_borehole_imageview);
+        mPrepaidZesa = rootView.findViewById(R.id.add_room_prezesa_imageview);
+        mWardrobe = rootView.findViewById(R.id.add_room_wardrobe_imageview);
+        mPrepaidWater = rootView.findViewById(R.id.add_room_prewater_imageview);
+        mFam = rootView.findViewById(R.id.add_room_fam_imageview);
+        mFemale = rootView.findViewById(R.id.add_room_female_imageview);
+        mMale = rootView.findViewById(R.id.add_room_male_imageview);
+        mSoberHabit = rootView.findViewById(R.id.add_room_sober_imageview);
+        mProfessional = rootView.findViewById(R.id.add_room_pro_imageview);
+        mCouple = rootView.findViewById(R.id.add_room_couple_imageview);
 
         //labels
-        mBicLabel = (TextView)rootView.findViewById(R.id.add_room_bic_label);
-        mOwnEntranceLabel = (TextView)rootView.findViewById(R.id.add_room_entrance_label);
-        mOwnToiletLabel = (TextView)rootView.findViewById(R.id.add_room_toilet_label);
-        mKitchenLabel = (TextView)rootView.findViewById(R.id.add_room_kitchen_label);
-        mParkingLabel = (TextView)rootView.findViewById(R.id.add_room_parking_label);
-        mWifiLabel = (TextView)rootView.findViewById(R.id.add_room_wifi_label);
-        mSecureLabel = (TextView)rootView.findViewById(R.id.add_room_secure_label);
-        mFurnishedLabel = (TextView)rootView.findViewById(R.id.add_room_furnished_label);
-        mBoreholeLabel = (TextView)rootView.findViewById(R.id.add_room_borehole_label);
-        mPrepaidZesaLabel = (TextView)rootView.findViewById(R.id.add_room_prezesa_label);
-        mWardrobeLabel = (TextView)rootView.findViewById(R.id.add_room_wardrobe_label);
-        mPrepaidWaterLabel = (TextView)rootView.findViewById(R.id.add_room_prewater_label);
-        mFamLabel = (TextView)rootView.findViewById(R.id.add_room_fam_label);
-        mFemaleLabel = (TextView)rootView.findViewById(R.id.add_room_female_label);
-        mMaleLabel = (TextView)rootView.findViewById(R.id.add_room_male_label);
-        mSoberHabitLabel = (TextView)rootView.findViewById(R.id.add_room_sober_label);
-        mProfessionalLabel = (TextView)rootView.findViewById(R.id.add_room_pro_label);
-        mCoupleLabel = (TextView)rootView.findViewById(R.id.add_room_couple_label);
+        mBicLabel = rootView.findViewById(R.id.add_room_bic_label);
+        mOwnEntranceLabel = rootView.findViewById(R.id.add_room_entrance_label);
+        mOwnToiletLabel = rootView.findViewById(R.id.add_room_toilet_label);
+        mKitchenLabel = rootView.findViewById(R.id.add_room_kitchen_label);
+        mParkingLabel = rootView.findViewById(R.id.add_room_parking_label);
+        mWifiLabel = rootView.findViewById(R.id.add_room_wifi_label);
+        mSecureLabel = rootView.findViewById(R.id.add_room_secure_label);
+        mFurnishedLabel = rootView.findViewById(R.id.add_room_furnished_label);
+        mBoreholeLabel = rootView.findViewById(R.id.add_room_borehole_label);
+        mPrepaidZesaLabel = rootView.findViewById(R.id.add_room_prezesa_label);
+        mWardrobeLabel = rootView.findViewById(R.id.add_room_wardrobe_label);
+        mPrepaidWaterLabel = rootView.findViewById(R.id.add_room_prewater_label);
+        mFamLabel = rootView.findViewById(R.id.add_room_fam_label);
+        mFemaleLabel = rootView.findViewById(R.id.add_room_female_label);
+        mMaleLabel = rootView.findViewById(R.id.add_room_male_label);
+        mSoberHabitLabel = rootView.findViewById(R.id.add_room_sober_label);
+        mProfessionalLabel = rootView.findViewById(R.id.add_room_pro_label);
+        mCoupleLabel = rootView.findViewById(R.id.add_room_couple_label);
 
         //imageview and label actions
         mBic.setOnClickListener(new View.OnClickListener() {
@@ -289,7 +289,7 @@ public class AddLocationFragment extends Fragment {
         });
 
 
-        mAddRoomStep3 = (FloatingActionButton)rootView.findViewById(R.id.add_room_step3_fab);
+        mAddRoomStep3 = rootView.findViewById(R.id.add_room_step3_fab);
 
         mAddRoomStep3.setOnClickListener(new View.OnClickListener() {
             @Override
