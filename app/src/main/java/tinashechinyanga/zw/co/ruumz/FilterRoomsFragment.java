@@ -14,11 +14,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import tinashechinyanga.zw.co.ruumz.repository.FilterRoomsRepository;
+
 public class FilterRoomsFragment extends Fragment {
 
     private FilterRoomsViewModel mViewModel;
 
-    private RadioButton sortByLeastExpensive;
+    private RadioButton sortByLeastExpensive, sortByMostExpensive, sortByMostRecent;
     private EditText minAmount;
     private Button applyFiltersBtn;
 
@@ -32,12 +34,28 @@ public class FilterRoomsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.filter_rooms_fragment, container, false);
 
         sortByLeastExpensive = rootView.findViewById(R.id.sort_by_least_expensive);
+        sortByMostExpensive = rootView.findViewById(R.id.sort_by_most_expensive);
+        sortByMostRecent = rootView.findViewById(R.id.sort_by_most_recent);
+
+        applyFiltersBtn = rootView.findViewById(R.id.apply_filters_btn);
 
         sortByLeastExpensive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //set the filter; or call the viewmodel to set the filter?
-                mViewModel.sortBy.setValue("ascending");
+                mViewModel.sortBy.setValue(getResources().getString(R.string.sort_rooms_ascending));
+            }
+        });
+        sortByMostExpensive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewModel.sortBy.setValue(getResources().getString(R.string.sort_rooms_descending));
+            }
+        });
+        sortByMostRecent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewModel.sortBy.setValue("sort_most_recent");
             }
         });
 
@@ -59,6 +77,14 @@ public class FilterRoomsFragment extends Fragment {
         // TODO: Use the ViewModel
         mViewModel.sortBy.observe(this, Observer -> {
             Log.i("Viewmodel", "Viewmodel ,sortby: " + mViewModel.sortBy.getValue());
+        });
+
+        applyFiltersBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FilterRoomsRepository roomsRepository = new FilterRoomsRepository();
+                roomsRepository.getFilteredRooms(mViewModel.sortBy.getValue());
+            }
         });
     }
 

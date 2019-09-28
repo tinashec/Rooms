@@ -88,4 +88,7 @@
         <item>4+ bedrooms</item>
     </string-array>
 
+    <string name="sort_rooms_ascending">ascending</string>
+    <string name="sort_rooms_descending">descending</string>
+
 </resources>
