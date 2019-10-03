@@ -25,7 +25,7 @@ public class RoomSummaryRepository {
     private RoomSummaryDao roomSummaryDao;
     private LiveData<List<RoomSummaryEntity>> mAllRooms;
 
-    LiveData<List<RoomSummaryEntity>> getAllRooms(){
+    public LiveData<List<RoomSummaryEntity>> getAllRooms(){
         return mAllRooms;
     }
 

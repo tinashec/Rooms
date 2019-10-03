@@ -19,5 +19,16 @@ public class RoomSummaryViewModel extends AndroidViewModel {
 
     public RoomSummaryViewModel(@NonNull Application application) {
         super(application);
+        roomSummaryRepository = new RoomSummaryRepository(application);
+        mAllRooms = roomSummaryRepository.getAllRooms();
+    }
+
+    //completely hides the implementation from the UI
+    LiveData<List<RoomSummaryEntity>> getmAllRooms(){
+        return mAllRooms;
+    }
+
+    public void insert(RoomSummaryEntity roomSummaryEntity){
+        roomSummaryRepository.insert(roomSummaryEntity);
     }
 }
