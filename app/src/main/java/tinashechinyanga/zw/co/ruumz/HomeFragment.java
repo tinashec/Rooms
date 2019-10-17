@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -25,6 +27,8 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import tinashechinyanga.zw.co.ruumz.model.RoomSummaryViewModel;
 
 /**
  * Created by Tinashe on 1/14/2016.
@@ -48,9 +52,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private RoomCardRecyclerViewAdapter roomAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private List<ParseObject> mRooms = new ArrayList<>();
-    private List<ParseObject> mLatestRooms = new ArrayList<>();
-    private List<ParseObject> mMoreRooms = new ArrayList<>();
+    private List<ParseObject> mRooms, mLatestRooms, mMoreRooms = new ArrayList<>();
 
     //swipe to refresh
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -60,6 +62,12 @@ public class HomeFragment extends Fragment {
 
     //date to track date of room last inserted onLoadMore/scrolling down
     private Date lastRoomDate;
+
+    //progress dialog
+    private ProgressDialog progressDialog;
+
+    //viewmodel
+    private RoomSummaryViewModel roomSummaryViewModel;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -77,8 +85,7 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout);
@@ -91,15 +98,39 @@ public class HomeFragment extends Fragment {
         //layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
+        //summary viewmodel
+        roomSummaryViewModel = ViewModelProviders.of(this).get(RoomSummaryViewModel.class);
+        roomSummaryViewModel.getmAllRooms().observe(this, new Observer<List<ParseObject>>() {
+            @Override
+            public void onChanged(List<ParseObject> rooms) {
+                mRooms = rooms;
+               // Log.i("Rooms", "Observed rooms: " + mRooms.get(1).getObjectId());
+                //check if progress dialog is not null and running then dismiss
+                if(progressDialog != null && progressDialog.isShowing()){
+                    progressDialog.dismiss();
+                }
+                //intialise adapter and set it
+                roomAdapter = new RoomCardRecyclerViewAdapter(mRooms);
+                recyclerView.setAdapter(roomAdapter);
+
+                //add endless scrolling
+                recyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener((LinearLayoutManager) layoutManager) {
+                    @Override
+                    public void onLoadMore(int page, int totalItemsCount) {
+                        //load more rooms and add to the end of the list
+                        new FetchMoreRooms().execute();
+                    }
+                });
+            }
+        });
+
+
         //check if network is present, then run the query in the background
-        new DownloadRooms().execute();
+//        new DownloadRooms().execute();
 
         //setup the swipeToRefreshLayout i.e. onSwipeDown, fetch new rooms added
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                fetchUpdatedRooms();
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            fetchUpdatedRooms();
         });
         //configure the swipe refresh colours
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
@@ -254,7 +285,6 @@ public class HomeFragment extends Fragment {
         protected void onPreExecute(){
             super.onPreExecute();
             //show progressbar
-
 
         }
 

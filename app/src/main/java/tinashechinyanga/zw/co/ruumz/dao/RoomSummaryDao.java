@@ -1,6 +1,6 @@
 package tinashechinyanga.zw.co.ruumz.dao;
 
-import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -13,5 +13,5 @@ public interface RoomSummaryDao {
     void insert(RoomSummaryEntity roomSummary);
 
     @Query("SELECT * from room_summary")
-    LiveData<List<RoomSummaryEntity>>  getAllRooms();
+    MutableLiveData<List<RoomSummaryEntity>> getAllRooms();
 }
