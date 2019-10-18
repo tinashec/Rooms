@@ -100,6 +100,7 @@ public class HomeFragment extends Fragment {
 
         //summary viewmodel
         roomSummaryViewModel = ViewModelProviders.of(this).get(RoomSummaryViewModel.class);
+        setUpProgressDialog();
         roomSummaryViewModel.getmAllRooms().observe(this, new Observer<List<ParseObject>>() {
             @Override
             public void onChanged(List<ParseObject> rooms) {
@@ -112,6 +113,8 @@ public class HomeFragment extends Fragment {
                 //intialise adapter and set it
                 roomAdapter = new RoomCardRecyclerViewAdapter(mRooms);
                 recyclerView.setAdapter(roomAdapter);
+
+                progressDialog.hide();
 
                 //add endless scrolling
                 recyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener((LinearLayoutManager) layoutManager) {
@@ -149,7 +152,7 @@ public class HomeFragment extends Fragment {
     private class DownloadRooms extends AsyncTask<Void, Integer, List<ParseObject>>{
 
         //local variable
-        private ProgressDialog progressDialog;
+
 
         //do the long running task
         //run the query
@@ -183,11 +186,7 @@ public class HomeFragment extends Fragment {
         @Override
         protected void onPreExecute(){
             super.onPreExecute();
-            //initialise and show progress bar
-            progressDialog = new ProgressDialog(getContext());
-            progressDialog.setMessage("Fetching rooms...");
-            progressDialog.setCancelable(false);
-            progressDialog.show();
+            setUpProgressDialog();
         }
 
         //update the UI main thread with the results returned by the doInBackground
@@ -212,6 +211,14 @@ public class HomeFragment extends Fragment {
                 }
             });
         }
+    }
+
+    private void setUpProgressDialog() {
+        //initialise and show progress bar
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Fetching rooms...");
+        progressDialog.setCancelable(true);
+        progressDialog.show();
     }
 
     //fetch updated rooms off the main thread
