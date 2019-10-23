@@ -111,12 +111,12 @@ public class HomeFragment extends Fragment {
                     progressDialog.dismiss();
                 }
                 //intialise adapter and set it
-                roomAdapter = new RoomCardRecyclerViewAdapter(mRooms);
+                roomAdapter = new RoomCardRecyclerViewAdapter();
                 recyclerView.setAdapter(roomAdapter);
 
                 progressDialog.hide();
 
-                //add endless scrolling
+                //add endless scrolling: NOT WORKING
                 recyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener((LinearLayoutManager) layoutManager) {
                     @Override
                     public void onLoadMore(int page, int totalItemsCount) {
@@ -199,7 +199,7 @@ public class HomeFragment extends Fragment {
                 progressDialog.dismiss();
             }
             //intialise adapter and set it
-            roomAdapter = new RoomCardRecyclerViewAdapter(mRooms);
+            roomAdapter = new RoomCardRecyclerViewAdapter();
             recyclerView.setAdapter(roomAdapter);
 
             //add endless scrolling
