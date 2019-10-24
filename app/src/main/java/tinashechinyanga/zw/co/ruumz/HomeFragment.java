@@ -13,9 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -98,32 +100,18 @@ public class HomeFragment extends Fragment {
         //layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
+        //intialise adapter and set it
+        roomAdapter = new RoomCardRecyclerViewAdapter();
+        recyclerView.setAdapter(roomAdapter);
+
         //summary viewmodel
         roomSummaryViewModel = ViewModelProviders.of(this).get(RoomSummaryViewModel.class);
         setUpProgressDialog();
-        roomSummaryViewModel.getmAllRooms().observe(this, new Observer<List<ParseObject>>() {
+        roomSummaryViewModel.getmAllRooms().observe(this, new Observer<PagedList<ParseObject>>() {
             @Override
-            public void onChanged(List<ParseObject> rooms) {
-                mRooms = rooms;
-               // Log.i("Rooms", "Observed rooms: " + mRooms.get(1).getObjectId());
-                //check if progress dialog is not null and running then dismiss
-                if(progressDialog != null && progressDialog.isShowing()){
-                    progressDialog.dismiss();
-                }
-                //intialise adapter and set it
-                roomAdapter = new RoomCardRecyclerViewAdapter();
-                recyclerView.setAdapter(roomAdapter);
-
+            public void onChanged(@Nullable PagedList<ParseObject> parseObjects) {
+                roomAdapter.submitList(parseObjects);
                 progressDialog.hide();
-
-                //add endless scrolling: NOT WORKING
-                recyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener((LinearLayoutManager) layoutManager) {
-                    @Override
-                    public void onLoadMore(int page, int totalItemsCount) {
-                        //load more rooms and add to the end of the list
-                        new FetchMoreRooms().execute();
-                    }
-                });
             }
         });
 

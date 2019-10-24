@@ -1,5 +1,7 @@
 package tinashechinyanga.zw.co.ruumz.repository;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.paging.PositionalDataSource;
 
@@ -31,6 +33,10 @@ public class RoomSummaryDataSource extends PositionalDataSource<ParseObject> {
             int numOfRooms = getRoomsSummaryQuery.count();
             List<ParseObject> roomsReturned = getRoomsSummaryQuery.find();
 
+            Log.i("Loaded rooms", "Number of rooms loaded: " + roomsReturned.size());
+            Log.i("Parameters", "params.requestedStartPosition: " + params.requestedStartPosition);
+            Log.i("Parameters", "params.requestedLoadSize: " + params.requestedLoadSize);
+
             //return results to PagedList callback
             callback.onResult(roomsReturned, params.requestedStartPosition, numOfRooms);
         } catch (ParseException e) {
@@ -50,7 +56,7 @@ public class RoomSummaryDataSource extends PositionalDataSource<ParseObject> {
 
         try {
             List<ParseObject> moreRoomReturned = getMoreRoomsQuery.find();
-
+            Log.i("Load range", "Load range is: " + moreRoomReturned.size());
             //return info to PagedList
             callback.onResult(moreRoomReturned);
         } catch (ParseException e) {
