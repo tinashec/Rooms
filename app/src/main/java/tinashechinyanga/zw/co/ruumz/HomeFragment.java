@@ -115,7 +115,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
         //check if network is present, then run the query in the background
 //        new DownloadRooms().execute();
 

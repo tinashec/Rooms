@@ -120,7 +120,7 @@ public class MyRoomsFragment extends Fragment {
         protected List<ParseObject> doInBackground(Void... params) {
             ParseQuery<ParseObject> getMyRoomsQuery = ParseQuery.getQuery("Room");
             getMyRoomsQuery.orderByDescending("updatedAt");
-            getMyRoomsQuery.whereEqualTo("roomOwner", ParseUser.getCurrentUser().getObjectId());
+            getMyRoomsQuery.whereEqualTo("roomOwner", "Room owner: " + ParseUser.getCurrentUser().getObjectId());
             Log.d("Owner: ", ParseUser.getCurrentUser().getObjectId());
 
             try {

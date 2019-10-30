@@ -12,8 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.paging.PagedList;
+import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -26,9 +27,10 @@ import java.util.List;
 /**
  * Created by Tinashe on 2/22/2016.
  */
-public class RoomCardRecyclerViewAdapter extends ListAdapter<ParseObject, RoomCardRecyclerViewAdapter.RoomViewHolder> {
+public class RoomCardRecyclerViewAdapter extends PagedListAdapter<ParseObject, RoomCardRecyclerViewAdapter.RoomViewHolder> {
 
     private List<ParseObject> mRooms = new ArrayList<>();
+    private ParseObject room;
     private String mSection;
 
     public RoomCardRecyclerViewAdapter(){
@@ -82,9 +84,9 @@ public class RoomCardRecyclerViewAdapter extends ListAdapter<ParseObject, RoomCa
 
         @Override
         public void onClick(View v) {
-            int pos = getLayoutPosition();
+            int pos = getAdapterPosition();
             Intent intent;
-            ParseObject room = mRooms.get(pos);
+            ParseObject room = getCurrentList().get(pos);
 
             //create the ParseObject proxy
             ParseProxyObject roomProxy = new ParseProxyObject(room);
@@ -120,7 +122,7 @@ public class RoomCardRecyclerViewAdapter extends ListAdapter<ParseObject, RoomCa
 
     @Override
     public void onBindViewHolder(RoomViewHolder holder, int position) {
-        ParseObject room = getItem(position);
+        room = getItem(position);
         holder.mRoomLocation.setText(room.getString("roomSuburb"));
         holder.mRoomPrice.setText(Integer.toString(room.getInt("roomMonthlyRent")));
         holder.mInclusiveOrNot.setText(room.getString("roomRentInclusiveOfBills"));
@@ -172,7 +174,7 @@ public class RoomCardRecyclerViewAdapter extends ListAdapter<ParseObject, RoomCa
 
     public void addMoreRooms(List<ParseObject> newRooms){
         mRooms.addAll(newRooms);
-        submitList(mRooms);
+        submitList((PagedList<ParseObject>) mRooms);
     }
 
     //update dataset change
