@@ -161,7 +161,7 @@ public class MyRoomsFragment extends Fragment {
             }
             Log.d("Current User: ", ParseUser.getCurrentUser().getUsername());
             //intialise adapter and set it
-            roomAdapter = new RoomCardRecyclerViewAdapter(mRooms, "My Rooms");
+            roomAdapter = new RoomCardRecyclerViewAdapter();
 
             recyclerView.setAdapter(roomAdapter);
         }

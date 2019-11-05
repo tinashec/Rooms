@@ -11,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -23,18 +26,34 @@ import java.util.List;
 /**
  * Created by Tinashe on 2/22/2016.
  */
-public class RoomCardRecyclerViewAdapter extends RecyclerView.Adapter<RoomCardRecyclerViewAdapter.RoomViewHolder> {
+public class RoomCardRecyclerViewAdapter extends ListAdapter<ParseObject, RoomCardRecyclerViewAdapter.RoomViewHolder> {
 
     private List<ParseObject> mRooms = new ArrayList<>();
     private String mSection;
-    RoomCardRecyclerViewAdapter(List<ParseObject> rooms){
-        this.mRooms = rooms;
+
+    public RoomCardRecyclerViewAdapter(){
+        super(DIFF_CALLBACK);
     }
 
-    public RoomCardRecyclerViewAdapter(List<ParseObject> mRooms, String section) {
-        this.mRooms = mRooms;
-        this.mSection = section;
-    }
+    public static final DiffUtil.ItemCallback<ParseObject> DIFF_CALLBACK = new DiffUtil.ItemCallback<ParseObject>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull ParseObject oldItem, @NonNull ParseObject newItem) {
+            return oldItem.getObjectId() == newItem.getObjectId();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull ParseObject oldItem, @NonNull ParseObject newItem) {
+            return (oldItem.getUpdatedAt().equals(newItem.getUpdatedAt()) && oldItem.getCreatedAt().equals(newItem.getCreatedAt()));
+        }
+    };
+//    RoomCardRecyclerViewAdapter(List<ParseObject> rooms){
+//        this.mRooms = rooms;
+//    }
+//
+//    public RoomCardRecyclerViewAdapter(List<ParseObject> mRooms, String section) {
+//        this.mRooms = mRooms;
+//        this.mSection = section;
+//    }
 
     public class RoomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         protected ImageView mRoomImage;
@@ -101,7 +120,7 @@ public class RoomCardRecyclerViewAdapter extends RecyclerView.Adapter<RoomCardRe
 
     @Override
     public void onBindViewHolder(RoomViewHolder holder, int position) {
-        ParseObject room = mRooms.get(position);
+        ParseObject room = getItem(position);
         holder.mRoomLocation.setText(room.getString("roomSuburb"));
         holder.mRoomPrice.setText(Integer.toString(room.getInt("roomMonthlyRent")));
         holder.mInclusiveOrNot.setText(room.getString("roomRentInclusiveOfBills"));
@@ -138,15 +157,22 @@ public class RoomCardRecyclerViewAdapter extends RecyclerView.Adapter<RoomCardRe
 
     }
 
-    @Override
-    public int getItemCount() {
-        if(mRooms.size() == 0){
-            return 0;
-        }else if (mRooms == null){
-            return 0;
-        }else {
-            return mRooms.size();
-        }
+
+
+//    @Override
+//    public int getItemCount() {
+//        if(mRooms.size() == 0){
+//            return 0;
+//        }else if (mRooms == null){
+//            return 0;
+//        }else {
+//            return mRooms.size();
+//        }
+//    }
+
+    public void addMoreRooms(List<ParseObject> newRooms){
+        mRooms.addAll(newRooms);
+        submitList(mRooms);
     }
 
     //update dataset change
