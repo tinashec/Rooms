@@ -85,7 +85,9 @@ public class MyRoomsFragment extends Fragment {
         //layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        //check if network is present, then run the query in the background
+        //check if network is present,
+        // ToDo:
+        // run the query in the background
         new DownloadMyRooms().execute();
 
         //setup the swipeToRefreshLayout i.e. onSwipeDown, fetch new rooms added
@@ -121,10 +123,11 @@ public class MyRoomsFragment extends Fragment {
             ParseQuery<ParseObject> getMyRoomsQuery = ParseQuery.getQuery("Room");
             getMyRoomsQuery.orderByDescending("updatedAt");
             getMyRoomsQuery.whereEqualTo("roomOwner", "Room owner: " + ParseUser.getCurrentUser().getObjectId());
-            Log.d("Owner: ", ParseUser.getCurrentUser().getObjectId());
+            Log.d("Owner: ", "Room owner: " + ParseUser.getCurrentUser().getObjectId());
 
             try {
                 mRooms = getMyRoomsQuery.find();
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -132,10 +135,11 @@ public class MyRoomsFragment extends Fragment {
             if(mRooms.size() > 0) {
                 //check if there are rooms fetched and update the value of lastUpdated
                 lastUpdated = mRooms.get(mRooms.size() - mRooms.size()).getUpdatedAt();
+                Log.d("mRooms", "Fetched rooms: " + mRooms.size() + " " + mRooms.get(0).getObjectId());
             }else {
                 //figure this portion out, but leaving blank seems ok
             }
-
+            Log.d("mRooms", "Fetched rooms: " + mRooms.size());
             return mRooms;
         }
 

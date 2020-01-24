@@ -21,7 +21,6 @@ public class RoomSummaryViewModel extends AndroidViewModel {
     public RoomSummaryViewModel(@NonNull Application application) {
         super(application);
         roomSummaryRepository = new RoomSummaryRepository(application);
-//        mAllRooms = roomSummaryRepository.getAllRooms();
     }
 
     //completely hides the implementation from the UI
@@ -30,6 +29,13 @@ public class RoomSummaryViewModel extends AndroidViewModel {
         mAllRooms = roomSummaryRepository.getAllRooms();
         return mAllRooms;
     }
+
+    //invalidate datasource
+    public void invalidateRoomSummaryDatasource(){
+        //datasource.invalidate
+        roomSummaryRepository.invalidateRoomSummaryDatasource();
+    }
+
 
     public void insert(RoomSummaryEntity roomSummaryEntity){
         roomSummaryRepository.insert(roomSummaryEntity);

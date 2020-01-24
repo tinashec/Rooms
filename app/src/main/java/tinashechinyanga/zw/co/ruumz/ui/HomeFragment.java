@@ -1,4 +1,4 @@
-package tinashechinyanga.zw.co.ruumz;
+package tinashechinyanga.zw.co.ruumz.ui;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -30,6 +30,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import tinashechinyanga.zw.co.ruumz.EndlessRecyclerViewScrollListener;
+import tinashechinyanga.zw.co.ruumz.R;
+import tinashechinyanga.zw.co.ruumz.RoomCardRecyclerViewAdapter;
 import tinashechinyanga.zw.co.ruumz.model.RoomSummaryViewModel;
 
 /**
@@ -120,7 +123,9 @@ public class HomeFragment extends Fragment {
 
         //setup the swipeToRefreshLayout i.e. onSwipeDown, fetch new rooms added
         swipeRefreshLayout.setOnRefreshListener(() -> {
-            fetchUpdatedRooms();
+//            fetchUpdatedRooms();
+            roomSummaryViewModel.invalidateRoomSummaryDatasource();
+            swipeRefreshLayout.setRefreshing(false);
         });
         //configure the swipe refresh colours
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
