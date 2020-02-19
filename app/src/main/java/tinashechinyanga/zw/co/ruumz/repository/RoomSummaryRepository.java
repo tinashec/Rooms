@@ -2,6 +2,7 @@ package tinashechinyanga.zw.co.ruumz.repository;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -40,12 +41,13 @@ public class RoomSummaryRepository {
     private List<ParseObject> mRooms = new ArrayList<>();
 
     private LiveData<PagedList<ParseObject>> rooms;
+    private LiveData<PagedList<ParseObject>> currentUserRooms;
 
     public LiveData<PagedList<ParseObject>> getAllRooms(){
 
         PagedList.Config pagegListConfig = new PagedList.Config.Builder().setEnablePlaceholders(false)
                 .setPrefetchDistance(6)
-                .setInitialLoadSizeHint(20)
+                .setInitialLoadSizeHint(12)
                 .setPageSize(8).build();
 
         RoomSummaryDataSourceFactory roomSummaryDataSourceFactory = new RoomSummaryDataSourceFactory();
@@ -53,6 +55,21 @@ public class RoomSummaryRepository {
         rooms = new LivePagedListBuilder(roomSummaryDataSourceFactory, pagegListConfig).build();
 
         return rooms;
+    }
+
+    public LiveData<PagedList<ParseObject>> getCurrentlyLoggedinUserRooms(String roomOwner){
+        PagedList.Config pagedListConfig = new PagedList.Config.Builder().setEnablePlaceholders(true)
+                .setPrefetchDistance(5)
+                .setInitialLoadSizeHint(8)
+                .setPageSize(6).build();
+
+        Log.i("Current User: ", "Current userID: " + roomOwner);
+
+        RoomSummaryDataSourceFactory roomSummaryDataSourceFactory = new RoomSummaryDataSourceFactory(roomOwner);
+
+        currentUserRooms = new LivePagedListBuilder(roomSummaryDataSourceFactory, pagedListConfig).build();
+
+        return currentUserRooms;
     }
 
     public void invalidateRoomSummaryDatasource(){

@@ -33,7 +33,7 @@ import java.util.List;
 import tinashechinyanga.zw.co.ruumz.EndlessRecyclerViewScrollListener;
 import tinashechinyanga.zw.co.ruumz.R;
 import tinashechinyanga.zw.co.ruumz.RoomCardRecyclerViewAdapter;
-import tinashechinyanga.zw.co.ruumz.model.RoomSummaryViewModel;
+import tinashechinyanga.zw.co.ruumz.viewmodel.RoomSummaryViewModel;
 
 /**
  * Created by Tinashe on 1/14/2016.
@@ -43,7 +43,7 @@ import tinashechinyanga.zw.co.ruumz.model.RoomSummaryViewModel;
  * A placeholder fragment containing a simple view.
  */
 
-public class HomeFragment extends Fragment {
+public class RoomsFragment extends Fragment {
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
 
     //recyclerView
     private RecyclerView recyclerView;
-    private RoomCardRecyclerViewAdapter roomAdapter;
+    private RoomCardRecyclerViewAdapter roomRecyclerViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<ParseObject> mRooms, mLatestRooms, mMoreRooms = new ArrayList<>();
 
@@ -78,15 +78,15 @@ public class HomeFragment extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static HomeFragment newInstance(int sectionNumber) {
-        HomeFragment fragment = new HomeFragment();
+    public static RoomsFragment newInstance(int sectionNumber) {
+        RoomsFragment fragment = new RoomsFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public HomeFragment() {
+    public RoomsFragment() {
     }
 
     @Override
@@ -104,16 +104,16 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         //intialise adapter and set it
-        roomAdapter = new RoomCardRecyclerViewAdapter();
-        recyclerView.setAdapter(roomAdapter);
+        roomRecyclerViewAdapter = new RoomCardRecyclerViewAdapter();
+        recyclerView.setAdapter(roomRecyclerViewAdapter);
 
         //summary viewmodel
         roomSummaryViewModel = ViewModelProviders.of(this).get(RoomSummaryViewModel.class);
         setUpProgressDialog();
         roomSummaryViewModel.getmAllRooms().observe(this, new Observer<PagedList<ParseObject>>() {
             @Override
-            public void onChanged(@Nullable PagedList<ParseObject> parseObjects) {
-                roomAdapter.submitList(parseObjects);
+            public void onChanged(@Nullable PagedList<ParseObject> allRooms) {
+                roomRecyclerViewAdapter.submitList(allRooms);
                 progressDialog.hide();
             }
         });
@@ -191,8 +191,8 @@ public class HomeFragment extends Fragment {
                 progressDialog.dismiss();
             }
             //intialise adapter and set it
-            roomAdapter = new RoomCardRecyclerViewAdapter();
-            recyclerView.setAdapter(roomAdapter);
+            roomRecyclerViewAdapter = new RoomCardRecyclerViewAdapter();
+            recyclerView.setAdapter(roomRecyclerViewAdapter);
 
             //add endless scrolling
             recyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener((LinearLayoutManager) layoutManager) {
@@ -245,8 +245,8 @@ public class HomeFragment extends Fragment {
         @Override
         protected void onPostExecute(List<ParseObject> latestRooms){
             //add the latest rooms added to the adapter
-            roomAdapter.addAll(latestRooms);
-            roomAdapter.notifyItemInserted(0);
+            roomRecyclerViewAdapter.addAll(latestRooms);
+            roomRecyclerViewAdapter.notifyItemInserted(0);
             //stop the refresh animator
             swipeRefreshLayout.setRefreshing(false);
         }
@@ -291,10 +291,10 @@ public class HomeFragment extends Fragment {
         @Override
         protected void onPostExecute(List<ParseObject> moreRooms){
             //add the latest rooms added to the adapter
-            int curSize = roomAdapter.getItemCount();
+            int curSize = roomRecyclerViewAdapter.getItemCount();
             //add the new rooms to the list of existing rooms
             mRooms.addAll(moreRooms);
-            roomAdapter.notifyItemRangeInserted(curSize, mRooms.size() - 1);
+            roomRecyclerViewAdapter.notifyItemRangeInserted(curSize, mRooms.size() - 1);
             //dismiss progressbar
 
         }

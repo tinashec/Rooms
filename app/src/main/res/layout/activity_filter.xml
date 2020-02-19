@@ -11,6 +11,6 @@
         android:layout_height="match_parent"
         android:id="@+id/rooms_filter_fragment"
         tools:layout="@layout/filter_rooms_fragment"
-        android:name="tinashechinyanga.zw.co.ruumz.FilterRoomsFragment"/>
+        android:name="tinashechinyanga.zw.co.ruumz.ui.FilterRoomsFragment"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

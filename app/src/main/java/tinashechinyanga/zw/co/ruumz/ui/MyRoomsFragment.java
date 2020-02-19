@@ -1,4 +1,4 @@
-package tinashechinyanga.zw.co.ruumz;
+package tinashechinyanga.zw.co.ruumz.ui;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -12,8 +12,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -26,6 +31,10 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import tinashechinyanga.zw.co.ruumz.R;
+import tinashechinyanga.zw.co.ruumz.RoomCardRecyclerViewAdapter;
+import tinashechinyanga.zw.co.ruumz.viewmodel.RoomSummaryViewModel;
 
 /**
  * Created by Tinashe on 1/14/2016.
@@ -48,9 +57,14 @@ public class MyRoomsFragment extends Fragment {
     protected List<ParseObject> mRooms = new ArrayList<>();
     protected List<ParseObject> mLatestRooms = new ArrayList<>();
     protected Context context;
+    protected TextView emptyRoomsList;
+
+    private RoomSummaryViewModel myRoomsSummaryViewModel;
 
     //swipe to refresh
     private SwipeRefreshLayout swipeRefreshLayout;
+    //progress dialog
+    private ProgressDialog progressDialog;
 
     //date to track date room last updated
     private Date lastUpdated;
@@ -78,6 +92,9 @@ public class MyRoomsFragment extends Fragment {
         swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout);
         recyclerView = rootView.findViewById(R.id.recycler_view);
 
+        //add empty view
+        emptyRoomsList = rootView.findViewById(R.id.empty_list);
+
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
@@ -85,16 +102,34 @@ public class MyRoomsFragment extends Fragment {
         //layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
+        //intialise and set the adapter
+        roomAdapter = new RoomCardRecyclerViewAdapter();
+        recyclerView.setAdapter(roomAdapter);
+
+        //connect the view model
+        myRoomsSummaryViewModel = ViewModelProviders.of(this).get(RoomSummaryViewModel.class);
+        setUpProgressDialog();
+        //observe the data and update the viewmodel when changes occur in the data
+        Log.i("Current User", "Current userId: " + ParseUser.getCurrentUser().getObjectId());
+        myRoomsSummaryViewModel.getmAllCurrentUserRooms(ParseUser.getCurrentUser().getObjectId()).observe(this, new Observer<PagedList<ParseObject>>() {
+            @Override
+            public void onChanged(@Nullable PagedList<ParseObject> currentUserRooms) {
+                //update the UI
+                roomAdapter.submitList(currentUserRooms);
+                progressDialog.dismiss();
+            }
+        });
+
         //check if network is present,
         // ToDo:
         // run the query in the background
-        new DownloadMyRooms().execute();
+//        new DownloadMyRooms().execute();
 
         //setup the swipeToRefreshLayout i.e. onSwipeDown, fetch new rooms added
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                fetchUpdatedRooms();
+//                fetchUpdatedRooms();
             }
         });
         //configure the swipe refresh colours
@@ -122,7 +157,7 @@ public class MyRoomsFragment extends Fragment {
         protected List<ParseObject> doInBackground(Void... params) {
             ParseQuery<ParseObject> getMyRoomsQuery = ParseQuery.getQuery("Room");
             getMyRoomsQuery.orderByDescending("updatedAt");
-            getMyRoomsQuery.whereEqualTo("roomOwner", "Room owner: " + ParseUser.getCurrentUser().getObjectId());
+            getMyRoomsQuery.whereEqualTo("roomOwner", ParseUser.getCurrentUser().getObjectId());
             Log.d("Owner: ", "Room owner: " + ParseUser.getCurrentUser().getObjectId());
 
             try {
@@ -240,6 +275,14 @@ public class MyRoomsFragment extends Fragment {
             }
         }
         return false;
+    }
+
+    private void setUpProgressDialog() {
+        //initialise and show progress bar
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Fetching rooms...");
+        progressDialog.setCancelable(true);
+        progressDialog.show();
     }
 }
 

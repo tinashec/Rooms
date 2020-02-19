@@ -1,4 +1,4 @@
-package tinashechinyanga.zw.co.ruumz;
+package tinashechinyanga.zw.co.ruumz.viewmodel;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

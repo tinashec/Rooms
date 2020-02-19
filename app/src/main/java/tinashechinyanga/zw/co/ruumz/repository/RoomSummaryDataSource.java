@@ -14,72 +14,28 @@ import java.util.List;
 
 public class RoomSummaryDataSource extends ItemKeyedDataSource<String, ParseObject> {
 
+    public RoomSummaryDataSource(){
+
+    }
+
+    public RoomSummaryDataSource(String roomOwnerID){
+        this.roomOwner = roomOwnerID;
+    }
+
+    private String roomOwner;
     private static final int ROOMS_FETCHED_LIMIT = 12;
     private Date lastRoomDate;
     //basic query
     public ParseQuery<ParseObject> getBaseQuery(){
-        return ParseQuery.getQuery("Room").orderByDescending("updatedAt");
-    }
-/*
-    @Override
-    public void loadInitial(@NonNull LoadInitialParams params, @NonNull LoadInitialCallback<ParseObject> callback) {
-        ParseQuery<ParseObject> getRoomsSummaryQuery = getBaseQuery();
-
-        //use values passed when PagedList was created
-        getRoomsSummaryQuery.setLimit(params.requestedLoadSize);
-//        getRoomsSummaryQuery.setSkip(params.requestedStartPosition);
-
-        try {
-            //loadInitial() should run queries synchronously so initial list won't be empty
-            int numOfRooms = getRoomsSummaryQuery.count();
-            List<ParseObject> roomsReturned = getRoomsSummaryQuery.find();
-
-            Log.i("Loaded rooms", "Number of rooms loaded: " + roomsReturned.size());
-//            Log.i("Parameters", "params.requestedStartPosition: " + params.requestedStartPosition);
-            Log.i("Parameters", "params.requestedLoadSize: " + params.requestedLoadSize);
-
-            //return results to PagedList callback
-            callback.onResult(roomsReturned, params.requestedStartPosition, numOfRooms);
-        } catch (ParseException e) {
-            //will need to properly handle this exception e.g. show a dialog or maybe a toast
-            e.printStackTrace();
-            //or retry the above logic
+        ParseQuery<ParseObject> baseQuery = ParseQuery.getQuery("Room").orderByDescending("updatedAt");;
+        //check if the quesry should return all rooms or rooms specific to a particular user
+        if(roomOwner != null) {
+            //set base query with roomOwner as whereEqualTo
+            baseQuery.whereEqualTo("roomOwner", roomOwner);
         }
+        return baseQuery;
     }
 
-    @Override
-    public void loadRange(@NonNull LoadRangeParams params, @NonNull LoadRangeCallback<ParseObject> callback) {
-        ParseQuery<ParseObject> getMoreRoomsQuery = getBaseQuery();
-        getMoreRoomsQuery.setLimit(params.loadSize);
-
-        //fetch the next set of data from a different offset
-        getMoreRoomsQuery.setSkip(params.startPosition);
-
-        try {
-            List<ParseObject> moreRoomReturned = getMoreRoomsQuery.find();
-            Log.i("Load range", "Load range is: " + moreRoomReturned.size());
-            //return info to PagedList
-            callback.onResult(moreRoomReturned);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            //handle exception
-
-        }
-    }
-
-    @Override
-    public void loadAfter(@NonNull ItemKeyedDataSource.LoadParams params, @NonNull ItemKeyedDataSource.LoadCallback<ParseObject> callback){
-        ParseQuery getLatestRoomsQuery = getBaseQuery();
-        getLatestRoomsQuery.whereGreaterThan("updatedAt", params.key);
-
-        try {
-            List<ParseObject> latestRooms = getLatestRoomsQuery.find();
-            callback.onResult(latestRooms);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-*/
     @Override
     public void loadInitial(@NonNull LoadInitialParams params, @NonNull LoadInitialCallback callback) {
         ParseQuery<ParseObject> getRoomsSummaryQuery = getBaseQuery();
@@ -110,7 +66,9 @@ public class RoomSummaryDataSource extends ItemKeyedDataSource<String, ParseObje
     @Override
     public void loadAfter(@NonNull LoadParams params, @NonNull LoadCallback callback) {
         ParseQuery getLatestRoomsQuery = getBaseQuery();
-        getLatestRoomsQuery.whereGreaterThan("updatedAt", lastRoomDate);
+        getLatestRoomsQuery.whereLessThan("updatedAt", lastRoomDate);
+
+        Log.i("Load after query: ", "Load after query detail: " + getLatestRoomsQuery.whereGreaterThan("updatedAt", lastRoomDate));
 
         try {
             List<ParseObject> latestRooms = getLatestRoomsQuery.find();
