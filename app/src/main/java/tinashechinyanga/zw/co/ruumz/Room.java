@@ -4,7 +4,7 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
 /**
- * Created by MUZ0007 on 1/14/2016.
+ * Created by Tinashe on 1/14/2016.
  */
 @ParseClassName("Room")
 public class Room extends ParseObject {

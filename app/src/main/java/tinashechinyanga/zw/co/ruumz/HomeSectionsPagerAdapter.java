@@ -4,6 +4,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import tinashechinyanga.zw.co.ruumz.ui.RoomsFragment;
+
 /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -16,10 +18,10 @@ public class HomeSectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
-        // Return a HomeFragment (defined as a static inner class below).
+        // Return a RoomsFragment (defined as a static inner class below).
         switch(position){
             case 0:
-                return new HomeFragment();
+                return new RoomsFragment();
             default:
                 break;
         }

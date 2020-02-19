@@ -1,4 +1,4 @@
-package tinashechinyanga.zw.co.ruumz.model;
+package tinashechinyanga.zw.co.ruumz.viewmodel;
 
 import android.app.Application;
 
@@ -17,11 +17,11 @@ public class RoomSummaryViewModel extends AndroidViewModel {
     private RoomSummaryRepository roomSummaryRepository;
     //LiveData variable to cache list of words
     private LiveData<PagedList<ParseObject>> mAllRooms;
+    private LiveData<PagedList<ParseObject>> mAllCurrentUserRooms;
 
     public RoomSummaryViewModel(@NonNull Application application) {
         super(application);
         roomSummaryRepository = new RoomSummaryRepository(application);
-//        mAllRooms = roomSummaryRepository.getAllRooms();
     }
 
     //completely hides the implementation from the UI
@@ -30,6 +30,18 @@ public class RoomSummaryViewModel extends AndroidViewModel {
         mAllRooms = roomSummaryRepository.getAllRooms();
         return mAllRooms;
     }
+
+    public LiveData<PagedList<ParseObject>> getmAllCurrentUserRooms(String currentUserID){
+        mAllCurrentUserRooms = roomSummaryRepository.getCurrentlyLoggedinUserRooms(currentUserID);
+        return mAllCurrentUserRooms;
+    }
+
+    //invalidate datasource
+    public void invalidateRoomSummaryDatasource(){
+        //datasource.invalidate
+        roomSummaryRepository.invalidateRoomSummaryDatasource();
+    }
+
 
     public void insert(RoomSummaryEntity roomSummaryEntity){
         roomSummaryRepository.insert(roomSummaryEntity);

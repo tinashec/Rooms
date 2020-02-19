@@ -34,7 +34,7 @@ public class MyRoomsActivity extends AppCompatActivity {
         mMyRoomsViewPager.setAdapter(myRoomsSectionsPagerAdapter);
 
         /*FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.placeholder_fragment, new HomeFragment());
+        fragmentTransaction.replace(R.id.placeholder_fragment, new RoomsFragment());
         fragmentTransaction.commit();*/
     }
 

@@ -16,7 +16,7 @@ public class RoomImagesPagerAdapter extends SmartFragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
-        // Return a HomeFragment (defined as a static inner class below).
+        // Return a RoomsFragment (defined as a static inner class below).
         switch(position){
             case 0:
                 return new RoomImageOneFragment();
