@@ -9,6 +9,8 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +27,9 @@ public class RoomSummaryDataSource extends ItemKeyedDataSource<String, ParseObje
     private String roomOwner;
     private static final int ROOMS_FETCHED_LIMIT = 12;
     private Date lastRoomDate;
+
+    private List<ParseObject> roomsReturned, latestRoomsReturned, moreRoomsReturned = new ArrayList<>();
+
     //basic query
     public ParseQuery<ParseObject> getBaseQuery(){
         ParseQuery<ParseObject> baseQuery = ParseQuery.getQuery("Room").orderByDescending("updatedAt");;
@@ -47,12 +52,16 @@ public class RoomSummaryDataSource extends ItemKeyedDataSource<String, ParseObje
         try {
             //loadInitial() should run queries synchronously so initial list won't be empty
             int numOfRooms = getRoomsSummaryQuery.count();
-            List<ParseObject> roomsReturned = getRoomsSummaryQuery.find();
+            roomsReturned = getRoomsSummaryQuery.find();
+
+            if(roomsReturned.size() > 0){
+                lastRoomDate = roomsReturned.get(roomsReturned.size() - 1).getUpdatedAt();
+                Log.i("Initial last room date", "Load initial last room date: " + lastRoomDate);
+            }
 
             Log.i("Loaded rooms", "Number of rooms loaded: " + roomsReturned.size());
 //            Log.i("Parameters", "params.requestedStartPosition: " + params.requestedStartPosition);
             Log.i("Parameters", "params.requestedLoadSize: " + params.requestedLoadSize);
-            lastRoomDate = roomsReturned.get(roomsReturned.size() - 1).getUpdatedAt();
 
             //return results to PagedList callback
             callback.onResult(roomsReturned, 0, numOfRooms);
@@ -65,15 +74,35 @@ public class RoomSummaryDataSource extends ItemKeyedDataSource<String, ParseObje
 
     @Override
     public void loadAfter(@NonNull LoadParams params, @NonNull LoadCallback callback) {
-        ParseQuery getLatestRoomsQuery = getBaseQuery();
-        getLatestRoomsQuery.whereLessThan("updatedAt", lastRoomDate);
+        ParseQuery getMoreRoomsQuery = getBaseQuery();
+        Log.i("Last room date:", "Last room date == " + lastRoomDate);
 
-        Log.i("Load after query: ", "Load after query detail: " + getLatestRoomsQuery.whereGreaterThan("updatedAt", lastRoomDate));
+        //getMoreRoomsQuery.whereGreaterThan("createdAt", lastRoomDate);
+
+        Log.i("Load after query: ", "Load after query detail: " + getMoreRoomsQuery.whereGreaterThan("updatedAt", lastRoomDate));
 
         try {
-            List<ParseObject> latestRooms = getLatestRoomsQuery.find();
-            Log.i("Latest rooms", "Number of latest rooms loaded: " + latestRooms.size());
-            callback.onResult(latestRooms);
+            if (roomOwner != null){
+                moreRoomsReturned = ParseQuery.getQuery("Room")
+                        .orderByDescending("updatedAt")
+                        .whereLessThan("createdAt", lastRoomDate)
+                        .setLimit(10)
+                        .whereEqualTo("roomOwner", roomOwner)
+                        .find();
+            }else {
+                moreRoomsReturned = ParseQuery.getQuery("Room").orderByDescending("updatedAt").whereLessThan("updatedAt", lastRoomDate).setLimit(3).find();
+                Log.i("Latest rooms", "Number of latest rooms loaded: " + moreRoomsReturned.size());
+            }
+            if (moreRoomsReturned.size() > 0){
+                //get last room
+                lastRoomDate = moreRoomsReturned.get(moreRoomsReturned.size() - 1).getUpdatedAt();
+            }
+            if (moreRoomsReturned.size() == 0){
+                //pass empty list
+                callback.onResult(Collections.emptyList());
+            }else {
+                callback.onResult(moreRoomsReturned);
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
