@@ -7,7 +7,7 @@ import com.parse.ParseObject;
 import com.parse.facebook.ParseFacebookUtils;
 
 /**
- * Created by MUZ0007 on 1/8/2016.
+ * Created by Tinashe on 1/8/2016.
  */
 public class RoomsApp extends Application {
 

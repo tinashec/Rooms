@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -25,6 +26,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
+
+import tinashechinyanga.zw.co.ruumz.ui.RoomsFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -133,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.action_sign_in:
                 if(currentUser == null){
                     //navigate to login
-                    Log.i("SignIn: ", "Attempting signin");
+                    Log.i("SignIn: ", "Attempting sign-in");
                     navToLogin();
                 }else{
                     //tell user is already signed in
@@ -188,6 +191,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_browse_rooms:
                 //launch rooms fragments
                 Toast.makeText(this, "Fetching rooms", Toast.LENGTH_LONG).show();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                RoomsFragment roomsFragment = new RoomsFragment();
+                fragmentTransaction.add(R.id.container, roomsFragment, "fragment");
+                fragmentTransaction.commit();
                 break;
             case R.id.nav_my_rooms:
                 /*try {

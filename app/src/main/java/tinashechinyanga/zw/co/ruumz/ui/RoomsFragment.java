@@ -331,16 +331,3 @@ public class RoomsFragment extends Fragment {
         return false;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
