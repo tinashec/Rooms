@@ -36,11 +36,7 @@ public class RoomDetailActivity extends AppCompatActivity implements RoomImageOn
     private RoomImagesPagerAdapter mRoomImageAdapter;
     private TextView mPropertyType, mSharedOrNot, mSuburb, mCity;
     private ImageView mPropertyTypeImage, mLocationImage;
-    private TextView mBedrooms;
-    private TextView mBathrooms;
-    private TextView mToilets;
-    private TextView mRentAmount, mInclusiveOfRentOrNot, mDepositAmount;
-    private TextView mMoveInDate;
+    private TextView mBedrooms, mBathrooms, mToilets, mRentAmount, mInclusiveOfRentOrNot, mDepositAmount, mMoveInDate;
     private boolean mBIC, mOwnEntrance, mOwnToilet, mKitchen, mParking, mWifi, mSecure, mFurnished,
                     mBorehole, mPrepaidZesa, mFittedWardrobe, mPrepaidWater;
 
