@@ -1,228 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:id="@+id/details_amenities_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="20dp"
-    android:weightSum="1"
     android:layout_gravity="center_horizontal"
     android:background="@drawable/border_bottom_top"
-    android:id="@+id/details_amenities_layout"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:weightSum="1"
     tools:showIn="@layout/fragment_add_location">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:baselineAligned="false">
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
         <RelativeLayout
+            android:id="@+id/room_bic_layoutid"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:clickable="true"
             android:paddingTop="5dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
                 android:id="@+id/add_room_bic_imageview"
-                android:src="@mipmap/ic_bic"
-                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+                android:padding="5dp"
+                android:src="@mipmap/ic_bic" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/add_room_bic_amenity"
                 android:id="@+id/add_room_bic_label"
-                android:textSize="16sp"
-                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/add_room_bic_imageview"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/add_room_bic_imageview" />
+                android:gravity="center"
+                android:text="@string/add_room_bic_amenity"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/room_entrance_layoutid"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingTop="5dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
                 android:id="@+id/add_room_entrance_imageview"
-                android:src="@mipmap/ic_entrance"
-                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+                android:padding="5dp"
+                android:src="@mipmap/ic_entrance" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/add_room_entrance_amenity"
                 android:id="@+id/add_room_entrance_label"
-                android:textSize="16sp"
-                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/add_room_entrance_amenity"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/room_toilet_layoutid"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingTop="5dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
                 android:id="@+id/add_room_toilet_imageview"
-                android:src="@mipmap/ic_toilet"
-                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+                android:padding="5dp"
+                android:src="@mipmap/ic_toilet" />
 
             <TextView
+                android:id="@+id/add_room_toilet_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/add_room_toilet_amenity"
-                android:id="@+id/add_room_toilet_label"
-                android:textSize="16sp"
-                android:gravity="center"
                 android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/add_room_toilet_amenity"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/room_kitchen_layoutid"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingTop="5dp">
 
             <ImageView
+                android:id="@+id/add_room_kitchen_imageview"
                 android:layout_width="wrap_content"
                 android:layout_height="38dp"
-                android:id="@+id/add_room_kitchen_imageview"
-                android:src="@mipmap/ic_kitchen"
-                android:padding="5dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+                android:padding="5dp"
+                android:src="@mipmap/ic_kitchen" />
 
             <TextView
+                android:id="@+id/add_room_kitchen_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/add_room_kitchen_amenity"
-                android:id="@+id/add_room_kitchen_label"
-                android:textSize="16sp"
-                android:gravity="center"
                 android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/add_room_kitchen_amenity"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp" />
         </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
         android:baselineAligned="false"
-        android:layout_marginTop="8dp">
+        android:orientation="horizontal">
 
         <RelativeLayout
+            android:id="@+id/room_parking_layoutid"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingTop="5dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
                 android:id="@+id/add_room_parking_imageview"
-                android:src="@mipmap/ic_parking"
-                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+                android:padding="5dp"
+                android:src="@mipmap/ic_parking" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/add_room_parking_amenity"
                 android:id="@+id/add_room_parking_label"
-                android:textSize="16sp"
-                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/add_room_parking_imageview"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/add_room_parking_imageview" />
+                android:gravity="center"
+                android:text="@string/add_room_parking_amenity"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/room_wifi_layoutid"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingTop="5dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
                 android:id="@+id/add_room_wifi_imageview"
-                android:src="@mipmap/ic_wi_fi"
-                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+                android:padding="5dp"
+                android:src="@mipmap/ic_wi_fi" />
 
             <TextView
+                android:id="@+id/add_room_wifi_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/add_room_wifi_amenity"
-                android:id="@+id/add_room_wifi_label"
-                android:textSize="16sp"
+                android:layout_below="@+id/add_room_wifi_imageview"
+                android:layout_centerHorizontal="true"
                 android:gravity="center"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
+                android:text="@string/add_room_wifi_amenity"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/room_security_layoutid"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingTop="5dp">
 
             <ImageView
+                android:id="@+id/add_room_secure_imageview"
                 android:layout_width="wrap_content"
                 android:layout_height="38dp"
-                android:id="@+id/add_room_secure_imageview"
-                android:src="@mipmap/ic_secure"
-                android:padding="5dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+                android:padding="5dp"
+                android:src="@mipmap/ic_secure" />
 
             <TextView
+                android:id="@+id/add_room_secure_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/add_room_secure_amenity"
-                android:id="@+id/add_room_secure_label"
-                android:textSize="16sp"
-                android:gravity="center"
                 android:layout_below="@+id/add_room_secure_imageview"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/add_room_secure_amenity"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/room_furnished_layoutid"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -234,20 +244,20 @@
                 android:layout_height="38dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
-                android:src="@mipmap/ic_furnished"
-                android:padding="5dp" />
+                android:padding="5dp"
+                android:src="@mipmap/ic_furnished" />
 
             <TextView
+                android:id="@+id/add_room_furnished_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/add_room_furnished_amenity"
-                android:id="@+id/add_room_furnished_label"
-                android:textSize="16sp"
-                android:gravity="center"
                 android:layout_below="@+id/add_room_furnished_imageview"
-                android:layout_centerHorizontal="true" />
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                android:text="@string/add_room_furnished_amenity"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp" />
 
         </RelativeLayout>
     </LinearLayout>
@@ -255,121 +265,128 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
         android:baselineAligned="false"
-        android:layout_marginTop="5dp">
+        android:orientation="horizontal">
 
         <RelativeLayout
+            android:id="@+id/room_borehole_layoutid"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingTop="5dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
                 android:id="@+id/add_room_borehole_imageview"
-                android:src="@mipmap/ic_borehole"
-                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+                android:padding="5dp"
+                android:src="@mipmap/ic_borehole" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/add_room_borehole_amenity"
                 android:id="@+id/add_room_borehole_label"
-                android:textSize="16sp"
-                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/add_room_borehole_imageview"
                 android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/add_room_borehole_amenity"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp" />
 
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/room_prepaidZesa_layoutid"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingTop="5dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
                 android:id="@+id/add_room_prezesa_imageview"
-                android:src="@mipmap/ic_zesa"
-                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+                android:padding="5dp"
+                android:src="@mipmap/ic_zesa" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/add_room_zesa_amenity"
                 android:id="@+id/add_room_prezesa_label"
-                android:textSize="16sp"
-                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/add_room_prezesa_imageview"
                 android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/add_room_zesa_amenity"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/room_fittedWardrobe_layoutid"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingTop="5dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
                 android:id="@+id/add_room_wardrobe_imageview"
-                android:src="@mipmap/ic_wardrobe"
-                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+                android:padding="5dp"
+                android:src="@mipmap/ic_wardrobe" />
 
             <TextView
+                android:id="@+id/add_room_wardrobe_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_below="@+id/add_room_wardrobe_imageview"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:gravity="center|center_horizontal|center_vertical"
                 android:text="@string/add_room_wardrobe_amenity"
-                android:id="@+id/add_room_wardrobe_label"
-                android:textSize="16sp"
-                android:gravity="center"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/room_prepaidWater_layoutid"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingTop="5dp">
 
             <ImageView
+                android:id="@+id/add_room_prewater_imageview"
                 android:layout_width="wrap_content"
                 android:layout_height="38dp"
-                android:id="@+id/add_room_prewater_imageview"
-                android:src="@mipmap/ic_prewater"
-                android:padding="5dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                style="@style/Base.Widget.AppCompat.Button.Borderless" />
+                android:padding="5dp"
+                android:src="@mipmap/ic_prewater" />
 
             <TextView
+                android:id="@+id/add_room_prewater_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/add_room_water_amenity"
-                android:id="@+id/add_room_prewater_label"
-                android:textSize="16sp"
-                android:gravity="center"
+                android:layout_below="@+id/add_room_prewater_imageview"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/add_room_prewater_imageview" />
+                android:gravity="center"
+                android:text="@string/add_room_water_amenity"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="14sp" />
         </RelativeLayout>
     </LinearLayout>
 

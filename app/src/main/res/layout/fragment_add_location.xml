@@ -126,112 +126,116 @@
         <include layout="@layout/amenities_selection_layout" />
 
         <TextView
+            android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_gravity="center|left"
+            android:layout_marginTop="10dp"
             android:text="Preferences"
-            android:id="@+id/textView11"
-            android:layout_gravity="center|left" />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/border"
-            android:layout_marginBottom="10dp"
-            android:weightSum="1" >
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:weightSum="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
                 android:baselineAligned="false"
-                android:layout_marginTop="5dp">
+                android:orientation="horizontal">
 
                 <RelativeLayout
+                    android:id="@+id/room_smallFamily_layoutid"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:paddingTop="5dp" >
+                    android:paddingTop="5dp">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="38dp"
                         android:id="@+id/add_room_fam_imageview"
-                        android:src="@mipmap/ic_fam"
-                        android:padding="5dp"
-                        style="@style/Base.Widget.AppCompat.Button.Borderless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
                         android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true" />
+                        android:layout_centerHorizontal="true"
+                        android:padding="5dp"
+                        android:src="@mipmap/ic_fam" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/add_room_family_amenity"
                         android:id="@+id/add_room_fam_label"
-                        android:textSize="16sp"
-                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_below="@+id/add_room_fam_imageview"
-                        android:layout_centerHorizontal="true" />
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center|center_horizontal|center_vertical"
+                        android:text="@string/add_room_family_amenity"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="14sp" />
 
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/room_female_layoutid"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:paddingTop="5dp" >
+                    android:paddingTop="5dp">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="38dp"
                         android:id="@+id/add_room_female_imageview"
-                        android:src="@mipmap/ic_female"
-                        android:padding="5dp"
-                        style="@style/Base.Widget.AppCompat.Button.Borderless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
                         android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true" />
+                        android:layout_centerHorizontal="true"
+                        android:padding="5dp"
+                        android:src="@mipmap/ic_female" />
 
                     <TextView
+                        android:id="@+id/add_room_female_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/add_room_female_preference"
-                        android:id="@+id/add_room_female_label"
-                        android:textSize="16sp"
-                        android:gravity="center"
                         android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true" />
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center|center_horizontal|center_vertical"
+                        android:text="@string/add_room_female_preference"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="14sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/room_male_layoutid"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:paddingTop="5dp" >
+                    android:paddingTop="5dp">
 
                     <ImageView
+                        android:id="@+id/add_room_male_imageview"
                         android:layout_width="wrap_content"
                         android:layout_height="38dp"
-                        android:id="@+id/add_room_male_imageview"
-                        android:src="@mipmap/ic_male"
-                        android:padding="5dp"
-                        style="@style/Base.Widget.AppCompat.Button.Borderless"
                         android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true" />
+                        android:layout_centerHorizontal="true"
+                        android:padding="5dp"
+                        android:src="@mipmap/ic_male" />
 
                     <TextView
+                        android:id="@+id/add_room_male_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/add_room_male_preference"
-                        android:id="@+id/add_room_male_label"
-                        android:textSize="16sp"
-                        android:gravity="center"
                         android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true" />
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:text="@string/add_room_male_preference"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="14spgit" />
                 </RelativeLayout>
 
             </LinearLayout>
@@ -239,94 +243,98 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
                 android:baselineAligned="false"
-                android:layout_marginTop="8dp">
+                android:orientation="horizontal">
 
                 <RelativeLayout
+                    android:id="@+id/room_sober_layoutid"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:paddingTop="5dp" >
+                    android:paddingTop="5dp">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="38dp"
                         android:id="@+id/add_room_sober_imageview"
-                        android:src="@mipmap/ic_sober"
-                        android:padding="5dp"
-                        style="@style/Base.Widget.AppCompat.Button.Borderless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
                         android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true" />
+                        android:layout_centerHorizontal="true"
+                        android:padding="5dp"
+                        android:src="@mipmap/ic_sober" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/add_room_habits_amenity"
                         android:id="@+id/add_room_sober_label"
-                        android:textSize="16sp"
-                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_below="@+id/add_room_sober_imageview"
-                        android:layout_centerHorizontal="true" />
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:text="@string/add_room_habits_amenity"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="14spgit" />
 
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/room_professional_layoutid"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:paddingTop="5dp" >
+                    android:paddingTop="5dp">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="38dp"
                         android:id="@+id/add_room_pro_imageview"
-                        android:src="@mipmap/ic_pro"
-                        android:padding="5dp"
-                        style="@style/Base.Widget.AppCompat.Button.Borderless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
                         android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true" />
+                        android:layout_centerHorizontal="true"
+                        android:padding="5dp"
+                        android:src="@mipmap/ic_pro" />
 
                     <TextView
+                        android:id="@+id/add_room_pro_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/add_room_professional_amenity"
-                        android:id="@+id/add_room_pro_label"
-                        android:textSize="16sp"
-                        android:gravity="center"
                         android:layout_below="@+id/add_room_pro_imageview"
-                        android:layout_alignRight="@+id/add_room_pro_imageview"
-                        android:layout_alignEnd="@+id/add_room_pro_imageview" />
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="2dp"
+                        android:gravity="center|center_horizontal|center_vertical"
+                        android:text="@string/add_room_professional_amenity"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="14spgit" />
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/room_couple_layoutid"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:paddingTop="5dp" >
+                    android:paddingTop="5dp">
 
                     <ImageView
+                        android:id="@+id/add_room_couple_imageview"
                         android:layout_width="wrap_content"
                         android:layout_height="38dp"
-                        android:id="@+id/add_room_couple_imageview"
-                        android:src="@mipmap/ic_couple"
-                        android:padding="5dp"
-                        style="@style/Base.Widget.AppCompat.Button.Borderless"
                         android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true" />
+                        android:layout_centerHorizontal="true"
+                        android:padding="5dp"
+                        android:src="@mipmap/ic_couple" />
 
                     <TextView
+                        android:id="@+id/add_room_couple_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/add_room_couple_amenity"
-                        android:id="@+id/add_room_couple_label"
-                        android:textSize="16sp"
-                        android:gravity="center"
                         android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true" />
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:text="@string/add_room_couple_amenity"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="14spgit" />
                 </RelativeLayout>
             </LinearLayout>
 
