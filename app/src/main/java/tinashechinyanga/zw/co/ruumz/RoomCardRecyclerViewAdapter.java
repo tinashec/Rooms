@@ -52,10 +52,10 @@ public class RoomCardRecyclerViewAdapter extends PagedListAdapter<ParseObject, R
 //        this.mRooms = rooms;
 //    }
 //
-//    public RoomCardRecyclerViewAdapter(List<ParseObject> mRooms, String section) {
-//        this.mRooms = mRooms;
-//        this.mSection = section;
-//    }
+    public RoomCardRecyclerViewAdapter(String section) {
+        this();
+        this.mSection = section;
+    }
 
     public class RoomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         protected ImageView mRoomImage;
@@ -84,6 +84,7 @@ public class RoomCardRecyclerViewAdapter extends PagedListAdapter<ParseObject, R
 
         @Override
         public void onClick(View v) {
+            Log.i("Click event: ", "My room has been clicked.");
             int pos = getAdapterPosition();
             Intent intent;
             ParseObject room = getCurrentList().get(pos);
@@ -93,8 +94,10 @@ public class RoomCardRecyclerViewAdapter extends PagedListAdapter<ParseObject, R
             Toast.makeText(context, room.getString("roomSuburb"), Toast.LENGTH_LONG).show();
             //fork to corresponding activity
             if(mSection != null) {
+                Log.i("mSection text: ", "mSection text is: " + mSection);
                 if (mSection.equals("My Rooms")) {
                     //start my rooms detail activity
+                    Log.i("My room: ", "Room selected " + roomProxy.getObjectId());
                     intent = new Intent(context, MyRoomDetailActivity.class);
                     //add the room to the intent
                     intent.putExtra("currentSelectedRoomObject", room);
@@ -103,6 +106,7 @@ public class RoomCardRecyclerViewAdapter extends PagedListAdapter<ParseObject, R
                     context.startActivity(intent);
                 }
             }else {
+                Log.i("My room:", "RoomDetailActivity loaded for MyRoomDetail Activity instead");
                 intent = new Intent(context, RoomDetailActivity.class);
                 //add the proxy to the intent
                 intent.putExtra("roomObject", roomProxy);

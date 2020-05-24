@@ -33,9 +33,12 @@
 
     <include layout="@layout/content_my_room_detail" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton android:id="@+id/edit_room_fab"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom" android:layout_margin="@dimen/fab_margin"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/edit_room_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
         android:src="@mipmap/ic_mode_edit_white_48dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -103,7 +103,7 @@ public class MyRoomsFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         //intialise and set the adapter
-        roomAdapter = new RoomCardRecyclerViewAdapter();
+        roomAdapter = new RoomCardRecyclerViewAdapter("My Rooms");
         recyclerView.setAdapter(roomAdapter);
 
         //connect the view model
