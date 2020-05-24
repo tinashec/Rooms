@@ -235,7 +235,7 @@
                         android:gravity="center"
                         android:text="@string/add_room_male_preference"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="14spgit" />
+                        android:textSize="14sp" />
                 </RelativeLayout>
 
             </LinearLayout>
@@ -273,7 +273,7 @@
                         android:gravity="center"
                         android:text="@string/add_room_habits_amenity"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="14spgit" />
+                        android:textSize="14sp" />
 
                 </RelativeLayout>
 
@@ -305,7 +305,7 @@
                         android:gravity="center|center_horizontal|center_vertical"
                         android:text="@string/add_room_professional_amenity"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="14spgit" />
+                        android:textSize="14sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -334,7 +334,7 @@
                         android:gravity="center"
                         android:text="@string/add_room_couple_amenity"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="14spgit" />
+                        android:textSize="14sp" />
                 </RelativeLayout>
             </LinearLayout>
 
