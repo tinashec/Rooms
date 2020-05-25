@@ -130,6 +130,7 @@ public class MyRoomsFragment extends Fragment {
             @Override
             public void onRefresh() {
 //                fetchUpdatedRooms();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
         //configure the swipe refresh colours
