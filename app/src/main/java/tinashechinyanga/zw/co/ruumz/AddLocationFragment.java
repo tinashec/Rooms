@@ -6,12 +6,13 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,9 +36,14 @@ public class AddLocationFragment extends Fragment {
     //imageviews
     private EditText mCityTown, mSuburb;
 
-    private ImageView mBic, mOwnEntrance, mOwnToilet, mKitchen, mParking, mWifi, mSecure, mFurnished,
-            mBorehole, mPrepaidZesa, mWardrobe, mPrepaidWater, mFam, mFemale, mMale, mSoberHabit,
-            mProfessional, mCouple;
+    private RelativeLayout bicLayout, ownEntrancelayout, ownToiletLayout, kitchenLayout, parkingLayout,
+            wifiLayout, securityLayout, furnishedLayout, boreholeLayout, prepaidZesaLayout, fittedWardrobeLayout,
+            prepaidWaterLayout, smallFamilyPrefLayout, femalePrefLayout, malePrefLayout, soberHabitsPrefLayout, professionalPrefLayout,
+            couplePrefLayout;
+
+//    private ImageView mBic, mOwnEntrance, mOwnToilet, mKitchen, mParking, mWifi, mSecure, mFurnished,
+//            mBorehole, mPrepaidZesa, mWardrobe, mPrepaidWater, mFam, mFemale, mMale, mSoberHabit,
+//            mProfessional, mCouple;
 
     //labels
     private TextView mBicLabel, mOwnEntranceLabel, mOwnToiletLabel, mKitchenLabel, mParkingLabel,
@@ -108,50 +114,179 @@ public class AddLocationFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_add_location, container, false);
 
         //attach the views to the fragment
-        mCityTown = (EditText)rootView.findViewById(R.id.add_room_town_edit_text);
-        mSuburb = (EditText)rootView.findViewById(R.id.add_room_suburb_edit_text);
+        mCityTown = rootView.findViewById(R.id.add_room_town_edit_text);
+        mSuburb = rootView.findViewById(R.id.add_room_suburb_edit_text);
 
-        //imageviews
-        mBic = (ImageView)rootView.findViewById(R.id.add_room_bic_imageview);
-        mOwnEntrance = (ImageView)rootView.findViewById(R.id.add_room_entrance_imageview);
-        mOwnToilet = (ImageView)rootView.findViewById(R.id.add_room_toilet_imageview);
-        mKitchen = (ImageView)rootView.findViewById(R.id.add_room_kitchen_imageview);
-        mParking = (ImageView)rootView.findViewById(R.id.add_room_parking_imageview);
-        mWifi = (ImageView)rootView.findViewById(R.id.add_room_wifi_imageview);
-        mSecure = (ImageView)rootView.findViewById(R.id.add_room_secure_imageview);
-        mFurnished = (ImageView)rootView.findViewById(R.id.add_room_furnished_imageview);
-        mBorehole = (ImageView)rootView.findViewById(R.id.add_room_borehole_imageview);
-        mPrepaidZesa = (ImageView)rootView.findViewById(R.id.add_room_prezesa_imageview);
-        mWardrobe = (ImageView)rootView.findViewById(R.id.add_room_wardrobe_imageview);
-        mPrepaidWater = (ImageView)rootView.findViewById(R.id.add_room_prewater_imageview);
-        mFam = (ImageView)rootView.findViewById(R.id.add_room_fam_imageview);
-        mFemale = (ImageView)rootView.findViewById(R.id.add_room_female_imageview);
-        mMale = (ImageView)rootView.findViewById(R.id.add_room_male_imageview);
-        mSoberHabit = (ImageView)rootView.findViewById(R.id.add_room_sober_imageview);
-        mProfessional = (ImageView)rootView.findViewById(R.id.add_room_pro_imageview);
-        mCouple = (ImageView)rootView.findViewById(R.id.add_room_couple_imageview);
+        bicLayout = rootView.findViewById(R.id.room_bic_layoutid);
+        ownEntrancelayout = rootView.findViewById(R.id.room_entrance_layoutid);
+        ownToiletLayout = rootView.findViewById(R.id.room_toilet_layoutid);
+        kitchenLayout = rootView.findViewById(R.id.room_kitchen_layoutid);
+        parkingLayout = rootView.findViewById(R.id.room_parking_layoutid);
+        wifiLayout = rootView.findViewById(R.id.room_wifi_layoutid);
+        securityLayout = rootView.findViewById(R.id.room_security_layoutid);
+        furnishedLayout = rootView.findViewById(R.id.room_furnished_layoutid);
+        boreholeLayout = rootView.findViewById(R.id.room_borehole_layoutid);
+        prepaidZesaLayout = rootView.findViewById(R.id.room_prepaidZesa_layoutid);
+        fittedWardrobeLayout = rootView.findViewById(R.id.room_fittedWardrobe_layoutid);
+        prepaidWaterLayout = rootView.findViewById(R.id.room_prepaidWater_layoutid);
+        smallFamilyPrefLayout = rootView.findViewById(R.id.room_smallFamily_layoutid);
+        femalePrefLayout = rootView.findViewById(R.id.room_female_layoutid);
+        malePrefLayout = rootView.findViewById(R.id.room_male_layoutid);
+        soberHabitsPrefLayout = rootView.findViewById(R.id.room_sober_layoutid);
+        professionalPrefLayout = rootView.findViewById(R.id.room_professional_layoutid);
+        couplePrefLayout = rootView.findViewById(R.id.room_couple_layoutid);
 
         //labels
-        mBicLabel = (TextView)rootView.findViewById(R.id.add_room_bic_label);
-        mOwnEntranceLabel = (TextView)rootView.findViewById(R.id.add_room_entrance_label);
-        mOwnToiletLabel = (TextView)rootView.findViewById(R.id.add_room_toilet_label);
-        mKitchenLabel = (TextView)rootView.findViewById(R.id.add_room_kitchen_label);
-        mParkingLabel = (TextView)rootView.findViewById(R.id.add_room_parking_label);
-        mWifiLabel = (TextView)rootView.findViewById(R.id.add_room_wifi_label);
-        mSecureLabel = (TextView)rootView.findViewById(R.id.add_room_secure_label);
-        mFurnishedLabel = (TextView)rootView.findViewById(R.id.add_room_furnished_label);
-        mBoreholeLabel = (TextView)rootView.findViewById(R.id.add_room_borehole_label);
-        mPrepaidZesaLabel = (TextView)rootView.findViewById(R.id.add_room_prezesa_label);
-        mWardrobeLabel = (TextView)rootView.findViewById(R.id.add_room_wardrobe_label);
-        mPrepaidWaterLabel = (TextView)rootView.findViewById(R.id.add_room_prewater_label);
-        mFamLabel = (TextView)rootView.findViewById(R.id.add_room_fam_label);
-        mFemaleLabel = (TextView)rootView.findViewById(R.id.add_room_female_label);
-        mMaleLabel = (TextView)rootView.findViewById(R.id.add_room_male_label);
-        mSoberHabitLabel = (TextView)rootView.findViewById(R.id.add_room_sober_label);
-        mProfessionalLabel = (TextView)rootView.findViewById(R.id.add_room_pro_label);
-        mCoupleLabel = (TextView)rootView.findViewById(R.id.add_room_couple_label);
+        mBicLabel = rootView.findViewById(R.id.add_room_bic_label);
+        mOwnEntranceLabel = rootView.findViewById(R.id.add_room_entrance_label);
+        mOwnToiletLabel = rootView.findViewById(R.id.add_room_toilet_label);
+        mKitchenLabel = rootView.findViewById(R.id.add_room_kitchen_label);
+        mParkingLabel = rootView.findViewById(R.id.add_room_parking_label);
+        mWifiLabel = rootView.findViewById(R.id.add_room_wifi_label);
+        mSecureLabel = rootView.findViewById(R.id.add_room_secure_label);
+        mFurnishedLabel = rootView.findViewById(R.id.add_room_furnished_label);
+        mBoreholeLabel = rootView.findViewById(R.id.add_room_borehole_label);
+        mPrepaidZesaLabel = rootView.findViewById(R.id.add_room_prezesa_label);
+        mWardrobeLabel = rootView.findViewById(R.id.add_room_wardrobe_label);
+        mPrepaidWaterLabel = rootView.findViewById(R.id.add_room_prewater_label);
+        mFamLabel = rootView.findViewById(R.id.add_room_fam_label);
+        mFemaleLabel = rootView.findViewById(R.id.add_room_female_label);
+        mMaleLabel = rootView.findViewById(R.id.add_room_male_label);
+        mSoberHabitLabel = rootView.findViewById(R.id.add_room_sober_label);
+        mProfessionalLabel = rootView.findViewById(R.id.add_room_pro_label);
+        mCoupleLabel = rootView.findViewById(R.id.add_room_couple_label);
 
-        //imageview and label actions
+        bicLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard();
+                changeLabelColour(mBicLabel);
+            }
+        });
+
+        ownEntrancelayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard();
+                changeLabelColour(mOwnEntranceLabel);
+            }
+        });
+        ownToiletLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard();
+                changeLabelColour(mOwnToiletLabel);
+            }
+        });
+        kitchenLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard();
+                changeLabelColour(mKitchenLabel);
+            }
+        });
+        parkingLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard();
+                changeLabelColour(mParkingLabel);
+            }
+        });
+        wifiLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard();
+                changeLabelColour(mWifiLabel);
+            }
+        });
+        securityLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard();
+                changeLabelColour(mSecureLabel);
+            }
+        });
+        furnishedLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard();
+                changeLabelColour(mFurnishedLabel);
+            }
+        });
+        boreholeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard();
+                changeLabelColour(mBoreholeLabel);
+            }
+        });
+        prepaidZesaLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard();
+                changeLabelColour(mPrepaidZesaLabel);
+            }
+        });
+        fittedWardrobeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard();
+                changeLabelColour(mWardrobeLabel);
+            }
+        });
+        prepaidWaterLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard();
+                changeLabelColour(mPrepaidWaterLabel);
+            }
+        });
+        smallFamilyPrefLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard();
+                changeLabelColour(mFamLabel);
+            }
+        });
+        femalePrefLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard();
+                changeLabelColour(mFemaleLabel);
+            }
+        });
+        malePrefLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard();
+                changeLabelColour(mMaleLabel);
+            }
+        });
+        soberHabitsPrefLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard();
+                changeLabelColour(mSoberHabitLabel);
+            }
+        });
+        professionalPrefLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard();
+                changeLabelColour(mProfessionalLabel);
+            }
+        });
+        couplePrefLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard();
+                changeLabelColour(mCoupleLabel);
+            }
+        });
+
+
+
+        /*imageview and label actions
         mBic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,130 +301,130 @@ public class AddLocationFragment extends Fragment {
             public void onClick(View v) {
                 changeLabelColour(mBicLabel);
             }
-        });
-        mOwnEntrance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKeyBoard();
-                changeLabelColour(mOwnEntranceLabel);
-            }
-        });
-        mOwnToilet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKeyBoard();
-                changeLabelColour(mOwnToiletLabel);
-            }
-        });
-        mKitchen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKeyBoard();
-                changeLabelColour(mKitchenLabel);
-            }
-        });
-        mParking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKeyBoard();
-                changeLabelColour(mParkingLabel);
-            }
-        });
-        mWifi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKeyBoard();
-                changeLabelColour(mWifiLabel);
-            }
-        });
-        mSecure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKeyBoard();
-                changeLabelColour(mSecureLabel);
-            }
-        });
-        mFurnished.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKeyBoard();
-                changeLabelColour(mFurnishedLabel);
-            }
-        });
-        mBorehole.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKeyBoard();
-                changeLabelColour(mBoreholeLabel);
-            }
-        });
-        mPrepaidZesa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKeyBoard();
-                changeLabelColour(mPrepaidZesaLabel);
-            }
-        });
-        mWardrobe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKeyBoard();
-                changeLabelColour(mWardrobeLabel);
-            }
-        });
-        mPrepaidWater.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKeyBoard();
-                changeLabelColour(mPrepaidWaterLabel);
-            }
-        });
-        mFam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKeyBoard();
-                changeLabelColour(mFamLabel);
-            }
-        });
-        mFemale.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKeyBoard();
-                changeLabelColour(mFemaleLabel);
-            }
-        });
-        mMale.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKeyBoard();
-                changeLabelColour(mMaleLabel);
-            }
-        });
-        mSoberHabit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKeyBoard();
-                //call method, change label colour
-                changeLabelColour(mSoberHabitLabel);
-            }
-        });
-        mProfessional.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKeyBoard();
-                changeLabelColour(mProfessionalLabel);
-            }
-        });
-        mCouple.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKeyBoard();
-                changeLabelColour(mCoupleLabel);
-            }
-        });
+        });*/
+//        mOwnEntrance.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                hideKeyBoard();
+//                changeLabelColour(mOwnEntranceLabel);
+//            }
+//        });
+//        mOwnToilet.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                hideKeyBoard();
+//                changeLabelColour(mOwnToiletLabel);
+//            }
+//        });
+//        mKitchen.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                hideKeyBoard();
+//                changeLabelColour(mKitchenLabel);
+//            }
+//        });
+//        mParking.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                hideKeyBoard();
+//                changeLabelColour(mParkingLabel);
+//            }
+//        });
+//        mWifi.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                hideKeyBoard();
+//                changeLabelColour(mWifiLabel);
+//            }
+//        });
+//        mSecure.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                hideKeyBoard();
+//                changeLabelColour(mSecureLabel);
+//            }
+//        });
+//        mFurnished.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                hideKeyBoard();
+//                changeLabelColour(mFurnishedLabel);
+//            }
+//        });
+//        mBorehole.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                hideKeyBoard();
+//                changeLabelColour(mBoreholeLabel);
+//            }
+//        });
+//        mPrepaidZesa.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                hideKeyBoard();
+//                changeLabelColour(mPrepaidZesaLabel);
+//            }
+//        });
+//        mWardrobe.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                hideKeyBoard();
+//                changeLabelColour(mWardrobeLabel);
+//            }
+//        });
+//        mPrepaidWater.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                hideKeyBoard();
+//                changeLabelColour(mPrepaidWaterLabel);
+//            }
+//        });
+//        mFam.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                hideKeyBoard();
+//                changeLabelColour(mFamLabel);
+//            }
+//        });
+//        mFemale.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                hideKeyBoard();
+//                changeLabelColour(mFemaleLabel);
+//            }
+//        });
+//        mMale.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                hideKeyBoard();
+//                changeLabelColour(mMaleLabel);
+//            }
+//        });
+//        mSoberHabit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                hideKeyBoard();
+//                //call method, change label colour
+//                changeLabelColour(mSoberHabitLabel);
+//            }
+//        });
+//        mProfessional.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                hideKeyBoard();
+//                changeLabelColour(mProfessionalLabel);
+//            }
+//        });
+//        mCouple.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                hideKeyBoard();
+//                changeLabelColour(mCoupleLabel);
+//            }
+//        });
 
 
-        mAddRoomStep3 = (FloatingActionButton)rootView.findViewById(R.id.add_room_step3_fab);
+        mAddRoomStep3 = rootView.findViewById(R.id.add_room_step3_fab);
 
         mAddRoomStep3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -310,8 +445,10 @@ public class AddLocationFragment extends Fragment {
                 if(mBicLabel.getCurrentTextColor() == ContextCompat.getColor(getContext(), R.color.colorAccent)){
                     //get value, set to true
                     mGetLocAmenitiesPrefOnNext.passBIC(true);
+                    Log.i("BIC value:", "Value is true");
                 }else{
                     mGetLocAmenitiesPrefOnNext.passBIC(false);
+                    Log.i("BIC value:", "Value is false");
                 }
 
                 if (mOwnEntranceLabel.getCurrentTextColor() == ContextCompat.getColor(getContext(), R.color.colorAccent)) {
@@ -426,7 +563,7 @@ public class AddLocationFragment extends Fragment {
     private void hideKeyBoard() {
         //hide the keyboard
         InputMethodManager inputMethodManager = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(mBic.getWindowToken(), 0);
+        inputMethodManager.hideSoftInputFromWindow(mBicLabel.getWindowToken(), 0);
     }
 
     private void changeLabelColour(TextView mLabel) {

@@ -70,7 +70,7 @@
                 android:textSize="20sp"
                 android:layout_gravity="bottom"
                 android:hint="150"
-                android:text="Details"
+                android:text="Room Details"
                 android:layout_centerVertical="true"
                 android:layout_alignParentStart="true" />
 
@@ -169,7 +169,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Features"
+                android:text="Room Features"
                 android:id="@+id/details_features_label"
                 android:layout_column="0"
                 android:textColor="#575757"
@@ -529,7 +529,7 @@
                 android:id="@+id/textView20"
                 android:textSize="20sp"
                 android:layout_gravity="bottom"
-                android:text="Amenities"
+                android:text="Room Amenities"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -901,7 +901,7 @@
                 android:id="@+id/textView29"
                 android:textSize="20sp"
                 android:layout_gravity="bottom"
-                android:text="Preferences"
+                android:text="Your Preferences"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />

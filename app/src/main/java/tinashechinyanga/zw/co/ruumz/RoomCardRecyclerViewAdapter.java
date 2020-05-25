@@ -11,6 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.paging.PagedList;
+import androidx.paging.PagedListAdapter;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -23,16 +27,33 @@ import java.util.List;
 /**
  * Created by Tinashe on 2/22/2016.
  */
-public class RoomCardRecyclerViewAdapter extends RecyclerView.Adapter<RoomCardRecyclerViewAdapter.RoomViewHolder> {
+public class RoomCardRecyclerViewAdapter extends PagedListAdapter<ParseObject, RoomCardRecyclerViewAdapter.RoomViewHolder> {
 
     private List<ParseObject> mRooms = new ArrayList<>();
+    private ParseObject room;
     private String mSection;
-    RoomCardRecyclerViewAdapter(List<ParseObject> rooms){
-        this.mRooms = rooms;
+
+    public RoomCardRecyclerViewAdapter(){
+        super(DIFF_CALLBACK);
     }
 
-    public RoomCardRecyclerViewAdapter(List<ParseObject> mRooms, String section) {
-        this.mRooms = mRooms;
+    public static final DiffUtil.ItemCallback<ParseObject> DIFF_CALLBACK = new DiffUtil.ItemCallback<ParseObject>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull ParseObject oldItem, @NonNull ParseObject newItem) {
+            return oldItem.getObjectId() == newItem.getObjectId();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull ParseObject oldItem, @NonNull ParseObject newItem) {
+            return (oldItem.getUpdatedAt().equals(newItem.getUpdatedAt()) && oldItem.getCreatedAt().equals(newItem.getCreatedAt()));
+        }
+    };
+//    RoomCardRecyclerViewAdapter(List<ParseObject> rooms){
+//        this.mRooms = rooms;
+//    }
+//
+    public RoomCardRecyclerViewAdapter(String section) {
+        this();
         this.mSection = section;
     }
 
@@ -63,17 +84,20 @@ public class RoomCardRecyclerViewAdapter extends RecyclerView.Adapter<RoomCardRe
 
         @Override
         public void onClick(View v) {
-            int pos = getLayoutPosition();
+            Log.i("Click event: ", "My room has been clicked.");
+            int pos = getAdapterPosition();
             Intent intent;
-            ParseObject room = mRooms.get(pos);
+            ParseObject room = getCurrentList().get(pos);
 
             //create the ParseObject proxy
             ParseProxyObject roomProxy = new ParseProxyObject(room);
             Toast.makeText(context, room.getString("roomSuburb"), Toast.LENGTH_LONG).show();
             //fork to corresponding activity
             if(mSection != null) {
+                Log.i("mSection text: ", "mSection text is: " + mSection);
                 if (mSection.equals("My Rooms")) {
                     //start my rooms detail activity
+                    Log.i("My room: ", "Room selected " + roomProxy.getObjectId());
                     intent = new Intent(context, MyRoomDetailActivity.class);
                     //add the room to the intent
                     intent.putExtra("currentSelectedRoomObject", room);
@@ -82,6 +106,7 @@ public class RoomCardRecyclerViewAdapter extends RecyclerView.Adapter<RoomCardRe
                     context.startActivity(intent);
                 }
             }else {
+                Log.i("My room:", "RoomDetailActivity loaded for MyRoomDetail Activity instead");
                 intent = new Intent(context, RoomDetailActivity.class);
                 //add the proxy to the intent
                 intent.putExtra("roomObject", roomProxy);
@@ -101,7 +126,7 @@ public class RoomCardRecyclerViewAdapter extends RecyclerView.Adapter<RoomCardRe
 
     @Override
     public void onBindViewHolder(RoomViewHolder holder, int position) {
-        ParseObject room = mRooms.get(position);
+        room = getItem(position);
         holder.mRoomLocation.setText(room.getString("roomSuburb"));
         holder.mRoomPrice.setText(Integer.toString(room.getInt("roomMonthlyRent")));
         holder.mInclusiveOrNot.setText(room.getString("roomRentInclusiveOfBills"));
@@ -138,15 +163,22 @@ public class RoomCardRecyclerViewAdapter extends RecyclerView.Adapter<RoomCardRe
 
     }
 
-    @Override
-    public int getItemCount() {
-        if(mRooms.size() == 0){
-            return 0;
-        }else if (mRooms == null){
-            return 0;
-        }else {
-            return mRooms.size();
-        }
+
+
+//    @Override
+//    public int getItemCount() {
+//        if(mRooms.size() == 0){
+//            return 0;
+//        }else if (mRooms == null){
+//            return 0;
+//        }else {
+//            return mRooms.size();
+//        }
+//    }
+
+    public void addMoreRooms(List<ParseObject> newRooms){
+        mRooms.addAll(newRooms);
+        submitList((PagedList<ParseObject>) mRooms);
     }
 
     //update dataset change

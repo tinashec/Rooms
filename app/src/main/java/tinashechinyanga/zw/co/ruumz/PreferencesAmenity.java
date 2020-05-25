@@ -1,7 +1,7 @@
 package tinashechinyanga.zw.co.ruumz;
 
 /**
- * Created by MUZ0007 on 6/10/2016.
+ * Created by Tinashe on 6/10/2016.
  */
 public class PreferencesAmenity {
     public int getPrefImageView() {

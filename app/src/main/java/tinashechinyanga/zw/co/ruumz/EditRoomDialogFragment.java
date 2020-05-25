@@ -49,6 +49,8 @@ public class EditRoomDialogFragment extends DialogFragment {
                                 //remove the room
                                 removeUsersRoom(selectedRoom);
                                 Toast.makeText(getActivity(), "Room removed, " + (selectedRoom != null ? selectedRoom.getObjectId() : null), Toast.LENGTH_LONG).show();
+                                //1. close current activity
+                                //2. reload the current viewmodel
                                 break;
                             case 1:
                                 /*
@@ -56,6 +58,7 @@ public class EditRoomDialogFragment extends DialogFragment {
                                 * */
                                 //mark room as reserved
                                 //Toast.makeText(getActivity(), "Room reserved", Toast.LENGTH_LONG).show();
+
                                 break;
                             default:
                                 //leave room as is
@@ -78,6 +81,8 @@ public class EditRoomDialogFragment extends DialogFragment {
                    /*
                    * TODO
                    * */
+                    //pop the fragment off the stack and go back to myRooms
+
                 }else {
                     //error
                     Toast.makeText(getActivity(), "Error, " + e.getMessage(), Toast.LENGTH_LONG).show();
