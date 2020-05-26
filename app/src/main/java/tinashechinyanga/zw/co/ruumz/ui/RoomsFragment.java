@@ -110,13 +110,7 @@ public class RoomsFragment extends Fragment {
         //summary viewmodel
         roomSummaryViewModel = ViewModelProviders.of(this).get(RoomSummaryViewModel.class);
         setUpProgressDialog();
-        roomSummaryViewModel.getmAllRooms().observe(this, new Observer<PagedList<ParseObject>>() {
-            @Override
-            public void onChanged(@Nullable PagedList<ParseObject> allRooms) {
-                roomRecyclerViewAdapter.submitList(allRooms);
-                progressDialog.hide();
-            }
-        });
+        getAllRooms();
 
         //check if network is present, then run the query in the background
 //        new DownloadRooms().execute();
@@ -124,13 +118,27 @@ public class RoomsFragment extends Fragment {
         //setup the swipeToRefreshLayout i.e. onSwipeDown, fetch new rooms added
         swipeRefreshLayout.setOnRefreshListener(() -> {
 //            fetchUpdatedRooms();
+            //invalidate datasourceFactory
             roomSummaryViewModel.invalidateRoomSummaryDatasource();
+            //get rooms
+            getAllRooms();
 //            swipeRefreshLayout.setRefreshing(false);
         });
         //configure the swipe refresh colours
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
 
         return rootView;
+    }
+
+    private void getAllRooms() {
+        roomSummaryViewModel.getmAllRooms().observe(this, new Observer<PagedList<ParseObject>>() {
+            @Override
+            public void onChanged(@Nullable PagedList<ParseObject> allRooms) {
+                roomRecyclerViewAdapter.submitList(allRooms);
+                progressDialog.dismiss();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     private void fetchUpdatedRooms() {

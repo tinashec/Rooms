@@ -52,7 +52,7 @@ public class RoomSummaryRepository {
                 .setInitialLoadSizeHint(12)
                 .setPageSize(8).build();
 
-        RoomSummaryDataSourceFactory roomSummaryDataSourceFactory = new RoomSummaryDataSourceFactory();
+        roomSummaryDataSourceFactory = new RoomSummaryDataSourceFactory();
 
         rooms = new LivePagedListBuilder(roomSummaryDataSourceFactory, pagegListConfig).build();
 
