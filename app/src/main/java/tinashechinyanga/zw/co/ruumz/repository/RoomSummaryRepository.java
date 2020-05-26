@@ -43,6 +43,8 @@ public class RoomSummaryRepository {
     private LiveData<PagedList<ParseObject>> rooms;
     private LiveData<PagedList<ParseObject>> currentUserRooms;
 
+    private RoomSummaryDataSourceFactory roomSummaryDataSourceFactory;
+
     public LiveData<PagedList<ParseObject>> getAllRooms(){
 
         PagedList.Config pagegListConfig = new PagedList.Config.Builder().setEnablePlaceholders(false)
@@ -65,7 +67,7 @@ public class RoomSummaryRepository {
 
         Log.i("Current User: ", "Current userID: " + roomOwner);
 
-        RoomSummaryDataSourceFactory roomSummaryDataSourceFactory = new RoomSummaryDataSourceFactory(roomOwner);
+        roomSummaryDataSourceFactory = new RoomSummaryDataSourceFactory(roomOwner);
 
         currentUserRooms = new LivePagedListBuilder(roomSummaryDataSourceFactory, pagedListConfig).build();
 
@@ -74,9 +76,12 @@ public class RoomSummaryRepository {
 
     public void invalidateRoomSummaryDatasource(){
         //datasource.invalidate
-        RoomSummaryDataSourceFactory roomSummaryDataSourceFactory = new RoomSummaryDataSourceFactory();
-        roomSummaryDataSource =  roomSummaryDataSourceFactory.create();
-        roomSummaryDataSource.invalidate();
+        roomSummaryDataSourceFactory.postLiveData.getValue().invalidate();
+    }
+
+    public void invalidateRoomSummaryDatasource(String roomOwner){
+        //datasource.invalidate
+        roomSummaryDataSourceFactory.currentUserRoomsPostLiveData.getValue().invalidate();
     }
 
     public void insert(RoomSummaryEntity roomSummaryEntity) {

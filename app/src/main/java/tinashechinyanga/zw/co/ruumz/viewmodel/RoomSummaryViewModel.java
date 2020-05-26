@@ -10,14 +10,17 @@ import androidx.paging.PagedList;
 import com.parse.ParseObject;
 
 import tinashechinyanga.zw.co.ruumz.entity.RoomSummaryEntity;
+import tinashechinyanga.zw.co.ruumz.repository.RoomSummaryDataSourceFactory;
 import tinashechinyanga.zw.co.ruumz.repository.RoomSummaryRepository;
 
 public class RoomSummaryViewModel extends AndroidViewModel {
     //variable to hold a reference to repository
     private RoomSummaryRepository roomSummaryRepository;
-    //LiveData variable to cache list of words
+    //LiveData variable to cache list of rooms
     private LiveData<PagedList<ParseObject>> mAllRooms;
     private LiveData<PagedList<ParseObject>> mAllCurrentUserRooms;
+
+    RoomSummaryDataSourceFactory roomSummaryDataSourceFactory;
 
     public RoomSummaryViewModel(@NonNull Application application) {
         super(application);
@@ -36,10 +39,15 @@ public class RoomSummaryViewModel extends AndroidViewModel {
         return mAllCurrentUserRooms;
     }
 
-    //invalidate datasource
+    //invalidate rooms datasource
     public void invalidateRoomSummaryDatasource(){
         //datasource.invalidate
         roomSummaryRepository.invalidateRoomSummaryDatasource();
+    }
+
+    //invalidate currentUserRooms datasource
+    public void invalidateCurrentUserDatasource(String currentUserID){
+        roomSummaryRepository.invalidateRoomSummaryDatasource(currentUserID);
     }
 
 

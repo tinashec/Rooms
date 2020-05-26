@@ -125,7 +125,7 @@ public class RoomsFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(() -> {
 //            fetchUpdatedRooms();
             roomSummaryViewModel.invalidateRoomSummaryDatasource();
-            swipeRefreshLayout.setRefreshing(false);
+//            swipeRefreshLayout.setRefreshing(false);
         });
         //configure the swipe refresh colours
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));

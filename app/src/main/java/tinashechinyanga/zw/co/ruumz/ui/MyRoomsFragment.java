@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -34,6 +33,7 @@ import java.util.List;
 
 import tinashechinyanga.zw.co.ruumz.R;
 import tinashechinyanga.zw.co.ruumz.RoomCardRecyclerViewAdapter;
+import tinashechinyanga.zw.co.ruumz.repository.RoomSummaryDataSourceFactory;
 import tinashechinyanga.zw.co.ruumz.viewmodel.RoomSummaryViewModel;
 
 /**
@@ -68,6 +68,9 @@ public class MyRoomsFragment extends Fragment {
 
     //date to track date room last updated
     private Date lastUpdated;
+
+    //datasource factory
+    RoomSummaryDataSourceFactory roomSummaryDataSourceFactory;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -111,14 +114,20 @@ public class MyRoomsFragment extends Fragment {
         setUpProgressDialog();
         //observe the data and update the viewmodel when changes occur in the data
         Log.i("Current User", "Current userId: " + ParseUser.getCurrentUser().getObjectId());
-        myRoomsSummaryViewModel.getmAllCurrentUserRooms(ParseUser.getCurrentUser().getObjectId()).observe(this, new Observer<PagedList<ParseObject>>() {
-            @Override
-            public void onChanged(@Nullable PagedList<ParseObject> currentUserRooms) {
-                //update the UI
-                roomAdapter.submitList(currentUserRooms);
-                progressDialog.dismiss();
-            }
-        });
+//        myRoomsSummaryViewModel.getmAllCurrentUserRooms(ParseUser.getCurrentUser().getObjectId()).observe(this, new Observer<PagedList<ParseObject>>() {
+//            @Override
+//            public void onChanged(@Nullable PagedList<ParseObject> currentUserRooms) {
+//                //* ToDo
+//                //*  if currentUserRooms == 0, show emptyList view, else show the below
+//                //update the UI
+//                roomAdapter.submitList(currentUserRooms);
+//                progressDialog.dismiss();
+//            }
+//        });
+        getAllCurrentUserRooms();
+
+        //get the datasource factory
+//        roomSummaryDataSourceFactory = new RoomSummaryDataSourceFactory(ParseUser.getCurrentUser().getObjectId());
 
         //check if network is present,
         // ToDo:
@@ -130,13 +139,30 @@ public class MyRoomsFragment extends Fragment {
             @Override
             public void onRefresh() {
 //                fetchUpdatedRooms();
-                swipeRefreshLayout.setRefreshing(false);
+                //invalidate datasorucefactory
+                myRoomsSummaryViewModel.invalidateCurrentUserDatasource(ParseUser.getCurrentUser().getObjectId());
+                getAllCurrentUserRooms();
+//                swipeRefreshLayout.setRefreshing(false);
             }
         });
+
+//        getAllCurrentUserRooms();
+
         //configure the swipe refresh colours
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
 
         return rootView;
+    }
+
+    private void getAllCurrentUserRooms() {
+        myRoomsSummaryViewModel.getmAllCurrentUserRooms(ParseUser.getCurrentUser().getObjectId()).observe(this, new Observer<PagedList<ParseObject>>() {
+            @Override
+            public void onChanged(PagedList<ParseObject> parseObjects) {
+                roomAdapter.submitList(parseObjects);
+                progressDialog.dismiss();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     private void fetchUpdatedRooms() {
