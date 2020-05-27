@@ -24,7 +24,8 @@ import java.util.List;
 //import android.support.v4.app.FragmentManager;
 
 public class MyRoomDetailActivity extends AppCompatActivity implements RoomImageOneFragment.GetImageUrlListener,
-        RoomImageTwoFragment.SetImageTwoUrl, RoomImageThreeFragment.SetImageThreeUrl{
+        RoomImageTwoFragment.SetImageTwoUrl, RoomImageThreeFragment.SetImageThreeUrl, RoomImageFourFragment.SetImageFourUrl,
+        RoomImageFiveFragment.SetImageFiveUrl, RoomImageSixFragment.SetImageSixUrl{
 
     //views
     private ImageView mRoomImages;
@@ -604,5 +605,23 @@ public class MyRoomDetailActivity extends AppCompatActivity implements RoomImage
     public void setImageThreeUrl() {
         RoomImageThreeFragment fragment = (RoomImageThreeFragment)mRoomImageAdapter.getRegisteredFragment(2);
         fragment.setImageUrl(roomObject.getRoomImageParseFile("roomImage3"));
+    }
+
+    @Override
+    public void setImageFourUrl() {
+        RoomImageFourFragment fragment= (RoomImageFourFragment)mRoomImageAdapter.getRegisteredFragment(3);
+        fragment.setSetImageFourUrl(roomObject.getRoomImageParseFile("roomImage4"));
+    }
+
+    @Override
+    public void setImageFiveUrl() {
+        RoomImageFiveFragment fragment= (RoomImageFiveFragment)mRoomImageAdapter.getRegisteredFragment(4);
+        fragment.setSetImageFiveUrl(roomObject.getRoomImageParseFile("roomImage5"));
+    }
+
+    @Override
+    public void setImageSixUrl() {
+        RoomImageSixFragment fragment= (RoomImageSixFragment)mRoomImageAdapter.getRegisteredFragment(5);
+        fragment.setSetImageSixUrl(roomObject.getRoomImageParseFile("roomImage6"));
     }
 }
