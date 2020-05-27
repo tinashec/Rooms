@@ -5,10 +5,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
@@ -113,40 +109,21 @@ public class MyRoomsFragment extends Fragment {
         myRoomsSummaryViewModel = ViewModelProviders.of(this).get(RoomSummaryViewModel.class);
         setUpProgressDialog();
         //observe the data and update the viewmodel when changes occur in the data
-        Log.i("Current User", "Current userId: " + ParseUser.getCurrentUser().getObjectId());
-//        myRoomsSummaryViewModel.getmAllCurrentUserRooms(ParseUser.getCurrentUser().getObjectId()).observe(this, new Observer<PagedList<ParseObject>>() {
-//            @Override
-//            public void onChanged(@Nullable PagedList<ParseObject> currentUserRooms) {
-//                //* ToDo
-//                //*  if currentUserRooms == 0, show emptyList view, else show the below
-//                //update the UI
-//                roomAdapter.submitList(currentUserRooms);
-//                progressDialog.dismiss();
-//            }
-//        });
         getAllCurrentUserRooms();
-
-        //get the datasource factory
-//        roomSummaryDataSourceFactory = new RoomSummaryDataSourceFactory(ParseUser.getCurrentUser().getObjectId());
 
         //check if network is present,
         // ToDo:
         // run the query in the background
-//        new DownloadMyRooms().execute();
 
         //setup the swipeToRefreshLayout i.e. onSwipeDown, fetch new rooms added
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                fetchUpdatedRooms();
                 //invalidate datasorucefactory
                 myRoomsSummaryViewModel.invalidateCurrentUserDatasource(ParseUser.getCurrentUser().getObjectId());
                 getAllCurrentUserRooms();
-//                swipeRefreshLayout.setRefreshing(false);
             }
         });
-
-//        getAllCurrentUserRooms();
 
         //configure the swipe refresh colours
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
@@ -163,114 +140,6 @@ public class MyRoomsFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-    }
-
-    private void fetchUpdatedRooms() {
-        //get the new data off the main thread
-        /*
-        * 1.
-        * */
-        new FetchLatestRooms().execute();
-    }
-
-    private class DownloadMyRooms extends AsyncTask<Void, Integer, List<ParseObject>>{
-
-        //local variable
-        private ProgressDialog progressDialog;
-
-        //do the long running task
-        //run the query
-        @Override
-        protected List<ParseObject> doInBackground(Void... params) {
-            ParseQuery<ParseObject> getMyRoomsQuery = ParseQuery.getQuery("Room");
-            getMyRoomsQuery.orderByDescending("updatedAt");
-            getMyRoomsQuery.whereEqualTo("roomOwner", ParseUser.getCurrentUser().getObjectId());
-            Log.d("Owner: ", "Room owner: " + ParseUser.getCurrentUser().getObjectId());
-
-            try {
-                mRooms = getMyRoomsQuery.find();
-
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            //get value of last updated room
-            if(mRooms.size() > 0) {
-                //check if there are rooms fetched and update the value of lastUpdated
-                lastUpdated = mRooms.get(mRooms.size() - mRooms.size()).getUpdatedAt();
-                Log.d("mRooms", "Fetched rooms: " + mRooms.size() + " " + mRooms.get(0).getObjectId());
-            }else {
-                //figure this portion out, but leaving blank seems ok
-            }
-            Log.d("mRooms", "Fetched rooms: " + mRooms.size());
-            return mRooms;
-        }
-
-        //runs when background work is executing
-        @Override
-        protected void onPreExecute(){
-            super.onPreExecute();
-            //initialise and show progress bar
-            progressDialog = new ProgressDialog(getContext());
-            progressDialog.setMessage("Fetching rooms... " + ParseUser.getCurrentUser().getUsername());
-            progressDialog.setCancelable(false);
-            progressDialog.show();
-        }
-
-        //update the UI main thread with the results returned by the doInBackground
-        //also dismiss the progressbar
-        @Override
-        protected void onPostExecute(List<ParseObject> rooms){
-            mRooms = rooms;
-            //check if progress dialog is not null and running then dismiss
-            if(progressDialog != null && progressDialog.isShowing()){
-                progressDialog.dismiss();
-            }
-            Log.d("Current User: ", ParseUser.getCurrentUser().getUsername());
-            //intialise adapter and set it
-            roomAdapter = new RoomCardRecyclerViewAdapter();
-
-            recyclerView.setAdapter(roomAdapter);
-        }
-    }
-
-    //fetch updated rooms off the main thread
-    private class FetchLatestRooms extends AsyncTask<Void, Integer, List<ParseObject>>{
-
-        @Override
-        protected List<ParseObject> doInBackground(Void... params) {
-            //fetch the latest rooms
-            ParseQuery<ParseObject> getLatestRoomQuery = ParseQuery.getQuery("Room");
-            getLatestRoomQuery.whereGreaterThan("updatedAt", lastUpdated);
-            getLatestRoomQuery.whereEqualTo("roomOwner", ParseUser.getCurrentUser().getObjectId());
-            getLatestRoomQuery.orderByDescending("createdAt");
-            try {
-                mLatestRooms = getLatestRoomQuery.find();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            //check if there are new rooms and assign the topmost elements date to lastUpdated
-            if(mLatestRooms.size() == 0){
-                //check if mRooms has any elements
-                if(mRooms.size() > 0) {
-                    lastUpdated = mRooms.get(0).getUpdatedAt();
-                }
-            }else {
-                lastUpdated = mLatestRooms.get(0).getUpdatedAt();
-            }
-
-            return mLatestRooms;
-        }
-
-        //update main UI with the results from doInBackground
-        @Override
-        protected void onPostExecute(List<ParseObject> latestRooms){
-            //add the latest rooms added to the adapter
-            roomAdapter.addAll(latestRooms);
-            roomAdapter.notifyItemInserted(0);
-            //recyclerView.swapAdapter(roomAdapter, false);
-            //stop the refresh animator
-            swipeRefreshLayout.setRefreshing(false);
-        }
     }
 
     @Override
